@@ -9,12 +9,17 @@ import SwiftUI
 
 struct ContentView: View {
     private let pageTitleList = ["main": "Bilibili", "login": "登录", "user": "个人中心"]
+    private let isLogin = false
     var body: some View {
-        #if os(iOS)
-        iosView()
-        #else
-        macView()
-        #endif
+        if isLogin {
+            #if os(iOS)
+            iosView()
+            #else
+            macView()
+            #endif
+        } else {
+            LoginView()
+        }
     }
 }
 

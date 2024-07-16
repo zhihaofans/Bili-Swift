@@ -15,6 +15,9 @@
 		263A6E292C46BB2500830CD5 /* SwiftUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 263A6E282C46BB2500830CD5 /* SwiftUtils */; };
 		263A6E312C46C14100830CD5 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263A6E302C46C14100830CD5 /* SettingView.swift */; };
 		263A6E332C46C49E00830CD5 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263A6E322C46C49E00830CD5 /* UserView.swift */; };
+		263A6E352C473A5800830CD5 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263A6E342C473A5800830CD5 /* LoginView.swift */; };
+		263A6E372C473D7100830CD5 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263A6E362C473D7100830CD5 /* LoginService.swift */; };
+		263A6E392C473DA200830CD5 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263A6E382C473DA200830CD5 /* LoginModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		263A6E1D2C46BAD600830CD5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		263A6E302C46C14100830CD5 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		263A6E322C46C49E00830CD5 /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
+		263A6E342C473A5800830CD5 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		263A6E362C473D7100830CD5 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		263A6E382C473DA200830CD5 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +91,7 @@
 			children = (
 				263A6E302C46C14100830CD5 /* SettingView.swift */,
 				263A6E322C46C49E00830CD5 /* UserView.swift */,
+				263A6E342C473A5800830CD5 /* LoginView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -92,6 +99,7 @@
 		263A6E2E2C46C12600830CD5 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				263A6E362C473D7100830CD5 /* LoginService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -99,6 +107,7 @@
 		263A6E2F2C46C13000830CD5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				263A6E382C473DA200830CD5 /* LoginModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -182,8 +191,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				263A6E312C46C14100830CD5 /* SettingView.swift in Sources */,
+				263A6E392C473DA200830CD5 /* LoginModel.swift in Sources */,
+				263A6E372C473D7100830CD5 /* LoginService.swift in Sources */,
 				263A6E182C46BAD400830CD5 /* ContentView.swift in Sources */,
 				263A6E162C46BAD400830CD5 /* Bili_SwiftApp.swift in Sources */,
+				263A6E352C473A5800830CD5 /* LoginView.swift in Sources */,
 				263A6E332C46C49E00830CD5 /* UserView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
