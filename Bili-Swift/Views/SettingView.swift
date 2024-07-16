@@ -13,6 +13,7 @@ struct SettingView: View {
             List {
                 Section(header: Text("About")) {
                     TextItem(title: "开发者", detail: "zhihaofans")
+                    TextItem(title: "Version", detail: "0.0.1")
                 }
             }
             Text("这里是设置").font(.largeTitle)
