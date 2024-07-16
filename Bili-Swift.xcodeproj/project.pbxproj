@@ -11,6 +11,10 @@
 		263A6E182C46BAD400830CD5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263A6E172C46BAD400830CD5 /* ContentView.swift */; };
 		263A6E1A2C46BAD600830CD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 263A6E192C46BAD600830CD5 /* Assets.xcassets */; };
 		263A6E1E2C46BAD600830CD5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 263A6E1D2C46BAD600830CD5 /* Preview Assets.xcassets */; };
+		263A6E262C46BB0100830CD5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 263A6E252C46BB0100830CD5 /* Alamofire */; };
+		263A6E292C46BB2500830CD5 /* SwiftUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 263A6E282C46BB2500830CD5 /* SwiftUtils */; };
+		263A6E312C46C14100830CD5 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263A6E302C46C14100830CD5 /* SettingView.swift */; };
+		263A6E332C46C49E00830CD5 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263A6E322C46C49E00830CD5 /* UserView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +24,8 @@
 		263A6E192C46BAD600830CD5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		263A6E1B2C46BAD600830CD5 /* Bili_Swift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bili_Swift.entitlements; sourceTree = "<group>"; };
 		263A6E1D2C46BAD600830CD5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		263A6E302C46C14100830CD5 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		263A6E322C46C49E00830CD5 /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +33,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				263A6E292C46BB2500830CD5 /* SwiftUtils in Frameworks */,
+				263A6E262C46BB0100830CD5 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +60,9 @@
 		263A6E142C46BAD400830CD5 /* Bili-Swift */ = {
 			isa = PBXGroup;
 			children = (
+				263A6E2F2C46C13000830CD5 /* Models */,
+				263A6E2E2C46C12600830CD5 /* Services */,
+				263A6E2D2C46C12000830CD5 /* Views */,
 				263A6E152C46BAD400830CD5 /* Bili_SwiftApp.swift */,
 				263A6E172C46BAD400830CD5 /* ContentView.swift */,
 				263A6E192C46BAD600830CD5 /* Assets.xcassets */,
@@ -67,6 +78,29 @@
 				263A6E1D2C46BAD600830CD5 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		263A6E2D2C46C12000830CD5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				263A6E302C46C14100830CD5 /* SettingView.swift */,
+				263A6E322C46C49E00830CD5 /* UserView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		263A6E2E2C46C12600830CD5 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		263A6E2F2C46C13000830CD5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -85,6 +119,10 @@
 			dependencies = (
 			);
 			name = "Bili-Swift";
+			packageProductDependencies = (
+				263A6E252C46BB0100830CD5 /* Alamofire */,
+				263A6E282C46BB2500830CD5 /* SwiftUtils */,
+			);
 			productName = "Bili-Swift";
 			productReference = 263A6E122C46BAD400830CD5 /* Bili-Swift.app */;
 			productType = "com.apple.product-type.application";
@@ -113,6 +151,10 @@
 				Base,
 			);
 			mainGroup = 263A6E092C46BAD400830CD5;
+			packageReferences = (
+				263A6E242C46BB0100830CD5 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				263A6E272C46BB2500830CD5 /* XCRemoteSwiftPackageReference "SwiftUtils" */,
+			);
 			productRefGroup = 263A6E132C46BAD400830CD5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -139,8 +181,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				263A6E312C46C14100830CD5 /* SettingView.swift in Sources */,
 				263A6E182C46BAD400830CD5 /* ContentView.swift in Sources */,
 				263A6E162C46BAD400830CD5 /* Bili_SwiftApp.swift in Sources */,
+				263A6E332C46C49E00830CD5 /* UserView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,6 +301,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 			};
 			name = Release;
@@ -274,6 +319,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "哔了个哩";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -288,7 +334,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "me.zzhhoo.Bili-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -312,6 +358,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "哔了个哩";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -326,7 +373,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "me.zzhhoo.Bili-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -359,6 +406,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		263A6E242C46BB0100830CD5 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+		263A6E272C46BB2500830CD5 /* XCRemoteSwiftPackageReference "SwiftUtils" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/zhihaofans/SwiftUtils";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		263A6E252C46BB0100830CD5 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 263A6E242C46BB0100830CD5 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		263A6E282C46BB2500830CD5 /* SwiftUtils */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 263A6E272C46BB2500830CD5 /* XCRemoteSwiftPackageReference "SwiftUtils" */;
+			productName = SwiftUtils;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 263A6E0A2C46BAD400830CD5 /* Project object */;
 }
