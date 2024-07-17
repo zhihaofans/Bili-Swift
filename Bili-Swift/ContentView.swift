@@ -32,7 +32,7 @@ struct iosMainView: View {
     var body: some View {
         NavigationView {
             List {
-                NavigationLink("签到", destination: SettingView())
+                NavigationLink("签到", destination: CheckinView())
                 NavigationLink("稍后再看", destination: SettingView())
                 NavigationLink("历史记录", destination: SettingView())
             }
