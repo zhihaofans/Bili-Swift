@@ -18,6 +18,11 @@ struct SettingView: View {
                 Section(header: Text("Bilibili")) {
                     TextItem(title: "安装哔哩哔哩", detail: AppService().isAppIntalled().string(trueStr: "已安装", falseStr: "未安装"))
                 }
+                if LoginService().isLogin() {
+                    Section(header: Text("登录数据")) {
+                        TextItem(title: "Cookies", detail: LoginService().getCookiesString())
+                    }
+                }
             }
             Text("这里是设置").font(.largeTitle)
         }
