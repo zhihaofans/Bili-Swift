@@ -13,9 +13,9 @@ struct ContentView: View {
     var body: some View {
         if isLogin {
             #if os(iOS)
-            iosView()
+            iosMainView()
             #else
-            macView()
+            macMainView()
             #endif
         } else {
             LoginView()
@@ -24,7 +24,7 @@ struct ContentView: View {
 }
 
 @available(macOS, unavailable)
-struct iosView: View {
+struct iosMainView: View {
     var body: some View {
         NavigationView {
             List {
@@ -51,7 +51,7 @@ struct iosView: View {
 }
 
 @available(iOS, unavailable)
-struct macView: View {
+struct macMainView: View {
     var body: some View {
         NavigationView {
             List {
