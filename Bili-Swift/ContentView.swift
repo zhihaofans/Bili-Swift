@@ -39,7 +39,7 @@ struct iosMainView: View {
             .navigationTitle("哔了个哩")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: SettingView()) {
+                    NavigationLink(destination: UserView()) {
                         // TODO: 这里跳转到个人页面或登录界面
                         Image(systemName: "person")
                     }
