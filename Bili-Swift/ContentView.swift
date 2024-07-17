@@ -9,16 +9,20 @@ import SwiftUI
 
 struct ContentView: View {
     private let pageTitleList = ["main": "Bilibili", "login": "登录", "user": "个人中心"]
-    private let isLogin = false
+    @State var isLogin = false
     var body: some View {
-        if isLogin {
-            #if os(iOS)
-            iosMainView()
-            #else
-            macMainView()
-            #endif
-        } else {
-            LoginView()
+        VStack {
+            if isLogin {
+                #if os(iOS)
+                iosMainView()
+                #else
+                macMainView()
+                #endif
+            } else {
+                LoginView()
+            }
+        }.onAppear {
+            isLogin = LoginService().isLogin()
         }
     }
 }
