@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUtils
 
 struct SettingView: View {
     var body: some View {
@@ -13,7 +14,7 @@ struct SettingView: View {
             List {
                 Section(header: Text("About")) {
                     TextItem(title: "开发者", detail: "zhihaofans")
-                    TextItem(title: "Version", detail: "0.0.1")
+                    TextItem(title: "Version", detail: "\(AppUtil().getAppVersion()) (\(AppUtil().getAppBuild()))" /* "0.0.1" */ )
                 }
                 Section(header: Text("Bilibili")) {
                     TextItem(title: "安装哔哩哔哩", detail: AppService().isAppIntalled().string(trueStr: "已安装", falseStr: "未安装"))
@@ -24,7 +25,7 @@ struct SettingView: View {
                     }
                 }
             }
-            Text("这里是设置").font(.largeTitle)
+            // Text("这里是设置").font(.largeTitle)
         }
         #if os(iOS)
         .navigationBarTitle("设置", displayMode: .inline)
