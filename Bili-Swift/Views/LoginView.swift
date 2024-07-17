@@ -43,7 +43,8 @@ struct iosLoginView: View {
                 Button(action: {
                     Task {
                         // 在这里执行耗时的任务
-                        let openSu = await AppService().openAppUrl(url: loginUrl)
+                        let qrcodeUrl = "https%3A%2F%2Fpassport.bilibili.com%2Fh5-app%2Fpassport%2Flogin%2Fscan%3Fnavhide%3D1%26from%3D%26qrcode_key%3D\(qrcodeKey)"
+                        let openSu = await AppUtil().openUrl(urlString: qrcodeUrl)
                         // 完成后，在主线程更新 UI
                         DispatchQueue.main.async {
                             // 更新 UI
