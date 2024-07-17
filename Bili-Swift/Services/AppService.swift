@@ -6,5 +6,14 @@
 //
 
 import Foundation
+import SwiftUtils
 
-class AppService {}
+class AppService {
+    func openAppUrl(url: String) async -> Bool {
+        return await AppUtil().openUrl(url: <#T##URL#>)
+    }
+
+    func isAppIntalled() -> Bool {
+        return AppUtil().canOpenUrl(urlString: "bilibili://")
+    }
+}
