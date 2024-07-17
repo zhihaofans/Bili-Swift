@@ -19,6 +19,7 @@
 		263A6E372C473D7100830CD5 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263A6E362C473D7100830CD5 /* LoginService.swift */; };
 		263A6E392C473DA200830CD5 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263A6E382C473DA200830CD5 /* LoginModel.swift */; };
 		263A6E3B2C47437200830CD5 /* AppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263A6E3A2C47437200830CD5 /* AppService.swift */; };
+		263A6E3D2C48060B00830CD5 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263A6E3C2C48060B00830CD5 /* UserService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		263A6E362C473D7100830CD5 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		263A6E382C473DA200830CD5 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		263A6E3A2C47437200830CD5 /* AppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppService.swift; sourceTree = "<group>"; };
+		263A6E3C2C48060B00830CD5 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 		263A6E2E2C46C12600830CD5 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				263A6E3C2C48060B00830CD5 /* UserService.swift */,
 				263A6E362C473D7100830CD5 /* LoginService.swift */,
 				263A6E3A2C47437200830CD5 /* AppService.swift */,
 			);
@@ -195,6 +198,7 @@
 			files = (
 				263A6E312C46C14100830CD5 /* SettingView.swift in Sources */,
 				263A6E392C473DA200830CD5 /* LoginModel.swift in Sources */,
+				263A6E3D2C48060B00830CD5 /* UserService.swift in Sources */,
 				263A6E372C473D7100830CD5 /* LoginService.swift in Sources */,
 				263A6E182C46BAD400830CD5 /* ContentView.swift in Sources */,
 				263A6E162C46BAD400830CD5 /* Bili_SwiftApp.swift in Sources */,
