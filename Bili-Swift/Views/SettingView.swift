@@ -15,6 +15,9 @@ struct SettingView: View {
                     TextItem(title: "开发者", detail: "zhihaofans")
                     TextItem(title: "Version", detail: "0.0.1")
                 }
+                Section(header: Text("Bilibili")) {
+                    TextItem(title: "安装哔哩哔哩", detail: AppService().isAppIntalled().string(trueStr: "已安装", falseStr: "未安装"))
+                }
             }
             Text("这里是设置").font(.largeTitle)
         }
