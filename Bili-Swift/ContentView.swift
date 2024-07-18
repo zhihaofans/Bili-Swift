@@ -33,8 +33,8 @@ struct iosMainView: View {
         NavigationView {
             List {
                 NavigationLink("签到", destination: CheckinView())
-                NavigationLink("稍后再看", destination: SettingView())
-                NavigationLink("历史记录", destination: SettingView())
+                NavigationLink("稍后再看", destination: HistoryView())
+                NavigationLink("历史记录", destination: HistoryView())
             }
             .navigationTitle("哔了个哩")
             .toolbar {

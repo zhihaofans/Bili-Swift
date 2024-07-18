@@ -16,6 +16,8 @@ struct HistoryView: View {
         VStack {
             if loaded {
                 if isError {
+                    Text(errorStr).font(.largeTitle)
+                }else{
                     LazyVStack {
                         ForEach(historyList, id: \.history.oid) { item in
                             HistoryItemView(itemData: item)
@@ -35,6 +37,7 @@ struct HistoryView: View {
                     historyList=result.data.list
                     isError=false
                 }
+                loaded=true
             } fail: { err in
                 isError=true
                 errorStr=err
