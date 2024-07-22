@@ -91,9 +91,9 @@
 		263A6E142C46BAD400830CD5 /* Bili-Swift */ = {
 			isa = PBXGroup;
 			children = (
+				263A6E2E2C46C12600830CD5 /* Services */,
 				263A6E402C480E8500830CD5 /* Info.plist */,
 				263A6E2F2C46C13000830CD5 /* Models */,
-				263A6E2E2C46C12600830CD5 /* Services */,
 				263A6E2D2C46C12000830CD5 /* Views */,
 				263A6E152C46BAD400830CD5 /* Bili_SwiftApp.swift */,
 				263A6E172C46BAD400830CD5 /* ContentView.swift */,

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 // 直播获取个人信息
 struct LiveUserInfoResult: Codable {
     let code: Int
@@ -15,7 +16,6 @@ struct LiveUserInfoResult: Codable {
 
 struct LiveUserInfoData: Codable {
     // let list: [LaterWatchList]
-    let count: Int
     let user_level: Int
     let user_intimacy: Int
     let vip: Int
@@ -28,7 +28,7 @@ struct LiveUserInfoData: Codable {
     let user_charged: Int
     let identification: Int
     let uname: String
-    let user_level_rank: Int
+    let user_level_rank: String
     let gold: Int
     let achieve: Int
     let face: String
@@ -45,11 +45,10 @@ struct LiveUserInfoWealthData: Codable {
     let dm_icon_key: String
     let cur_score: Int
 }
+
 // 直播签到
 
 struct LiveCheckinResult: Codable {
     let code: Int
     let message: String
 }
-
-

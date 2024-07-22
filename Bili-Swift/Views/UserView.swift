@@ -11,7 +11,7 @@ struct UserView: View {
     @State var userFaceUrl = "https://i0.hdslb.com/bfs/static/jinkela/long/images/vip-login-banner.png"
     @State var userName = "未登录..."
     @State var bCoin = 0.0
-    @State var Battery = 0.0
+    @State var Battery = 0
     @State var ybCoin = 0.0
     var body: some View {
         Spacer(minLength: 30)
@@ -59,6 +59,24 @@ struct UserView: View {
                 } fail: { errStr in
                     DispatchQueue.main.async {
                         userName = "加载失败:\(errStr)"
+                    }
+                }
+
+                LiveService().getUserInfo { result in
+                    DispatchQueue.main.async {
+                        // 更新 UI
+                        if result.code == 0 {
+                            Battery = result.data.gold / 100
+                        } else {
+                            Battery = -1
+                        }
+                    }
+                } fail: { errStr in
+                    debugPrint("=======")
+                    debugPrint("LiveService().getUserInfo:" + errStr)
+                    debugPrint("=======")
+                    DispatchQueue.main.async {
+                        Battery = -2
                     }
                 }
             }
