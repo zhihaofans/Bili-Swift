@@ -28,6 +28,8 @@
 		263B0D462C48A0BA0040F879 /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263B0D452C48A0BA0040F879 /* HistoryModel.swift */; };
 		263B0D482C48A0D10040F879 /* LaterWatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263B0D472C48A0D10040F879 /* LaterWatchModel.swift */; };
 		263B0D4A2C48A1040040F879 /* HistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263B0D492C48A1040040F879 /* HistoryService.swift */; };
+		26C592AC2C4EBD91006E211D /* LiveService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C592AB2C4EBD91006E211D /* LiveService.swift */; };
+		26C592AE2C4EBE0F006E211D /* LiveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C592AD2C4EBE0F006E211D /* LiveModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +55,8 @@
 		263B0D452C48A0BA0040F879 /* HistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
 		263B0D472C48A0D10040F879 /* LaterWatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaterWatchModel.swift; sourceTree = "<group>"; };
 		263B0D492C48A1040040F879 /* HistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryService.swift; sourceTree = "<group>"; };
+		26C592AB2C4EBD91006E211D /* LiveService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveService.swift; sourceTree = "<group>"; };
+		26C592AD2C4EBE0F006E211D /* LiveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +132,7 @@
 				263A6E3A2C47437200830CD5 /* AppService.swift */,
 				263A6E412C48232700830CD5 /* CheckinService.swift */,
 				263B0D492C48A1040040F879 /* HistoryService.swift */,
+				26C592AB2C4EBD91006E211D /* LiveService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -140,6 +145,7 @@
 				263A6E432C48235000830CD5 /* CheckinModel.swift */,
 				263B0D452C48A0BA0040F879 /* HistoryModel.swift */,
 				263B0D472C48A0D10040F879 /* LaterWatchModel.swift */,
+				26C592AD2C4EBE0F006E211D /* LiveModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -231,8 +237,10 @@
 				263A6E162C46BAD400830CD5 /* Bili_SwiftApp.swift in Sources */,
 				263A6E3B2C47437200830CD5 /* AppService.swift in Sources */,
 				263B0D4A2C48A1040040F879 /* HistoryService.swift in Sources */,
+				26C592AE2C4EBE0F006E211D /* LiveModel.swift in Sources */,
 				263B0D442C48A0A80040F879 /* HistoryView.swift in Sources */,
 				263A6E352C473A5800830CD5 /* LoginView.swift in Sources */,
+				26C592AC2C4EBD91006E211D /* LiveService.swift in Sources */,
 				263A6E422C48232700830CD5 /* CheckinService.swift in Sources */,
 				263A6E3F2C4808DC00830CD5 /* UserModel.swift in Sources */,
 				263B0D462C48A0BA0040F879 /* HistoryModel.swift in Sources */,

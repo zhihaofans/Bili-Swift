@@ -31,7 +31,7 @@ struct CheckinView: View {
             .buttonStyle(BorderedProminentButtonStyle())
             Button("直播签到") {
                 Task {
-                    CheckinService().liveCheckin { result in
+                    LiveService().checkIn { result in
                         DispatchQueue.main.async {
                             alertText = result.message
                             showingAlert = true

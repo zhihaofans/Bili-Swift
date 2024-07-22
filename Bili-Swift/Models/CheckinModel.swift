@@ -11,9 +11,3 @@ struct MangaCheckinResult: Codable {
     let code: Int
     let msg: String
 }
-
-struct LiveCheckinResult: Codable {
-    let code: Int
-    let message: String
-}
-
