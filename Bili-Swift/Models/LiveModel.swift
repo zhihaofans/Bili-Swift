@@ -20,7 +20,7 @@ struct LiveUserInfoData: Codable {
     let user_intimacy: Int
     let vip: Int
     let uid: Int
-    let billCoin: Float
+    let billCoin: Double
     let svip: Int
     let user_next_level: Int
     let user_next_intimacy: Int
