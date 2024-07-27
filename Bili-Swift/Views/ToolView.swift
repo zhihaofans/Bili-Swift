@@ -15,7 +15,11 @@ struct ToolView: View {
     @State private var showingPicker = false
     var body: some View {
         VStack {
-            if let selectedImage = selectedImage {
+            if let selectedLivePhoto = selectedLivePhoto {
+                Text("Live Photo selected!")
+                
+
+            } else if let selectedImage = selectedImage {
                 Image(uiImage: selectedImage)
                     .resizable()
                     .scaledToFit().onTapGesture {
@@ -27,9 +31,6 @@ struct ToolView: View {
                             debugPrint(error)
                         }
                     }
-            }
-            if let selectedLivePhoto = selectedLivePhoto {
-                Text("Live Photo selected!")
             }
             Button("Select Photo") {
                 showingPicker = true

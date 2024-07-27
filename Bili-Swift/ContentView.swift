@@ -11,47 +11,73 @@ struct ContentView: View {
     private let pageTitleList = ["main": "Bilibili", "login": "登录", "user": "个人中心"]
     @State var isLogin = false
     var body: some View {
-        VStack {
-            if isLogin {
-                #if os(iOS)
-                iosMainView()
-                #else
-                macMainView()
-                #endif
-            } else {
-                LoginView()
-            }
-        }.onAppear {
-            isLogin = LoginService().isLogin()
+        if LoginService().isLogin() {
+            #if os(iOS)
+            iosMainView()
+            #else
+            macMainView()
+            #endif
+        } else {
+            LoginView()
         }
     }
 }
 
 @available(macOS, unavailable)
 struct iosMainView: View {
+    @State private var selectedTab = 0
     var body: some View {
-        NavigationView {
-            List {
-                NavigationLink("签到", destination: CheckinView())
-                NavigationLink("稍后再看", destination: HistoryView())
-                NavigationLink("历史记录", destination: HistoryView())
-                NavigationLink("工具", destination: ToolView())
-            }
-            .navigationTitle("哔了个哩")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: UserView()) {
-                        // TODO: 这里跳转到个人页面或登录界面
-                        Image(systemName: "person")
-                    }
+        switch selectedTab {
+        case 1:
+            HistoryView()
+        case 2:
+            UserView()
+        default:
+            NavigationView {
+                List {
+                    NavigationLink("签到", destination: CheckinView())
+                    NavigationLink("稍后再看", destination: HistoryView())
+                    NavigationLink("历史记录", destination: HistoryView())
+                    NavigationLink("工具", destination: ToolView())
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: SettingView()) {
-                        Image(systemName: "gear")
+                .navigationTitle("哔了个哩")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        NavigationLink(destination: UserView()) {
+                            // TODO: 这里跳转到个人页面或登录界面
+                            Image(systemName: "person")
+                        }
+                    }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        NavigationLink(destination: SettingView()) {
+                            Image(systemName: "gear")
+                        }
                     }
                 }
             }
         }
+        TabView(selection: $selectedTab) {
+            Text("")
+                .tabItem {
+                    Label("Home", systemImage: "house")
+                }
+                .tag(0)
+
+            Text("")
+                .fixedSize(horizontal: false, vertical: true) // 纵向固定大小
+                .tabItem {
+                    Label("Search", systemImage: "magnifyingglass")
+                }
+                .tag(1)
+
+            Text("")
+                .fixedSize(horizontal: false, vertical: true) // 纵向固定大小
+                .tabItem {
+                    Label("User", systemImage: "person")
+                }
+                .tag(2)
+        }
+        .frame(maxHeight: 50) // 限制最大高度
     }
 }
 
@@ -85,6 +111,6 @@ struct macMainView: View {
     }
 }
 
-// #Preview {
-//    ContentView()
-// }
+#Preview {
+    ContentView()
+}
