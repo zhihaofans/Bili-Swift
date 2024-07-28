@@ -40,27 +40,40 @@ struct iosLoginView: View {
             if !loadLoginDataFinished {
                 Text(qrcodeText)
             } else {
-                Button(action: {
-                    Task {
-                        // 在这里执行耗时的任务
-                        let qrcodeUrl = "https%3A%2F%2Fpassport.bilibili.com%2Fh5-app%2Fpassport%2Flogin%2Fscan%3Fnavhide%3D1%26from%3D%26qrcode_key%3D\(qrcodeKey)"
-                        let openSu = await AppUtil().openUrl(urlString: qrcodeUrl)
-                        // 完成后，在主线程更新 UI
-                        DispatchQueue.main.async {
-                            // 更新 UI
-                            print("打开app：" + openSu.string(trueStr: "Su", falseStr: "fail"))
+                let qrcodeUrl = "https%3A%2F%2Fpassport.bilibili.com%2Fh5-app%2Fpassport%2Flogin%2Fscan%3Fnavhide%3D1%26from%3D%26qrcode_key%3D\(qrcodeKey)"
+                if AppService().isAppIntalled() {
+                    Button(action: {
+                        Task {
+                            // 在这里执行耗时的任务
+                            let openSu = await AppUtil().openUrl(urlString: qrcodeUrl)
+                            // 完成后，在主线程更新 UI
+                            DispatchQueue.main.async {
+                                // 更新 UI
+                                print("打开app：" + openSu.string(trueStr: "Su", falseStr: "fail"))
+                            }
                         }
+                    }) {
+                        Text("打开App登录").font(.title)
                     }
-                }) {
-                    Text("打开App登录").font(.title)
+                    .padding()
+                } else {
+                    let qrImage = QrcodeUtil().generateQRCode(from: EncodeUtil().urlDecode(oldString: qrcodeUrl))
+                    if qrImage == nil {
+                        Text("请安装APP")
+
+                    } else {
+                        Image(uiImage: qrImage!).resizable().frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 100)
+                    }
                 }
-                .padding()
                 Button(action: {
                     self.loginService.checkWebLoginQrcode(qrcodeKey: self.qrcodeKey) { checkResult in
                         if checkResult.code == 0 {
                             let setSu = KeychainUtil().saveString(forKey: "bilibili.login.refresh_token", value: checkResult.refresh_token)
                             alertText = "保存登录数据" + setSu.string(trueStr: "成功", falseStr: "失败")
                             showingAlert = true
+                            if(setSu){
+                                
+                            }
                         } else {
                             alertText = checkResult.message
                             showingAlert = true

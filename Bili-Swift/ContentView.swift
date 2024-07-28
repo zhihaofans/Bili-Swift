@@ -59,21 +59,21 @@ struct iosMainView: View {
         TabView(selection: $selectedTab) {
             Text("")
                 .tabItem {
-                    Label("Home", systemImage: "house")
+                    Label("主页", systemImage: "house")
                 }
                 .tag(0)
 
             Text("")
                 .fixedSize(horizontal: false, vertical: true) // 纵向固定大小
                 .tabItem {
-                    Label("Search", systemImage: "magnifyingglass")
+                    Label("历史", systemImage: "list.bullet")
                 }
                 .tag(1)
 
             Text("")
                 .fixedSize(horizontal: false, vertical: true) // 纵向固定大小
                 .tabItem {
-                    Label("User", systemImage: "person")
+                    Label("我的", systemImage: "person")
                 }
                 .tag(2)
         }
