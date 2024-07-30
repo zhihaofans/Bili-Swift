@@ -21,9 +21,7 @@ class VipService {
     }
 
     func bipPointCheckin(callback: @escaping (VipCheckinResult)->Void, fail: @escaping (String)->Void) {
-        // TODO: http.post
         let url = "https://api.bilibili.com/pgc/activity/score/task/sign"
-
         http.post(url: url) { result in
             if result.isEmpty {
                 fail("result.isEmpty")
@@ -39,7 +37,7 @@ class VipService {
                     }
                 } catch {
                     print(error)
-                    print("bipPointCheckin.http.error")
+                    print("bipPointCheckin.catch.error")
                     fail("bipPointCheckin:\(error)")
                 }
             }

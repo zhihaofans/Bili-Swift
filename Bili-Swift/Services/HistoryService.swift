@@ -10,6 +10,12 @@ import Foundation
 import SwiftUtils
 
 class HistoryService {
+    private let http = HttpUtil()
+    private let headers: HTTPHeaders = [
+        "Cookie": LoginService().getCookiesString(),
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Referer": "https://big.bilibili.com/mobile/bigPoint/task",
+    ]
     func getHistory(callback: @escaping (HistoryResult)->Void, fail: @escaping (String)->Void) {
         let headers: HTTPHeaders = [
             "Cookie": "SESSDATA=" + LoginService().getSESSDATA(),
@@ -41,6 +47,34 @@ class HistoryService {
                 debugPrint(error)
                 fail("网络请求错误:\(error.localizedDescription)")
             }
+        }
+    }
+
+    func getLaterToWatch(callback: @escaping (HistoryResult)->Void, fail: @escaping (String)->Void) {
+        let url = "https://api.bilibili.com/x/v2/history/toview"
+        http.post(url: url) { result in
+            if result.isEmpty {
+                fail("result.isEmpty")
+            } else {
+                print(result)
+                do {
+                    let data = try JSONDecoder().decode(VipCheckinResult.self, from: result.data(using: .utf8)!)
+                    debugPrint(data.code)
+                    if data.code == 0 {
+                        callback(data)
+                    } else {
+                        fail("Code \(data.code): \(data.message)")
+                    }
+                } catch {
+                    print(error)
+                    print("getLaterToWatch.catch.error")
+                    fail("getLaterToWatch:\(error)")
+                }
+            }
+        } fail: { error in
+            print(error)
+            print("getLaterToWatch.http.error")
+            fail("getLaterToWatch:\(error)")
         }
     }
 }
