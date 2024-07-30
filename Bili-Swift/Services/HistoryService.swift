@@ -58,7 +58,7 @@ class HistoryService {
             } else {
                 print(result)
                 do {
-                    let data = try JSONDecoder().decode(VipCheckinResult.self, from: result.data(using: .utf8)!)
+                    let data = try JSONDecoder().decode(HistoryResult.self, from: result.data(using: .utf8)!)
                     debugPrint(data.code)
                     if data.code == 0 {
                         callback(data)
