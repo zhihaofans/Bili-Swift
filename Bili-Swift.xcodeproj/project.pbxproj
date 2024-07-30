@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		260B583B2C5402FB00923D29 /* ToolService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260B583A2C5402FB00923D29 /* ToolService.swift */; };
 		260B583D2C54031500923D29 /* ToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260B583C2C54031500923D29 /* ToolView.swift */; };
+		260B583F2C5948E800923D29 /* VipService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260B583E2C5948E800923D29 /* VipService.swift */; };
 		263A6E162C46BAD400830CD5 /* Bili_SwiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263A6E152C46BAD400830CD5 /* Bili_SwiftApp.swift */; };
 		263A6E182C46BAD400830CD5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263A6E172C46BAD400830CD5 /* ContentView.swift */; };
 		263A6E1A2C46BAD600830CD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 263A6E192C46BAD600830CD5 /* Assets.xcassets */; };
@@ -37,6 +38,7 @@
 /* Begin PBXFileReference section */
 		260B583A2C5402FB00923D29 /* ToolService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolService.swift; sourceTree = "<group>"; };
 		260B583C2C54031500923D29 /* ToolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolView.swift; sourceTree = "<group>"; };
+		260B583E2C5948E800923D29 /* VipService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VipService.swift; sourceTree = "<group>"; };
 		263A6E122C46BAD400830CD5 /* Bili-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bili-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		263A6E152C46BAD400830CD5 /* Bili_SwiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bili_SwiftApp.swift; sourceTree = "<group>"; };
 		263A6E172C46BAD400830CD5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				263B0D492C48A1040040F879 /* HistoryService.swift */,
 				26C592AB2C4EBD91006E211D /* LiveService.swift */,
 				260B583A2C5402FB00923D29 /* ToolService.swift */,
+				260B583E2C5948E800923D29 /* VipService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 				260B583B2C5402FB00923D29 /* ToolService.swift in Sources */,
 				263A6E352C473A5800830CD5 /* LoginView.swift in Sources */,
 				26C592AC2C4EBD91006E211D /* LiveService.swift in Sources */,
+				260B583F2C5948E800923D29 /* VipService.swift in Sources */,
 				263A6E422C48232700830CD5 /* CheckinService.swift in Sources */,
 				263A6E3F2C4808DC00830CD5 /* UserModel.swift in Sources */,
 				263B0D462C48A0BA0040F879 /* HistoryModel.swift in Sources */,

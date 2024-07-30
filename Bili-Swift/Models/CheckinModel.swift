@@ -11,3 +11,8 @@ struct MangaCheckinResult: Codable {
     let code: Int
     let msg: String
 }
+
+struct VipCheckinResult: Codable {
+    let code: Int
+    let message: String
+}
