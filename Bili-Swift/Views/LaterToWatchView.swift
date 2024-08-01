@@ -1,17 +1,17 @@
 //
-//  HistoryView.swift
+//  LaterToWatchView.swift
 //  Bili-Swift
 //
-//  Created by zzh on 2024/7/18.
+//  Created by zzh on 2024/8/1.
 //
 
 import SwiftUI
 
-struct HistoryView: View {
+struct LaterToWatchView: View {
     @State var isError=false
     @State var loaded=false
     @State var errorStr=""
-    @State var historyList: [HistoryItem]=[]
+    @State var later2watchList: [Later2WatchItem]=[]
     var body: some View {
         ScrollView {
             if loaded {
@@ -19,8 +19,8 @@ struct HistoryView: View {
                     Text(errorStr).font(.largeTitle)
                 } else {
                     LazyVStack {
-                        ForEach(historyList, id: \.history.oid) { item in
-                            HistoryItemView(itemData: item)
+                        ForEach(later2watchList, id: \.bvid) { item in
+                            Later2WatchItemView(itemData: item)
                         }
                     }
                 }
@@ -33,17 +33,17 @@ struct HistoryView: View {
                 Image(systemName: "trash")
             }
         }
-        .navigationTitle("历史记录")
+        .navigationTitle("稍后再看")
         .onAppear {
             // TODO: 加载历史数据
             Task {
-                HistoryService().getHistory { result in
+                HistoryService().getLaterToWatch { result in
                     DispatchQueue.main.async {
                         if result.data.list.isEmpty {
                             isError=true
                             errorStr="空白结果列表"
                         } else {
-                            historyList=result.data.list
+                            later2watchList=result.data.list
                             isError=false
                         }
                         loaded=true
@@ -59,12 +59,12 @@ struct HistoryView: View {
     }
 }
 
-struct HistoryItemView: View {
-    var itemData: HistoryItem
+struct Later2WatchItemView: View {
+    var itemData: Later2WatchItem
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                AsyncImage(url: URL(string: itemData.getCover())) { image in
+                AsyncImage(url: URL(string: itemData.pic.replace(of: "http://", with: "https://"))) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -74,7 +74,7 @@ struct HistoryItemView: View {
                 .frame(width: 150, height: 84)
                 VStack {
                     Text(itemData.title) // .font()
-                    Text("@" + itemData.author_name)
+                    Text("@" + itemData.owner.name)
                 }
                 // .frame(width: geometry.size.width)
             }.frame(maxHeight: .infinity, alignment: .leading) // 设置对齐方式
@@ -84,16 +84,16 @@ struct HistoryItemView: View {
         .onTapGesture {
             // TODO: onClick
 
-            switch itemData.history.getType() {
-                // case "archive":
-
-                default:
-                    print(itemData.getCover())
-            }
+//            switch itemData.history.getType() {
+//                // case "archive":
+//
+//                default:
+//                    print(itemData.getCover())
+//            }
         }
     }
 }
 
-//#Preview {
-//    HistoryView()
-//}
+// #Preview {
+//    LaterToWatchView()
+// }
