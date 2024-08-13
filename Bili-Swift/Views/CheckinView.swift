@@ -112,17 +112,6 @@ struct CheckinItemView: View {
     }
 }
 
-class CheckinItem {
-    var title: String
-    var isLoading: Bool
-    var callback: ()
-    init(title: String, isLoading: Bool, callback: ()) {
-        self.title = title
-        self.isLoading = isLoading
-        self.callback = callback
-    }
-}
-
-// #Preview {
-//    CheckinView()
-// }
+ #Preview {
+    CheckinView()
+ }
