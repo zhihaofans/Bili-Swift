@@ -34,6 +34,7 @@
 		26C592AC2C4EBD91006E211D /* LiveService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C592AB2C4EBD91006E211D /* LiveService.swift */; };
 		26C592AE2C4EBE0F006E211D /* LiveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C592AD2C4EBE0F006E211D /* LiveModel.swift */; };
 		26DF0E2C2C5B191800B4A8B3 /* LaterToWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF0E2B2C5B191800B4A8B3 /* LaterToWatchView.swift */; };
+		26DF0E512C6BC42600B4A8B3 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF0E502C6BC42600B4A8B3 /* NotificationService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		26C592AB2C4EBD91006E211D /* LiveService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveService.swift; sourceTree = "<group>"; };
 		26C592AD2C4EBE0F006E211D /* LiveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveModel.swift; sourceTree = "<group>"; };
 		26DF0E2B2C5B191800B4A8B3 /* LaterToWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaterToWatchView.swift; sourceTree = "<group>"; };
+		26DF0E502C6BC42600B4A8B3 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 				26C592AB2C4EBD91006E211D /* LiveService.swift */,
 				260B583A2C5402FB00923D29 /* ToolService.swift */,
 				260B583E2C5948E800923D29 /* VipService.swift */,
+				26DF0E502C6BC42600B4A8B3 /* NotificationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 				263B0D482C48A0D10040F879 /* LaterWatchModel.swift in Sources */,
 				263A6E312C46C14100830CD5 /* SettingView.swift in Sources */,
 				263A6E392C473DA200830CD5 /* LoginModel.swift in Sources */,
+				26DF0E512C6BC42600B4A8B3 /* NotificationService.swift in Sources */,
 				263A6E3D2C48060B00830CD5 /* UserService.swift in Sources */,
 				260B583D2C54031500923D29 /* ToolView.swift in Sources */,
 				263A6E372C473D7100830CD5 /* LoginService.swift in Sources */,
