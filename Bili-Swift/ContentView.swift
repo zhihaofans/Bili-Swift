@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import SwiftUtils
 struct ContentView: View {
     private let pageTitleList = ["main": "Bilibili", "login": "登录", "user": "个人中心"]
     @State var isLogin = false
@@ -41,7 +41,7 @@ struct iosMainView: View {
                     NavigationLink("动态", destination: HistoryView())
                     NavigationLink("工具", destination: ToolView())
                 }
-                .navigationTitle("哔了个哩")
+                .navigationTitle(AppUtil().getAppName() ?? "" /* "哔了个哩" */ )
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         NavigationLink(destination: UserView()) {
