@@ -9,7 +9,7 @@ import Foundation
 import UserNotifications
 
 class NotificationService {
-    func requestNotificationPermission(success: () -> Void, fail: (String) -> Void) {
+    func requestNotificationPermission(success: @escaping () -> Void, fail: @escaping (String) -> Void) {
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             if let error = error {
@@ -25,16 +25,16 @@ class NotificationService {
         }
     }
 
-    func createNotificationContent() -> UNMutableNotificationContent {
+    func createNotificationContent(title: String, body: String) -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
-        content.title = "指定时间提醒"
-        content.body = "这是在指定时间发送的通知内容"
+        content.title = title
+        content.body = body
         content.sound = .default
         return content
     }
 
     func scheduleNotification(at dateComponents: DateComponents) {
-        let content = createNotificationContent()
+        let content = createNotificationContent(title: "", body: "")
 
         // 设置基于日期的触发器
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
