@@ -20,7 +20,7 @@ struct SettingView: View {
                     TextItem(title: "安装哔哩哔哩", detail: AppService().isAppIntalled().string(trueStr: "已安装", falseStr: "未安装"))
                 }
                 if LoginService().isLogin() {
-                    Section(header: Text("登录数据")) {
+                    Section(header: Text("登录数据(请不要给别人看⚠️)")) {
                         TextItem(title: "Cookies", detail: LoginService().getCookiesString())
                     }
                 }
