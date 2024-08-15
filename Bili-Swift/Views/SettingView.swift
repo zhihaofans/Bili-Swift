@@ -7,11 +7,36 @@
 
 import SwiftUI
 import SwiftUtils
+import UIKit
+
+private func getAppIconName() -> String? {
+    if let iconsDictionary = Bundle.main.infoDictionary?["CFBundleIcons"] as? [String: Any],
+       let primaryIconsDictionary = iconsDictionary["CFBundlePrimaryIcon"] as? [String: Any],
+       let iconFiles = primaryIconsDictionary["CFBundleIconFiles"] as? [String],
+       let lastIcon = iconFiles.last
+    {
+        return lastIcon
+    }
+    return nil
+}
+
+private func getAppIconImage() -> UIImage? {
+    if let iconName = getAppIconName() {
+        return UIImage(named: iconName)
+    }
+    return nil
+}
 
 struct SettingView: View {
     var body: some View {
         VStack {
             List {
+                if let appIcon = getAppIconImage() {
+                    AppIconAndNameView(image: appIcon)
+                    // 你可以在你的UI中展示这个appIcon, 比如在UIImageView中
+                } else {
+                    Text("Failed to retrieve app icon")
+                }
                 Section(header: Text("About")) {
                     TextItem(title: "开发者", detail: "zhihaofans")
                     TextItem(title: "Version", detail: "\(AppUtil().getAppVersion()) (\(AppUtil().getAppBuild()))" /* "0.0.1" */ )
@@ -32,6 +57,28 @@ struct SettingView: View {
         #else
         .navigationTitle("设置")
         #endif
+    }
+}
+
+struct AppIconAndNameView: View {
+    let image: UIImage
+    var body: some View {
+        VStack(alignment: .center) {
+            // Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+            Image(uiImage: image)
+                .resizable() // 允许图片可调整大小
+                .scaledToFit() // 图片将等比缩放以适应框架
+                .frame(width: 120, height: 120) // 设置视图框架的大小
+                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous)) // 设置圆角矩形形状
+                .shadow(radius: 5) // 添加阴影以增强效果
+            // .overlay(Circle().stroke(Color.gray, lineWidth: 4)) // 可选的白色边框
+//                .aspectRatio(contentMode: .fit)
+//                .frame(width: 100, height: 100)
+            Text(AppUtil().getAppName())
+                .font(.title)
+                .padding()
+        }
+        .frame(maxWidth: .infinity, alignment: .center) // 设置对齐方式
     }
 }
 
