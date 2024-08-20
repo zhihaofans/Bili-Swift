@@ -39,7 +39,7 @@ struct iosMainView: View {
                     NavigationLink("签到", destination: CheckinView())
                     NavigationLink("稍后再看", destination: LaterToWatchView())
                     NavigationLink("历史记录", destination: HistoryView())
-                    NavigationLink("动态", destination: HistoryView())
+                    //NavigationLink("动态", destination: HistoryView())
                     NavigationLink("工具", destination: ToolView())
                 }
                 .navigationTitle(AppUtil().getAppName() /* "哔了个哩" */ )
@@ -68,14 +68,14 @@ struct iosMainView: View {
             Text("")
                 .fixedSize(horizontal: false, vertical: true) // 纵向固定大小
                 .tabItem {
-                    Label("历史", systemImage: "list.bullet")
+                    Label("动态", systemImage: "fanblades")
                 }
                 .tag(1)
 
             Text("")
                 .fixedSize(horizontal: false, vertical: true) // 纵向固定大小
                 .tabItem {
-                    Label("我的", systemImage: "person")
+                    Label("更多", systemImage: "ellipsis")
                 }
                 .tag(2)
         }
