@@ -80,7 +80,7 @@ struct CheckinView: View {
                 alertText = ""
             })
         } message: {
-            Text(alertText.getString(defaultValue: "没有结果就是好结果"))
+            Text(alertText.getString("没有结果就是好结果"))
         }.onAppear {}
         #if os(iOS)
             .navigationBarTitle("签到", displayMode: .inline)
@@ -112,6 +112,6 @@ struct CheckinItemView: View {
     }
 }
 
- #Preview {
+#Preview {
     CheckinView()
- }
+}

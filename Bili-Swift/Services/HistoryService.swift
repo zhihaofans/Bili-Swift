@@ -17,7 +17,7 @@ class HistoryService {
         "Referer": "https://www.bilibili.com/",
     ]
     init() {
-        http.setHeader(newHeaders: headers)
+        http.setHeader(headers)
     }
 
     func getHistory(callback: @escaping (HistoryResult)->Void, fail: @escaping (String)->Void) {
@@ -56,7 +56,7 @@ class HistoryService {
 
     func getLaterToWatch(callback: @escaping (Later2WatchResult)->Void, fail: @escaping (String)->Void) {
         let url = "https://api.bilibili.com/x/v2/history/toview"
-        http.get(url: url) { result in
+        http.get(url) { result in
             if result.isEmpty {
                 fail("result.isEmpty")
             } else {

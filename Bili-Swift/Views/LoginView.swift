@@ -45,7 +45,7 @@ struct iosLoginView: View {
                     Button(action: {
                         Task {
                             // 在这里执行耗时的任务
-                            let openSu = await AppUtil().openUrl(urlString: qrcodeUrl)
+                            let openSu = await AppUtil().openUrl(qrcodeUrl)
                             // 完成后，在主线程更新 UI
                             DispatchQueue.main.async {
                                 // 更新 UI
@@ -57,7 +57,7 @@ struct iosLoginView: View {
                     }
                     .padding()
                 } else {
-                    let qrImage = QrcodeUtil().generateQRCode(from: EncodeUtil().urlDecode(oldString: qrcodeUrl))
+                    let qrImage = QrcodeUtil().generateQRCode(from: EncodeUtil().urlDecode( qrcodeUrl))
                     if qrImage == nil {
                         Text("请安装APP")
 
@@ -72,7 +72,7 @@ struct iosLoginView: View {
                             alertText = "保存登录数据" + setSu.string(trueStr: "成功", falseStr: "失败")
                             showingAlert = true
                             if(setSu){
-                                
+                                // TODO: 登录成功后操作
                             }
                         } else {
                             alertText = checkResult.message

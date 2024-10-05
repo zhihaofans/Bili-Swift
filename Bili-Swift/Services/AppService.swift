@@ -16,12 +16,12 @@ class AppService {
     func openAppUrl(url: String) async -> Bool {
         let biliUrl = self.getBiliUrl(url: url)
         print(biliUrl)
-        return await AppUtil().openUrl(urlString: url)
+        return await AppUtil().openUrl(url)
     }
 
     func isAppIntalled() -> Bool {
         #if os(iOS)
-        return AppUtil().canOpenUrl(urlString: "bilibili://")
+        return AppUtil().canOpenUrl("bilibili://")
         #else
         return true
         #endif
