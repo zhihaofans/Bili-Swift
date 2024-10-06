@@ -60,14 +60,20 @@ struct DynamicListItemModuleAuthor: Codable {
 
 struct DynamicListItemModuleDynamic: Codable {
     let additional: String? // 相关内容卡片信息
-    let desc: String? // 动态文字内容,其他动态时为null
+    let desc: DynamicListItemModuleDynamicDesc? // 动态文字内容,其他动态时为null
     let major: DynamicListItemModuleDynamicMajor? // 动态主体对象,转发动态时为null
     let topic: String? // 话题信息
+}
+
+struct DynamicListItemModuleDynamicDesc: Codable {
+//    let rich_text_nodes: [String]
+    let text: String
 }
 
 struct DynamicListItemModuleDynamicMajor: Codable {
     let type: String // 动态主体类型
     let archive: DynamicListItemModuleDynamicMajorArchive? // type=MAJOR_TYPE_ARCHIVE
+    let draw: DynamicListItemModuleDynamicMajorDraw? // type=MAJOR_TYPE_DRAW
 }
 
 struct DynamicListItemModuleDynamicMajorArchive: Codable {
@@ -76,10 +82,24 @@ struct DynamicListItemModuleDynamicMajorArchive: Codable {
     let bvid: String // 视频BVID
     let cover: String // 视频封面
     let desc: String // 视频简介
-    disable_preview num 0
-    duration_text str 视频长度
-    jump_url str 跳转URL
-    stat obj 统计信息
-    title str 视频标题
+//    disable_preview num 0
+    let duration_text: String // 视频长度文本
+    let jump_url: String // 跳转URL
+//    stat obj 统计信息
+    let title: String // 视频标题
 //    type    num    1
+}
+
+struct DynamicListItemModuleDynamicMajorDraw: Codable {
+    let id: Int // 对应相簿id
+    let items: [DynamicListItemModuleDynamicMajorDrawItem] // 图片信息列表
+//    type    num    1
+}
+
+struct DynamicListItemModuleDynamicMajorDrawItem: Codable {
+    let height: Int // 图片高度
+    let width: Int // 图片宽度
+    let size: Float // 图片大小,单位KB
+    let src: String // 图片URL
+    // tags    array
 }
