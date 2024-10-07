@@ -20,7 +20,7 @@ class DynamicService {
         http.setHeader(headers)
     }
 
-    func getDynamicList(callback: @escaping (HistoryResult)->Void, fail: @escaping (String)->Void) {
+    func getDynamicList(callback: @escaping (DynamicListResult)->Void, fail: @escaping (String)->Void) {
         let headers: HTTPHeaders = [
             "Cookie": "SESSDATA=" + LoginService().getSESSDATA(),
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
@@ -33,7 +33,7 @@ class DynamicService {
             } else {
                 print(result)
                 do {
-                    let data = try JSONDecoder().decode(HistoryResult.self, from: result.data(using: .utf8)!)
+                    let data = try JSONDecoder().decode(DynamicListResult.self, from: result.data(using: .utf8)!)
                     debugPrint(data.code)
                     if data.code == 0 {
                         callback(data)
@@ -42,40 +42,14 @@ class DynamicService {
                     }
                 } catch {
                     print(error)
-                    print("bipPointCheckin.catch.error")
-                    fail("bipPointCheckin:\(error)")
+                    print("getDynamicList.catch.error")
+                    fail("getDynamicList:\(error)")
                 }
             }
         } fail: { error in
             print(error)
-            print("bipPointCheckin.http.error")
-            fail("bipPointCheckin:\(error)")
-        }
-        AF.request("https://api.bilibili.com/x/web-interface/history/cursor", headers: headers).responseString { response in
-            do {
-                switch response.result {
-                case let .success(value):
-                    debugPrint(value)
-                    if value.contains("Method Not Allowed") {
-                        fail("err:" + value)
-                    } else {
-                        let result = try JSONDecoder().decode(HistoryResult.self, from: value.data(using: .utf8)!)
-                        debugPrint(result)
-                        if result.code == 0 {
-                            callback(result)
-                        } else {
-                            fail(result.message)
-                        }
-                    }
-                case let .failure(error):
-                    print(error)
-                    fail(error.localizedDescription)
-                }
-            } catch {
-                print("http.error")
-                debugPrint(error)
-                fail("网络请求错误:\(error.localizedDescription)")
-            }
+            print("getDynamicList.http.error")
+            fail("getDynamicList:\(error)")
         }
     }
 }

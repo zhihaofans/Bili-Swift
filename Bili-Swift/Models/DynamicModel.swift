@@ -7,6 +7,18 @@
 
 import Foundation
 
+class DynamicType {
+    let FORWARD = "DYNAMIC_TYPE_FORWARD" // 转发
+    let VIDEO = "DYNAMIC_TYPE_AV" // 投稿视频
+    let PGC = "DYNAMIC_TYPE_PGC" // 剧集（番剧、电影、纪录片）
+    let WORD = "DYNAMIC_TYPE_WORD" // 纯文字动态
+    let DRAW = "DYNAMIC_TYPE_DRAW" // 带图动态
+    let LIVE = "DYNAMIC_TYPE_LIVE" // 直播间分享
+    let ARTICLE = "DYNAMIC_TYPE_ARTICLE" // 专栏
+    let LIVE_RCMD = "DYNAMIC_TYPE_LIVE_RCMD" // 直播开播
+    let NONE = "DYNAMIC_TYPE_NONE" // 无效动态
+}
+
 struct DynamicListResult: Codable {
     let code: Int
     let message: String
@@ -27,6 +39,21 @@ struct DynamicListItem: Codable {
     let type: String
     let basic: DynamicListItemBasic
     let modules: DynamicListItemModules
+//    func getCover() -> String {
+//        if self.major != nil {
+//            return self.major?.getCover()
+//        }
+//        return nil
+//    }
+//
+    func getTitle() -> String {
+        switch self.type {
+        case DynamicType().VIDEO:
+            return self.modules.module_dynamic.desc?.text ?? "[文字动态的文字神秘消失了]"
+        default:
+            return "[神秘动态]"
+        }
+    }
 }
 
 struct DynamicListItemBasic: Codable {
@@ -63,6 +90,20 @@ struct DynamicListItemModuleDynamic: Codable {
     let desc: DynamicListItemModuleDynamicDesc? // 动态文字内容,其他动态时为null
     let major: DynamicListItemModuleDynamicMajor? // 动态主体对象,转发动态时为null
     let topic: String? // 话题信息
+    func getCover() -> String? {
+        if self.major != nil {
+            return self.major?.getCover()
+        }
+        return nil
+    }
+
+    func getTitle() -> String? {
+        if self.desc != nil {
+            return self.desc?.text
+        } else if self.major != nil {
+            return self.major?.getTitle()
+        }
+    }
 }
 
 struct DynamicListItemModuleDynamicDesc: Codable {
@@ -74,6 +115,27 @@ struct DynamicListItemModuleDynamicMajor: Codable {
     let type: String // 动态主体类型
     let archive: DynamicListItemModuleDynamicMajorArchive? // type=MAJOR_TYPE_ARCHIVE
     let draw: DynamicListItemModuleDynamicMajorDraw? // type=MAJOR_TYPE_DRAW
+    func getCover() -> String? {
+        switch self.type {
+        case DynamicType().VIDEO:
+            return self.archive?.cover
+        case DynamicType().DRAW:
+            return self.draw?.items[0].src
+        default:
+            return nil
+        }
+    }
+
+    func getTitle() -> String? {
+        switch self.type {
+        case DynamicType().VIDEO:
+            return self.archive?.title
+//        case "MAJOR_TYPE_DRAW":
+//            return self.draw?.id.toString
+        default:
+            return nil
+        }
+    }
 }
 
 struct DynamicListItemModuleDynamicMajorArchive: Codable {
