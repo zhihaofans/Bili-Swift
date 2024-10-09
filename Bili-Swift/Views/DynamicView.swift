@@ -85,7 +85,9 @@ struct DynamicItemView: View {
                     Text("@" + itemData.modules.module_author.name)
                 }
                 // .frame(width: geometry.size.width)
+                Spacer()
             }.frame(maxHeight: .infinity, alignment: .leading) // 设置对齐方式
+            Spacer()
         }
         .background(Color.secondary) // 设置背景色以便观察效果
         .frame(height: 100) // 将 VStack 的固定高度设置为100
@@ -128,6 +130,7 @@ struct DynamicItemTextView: View {
                 }.frame(maxHeight: .infinity) // 设置对齐方式
                 Text(itemData.getTitle())
                     .padding(.horizontal, 20) // 设置水平方向的内间距
+                Spacer()
             }
         }
         .background(Color.secondary) // 设置背景色以便观察效果
@@ -173,22 +176,26 @@ struct DynamicItemImageView: View {
                 Text(itemData.getTitle())
                     .lineLimit(2)
                     .padding(.horizontal, 20) // 设置水平方向的内间距
-                AsyncImage(url: URL(string: itemData.modules.module_dynamic.major?.draw?.items[0].src ?? defaultImg)) { image in
+                AsyncImage(url: URL(string: itemData.modules.module_dynamic.major?.draw?.items[0].src.replace(of: "http://", with: "https://") ?? defaultImg)) { image in
                     image
+                        .resizable()
                         .aspectRatio(contentMode: .fill)
                         .scaledToFit() // 图片将等比缩放以适应框架
+                        .padding(.horizontal, 20) // 设置水平方向的内间距
                 } placeholder: {
                     ProgressView()
                 }
                 .padding(.leading, 20) // 在左侧添加 10 点的内间距
+                Spacer()
             }
         }
         .background(Color.secondary) // 设置背景色以便观察效果
-        .frame(height: 100) // 将 VStack 的固定高度设置为100
+//        .frame(height: 150) // 将 VStack 的固定高度设置为100
+        .frame(minHeight: 180)
         .contentShape(Rectangle()) // 加这行才实现可点击
         .onTapGesture {
             // TODO: onClick
-            print(itemData)
+            print(itemData.modules.module_dynamic.major?.draw?.items[0].src)
 //            switch itemData.type {
 //                // case "archive":
 //
