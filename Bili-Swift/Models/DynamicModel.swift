@@ -39,19 +39,22 @@ struct DynamicListItem: Codable {
     let type: String
     let basic: DynamicListItemBasic
     let modules: DynamicListItemModules
-//    func getCover() -> String {
-//        if self.major != nil {
-//            return self.major?.getCover()
-//        }
-//        return nil
-//    }
-//
+    func getCover() -> String? {
+        var coverUrl: String? = nil
+        if self.modules.module_dynamic.major != nil {
+            coverUrl = self.modules.module_dynamic.major?.getCover()
+        }
+        return coverUrl ?? self.modules.module_author.face
+    }
+
     func getTitle() -> String {
         switch self.type {
         case DynamicType().VIDEO:
+            return self.modules.module_dynamic.major?.archive?.title ?? "[标题神秘消失了]"
+        case DynamicType().WORD:
             return self.modules.module_dynamic.desc?.text ?? "[文字动态的文字神秘消失了]"
         default:
-            return "[神秘动态]"
+            return "[\(self.type)]"
         }
     }
 }
@@ -78,7 +81,7 @@ struct DynamicListItemModuleAuthor: Codable {
     let face: String
     let jump_url: String
     let label: String // 名称前标签：合集、电视剧、番剧
-    let mid: String // UP主UID、剧集SeasonId
+    let mid: Int // UP主UID、剧集SeasonId
     let name: String // UP主名称、剧集名称、合集名称
     let pub_action: String // 更新动作描述
     let pub_time: String // 更新时间：x分钟前、x小时前、昨天
@@ -86,7 +89,7 @@ struct DynamicListItemModuleAuthor: Codable {
 }
 
 struct DynamicListItemModuleDynamic: Codable {
-    let additional: String? // 相关内容卡片信息
+//    let additional: obj? // 相关内容卡片信息
     let desc: DynamicListItemModuleDynamicDesc? // 动态文字内容,其他动态时为null
     let major: DynamicListItemModuleDynamicMajor? // 动态主体对象,转发动态时为null
     let topic: String? // 话题信息
@@ -102,6 +105,8 @@ struct DynamicListItemModuleDynamic: Codable {
             return self.desc?.text
         } else if self.major != nil {
             return self.major?.getTitle()
+        } else {
+            return nil
         }
     }
 }
@@ -113,7 +118,7 @@ struct DynamicListItemModuleDynamicDesc: Codable {
 
 struct DynamicListItemModuleDynamicMajor: Codable {
     let type: String // 动态主体类型
-    let archive: DynamicListItemModuleDynamicMajorArchive? // type=MAJOR_TYPE_ARCHIVE
+    let archive: DynamicListItemModuleDynamicMajorArchive? // type=MAJOR_TYPE_ARCHIVE  视频
     let draw: DynamicListItemModuleDynamicMajorDraw? // type=MAJOR_TYPE_DRAW
     func getCover() -> String? {
         switch self.type {
@@ -129,6 +134,8 @@ struct DynamicListItemModuleDynamicMajor: Codable {
     func getTitle() -> String? {
         switch self.type {
         case DynamicType().VIDEO:
+            return self.archive?.title
+        case DynamicType().ARTICLE:
             return self.archive?.title
 //        case "MAJOR_TYPE_DRAW":
 //            return self.draw?.id.toString

@@ -30,7 +30,7 @@ struct iosMainView: View {
     var body: some View {
         switch selectedTab {
         case 1:
-            HistoryView()
+            DynamicView()
         case 2:
             UserView()
         default:
