@@ -130,6 +130,7 @@ struct DynamicItemTextView: View {
                     Text(itemData.modules.module_author.name)
                         .font(.title2)
                     Spacer()
+                    Text(itemData.modules.module_author.pub_time)
                 }.frame(maxHeight: .infinity) // 设置对齐方式
                 Text(itemData.getTitle())
                     .padding(.horizontal, 20) // 设置水平方向的内间距
@@ -175,6 +176,8 @@ struct DynamicItemImageView: View {
                     Text(itemData.modules.module_author.name)
                         .font(.title2)
                     Spacer()
+                    Text(itemData.modules.module_author.pub_time + " " + itemData.modules.module_author.pub_action)
+                        .padding(.trailing, 10) // 在右侧添加 10 点的内间距
                 }.frame(maxHeight: .infinity) // 设置对齐方式
                 Text(itemData.getTitle())
                     .lineLimit(2)
@@ -198,7 +201,7 @@ struct DynamicItemImageView: View {
         .contentShape(Rectangle()) // 加这行才实现可点击
         .onTapGesture {
             // TODO: onClick
-            print(itemData.modules.module_dynamic.major?.draw?.items[0].src)
+            print(itemData)
 //            switch itemData.type {
 //                // case "archive":
 //

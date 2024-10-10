@@ -92,7 +92,7 @@ struct DynamicListItemModuleDynamic: Codable {
 //    let additional: obj? // 相关内容卡片信息
     let desc: DynamicListItemModuleDynamicDesc? // 动态文字内容,其他动态时为null
     let major: DynamicListItemModuleDynamicMajor? // 动态主体对象,转发动态时为null
-    let topic: String? // 话题信息
+//    let topic: Obj? // 话题信息
     func getCover() -> String? {
         if self.major != nil {
             return self.major?.getCover()
@@ -120,6 +120,7 @@ struct DynamicListItemModuleDynamicMajor: Codable {
     let type: String // 动态主体类型
     let archive: DynamicListItemModuleDynamicMajorArchive? // type=MAJOR_TYPE_ARCHIVE  视频
     let draw: DynamicListItemModuleDynamicMajorDraw? // type=MAJOR_TYPE_DRAW
+    let live_rcmd: DynamicListItemModuleDynamicMajorLiveRcmd? // type=MAJOR_TYPE_DRAW
     func getCover() -> String? {
         switch self.type {
         case DynamicType().VIDEO:
@@ -171,4 +172,9 @@ struct DynamicListItemModuleDynamicMajorDrawItem: Codable {
     let size: Float // 图片大小,单位KB
     let src: String // 图片URL
     // tags    array
+}
+
+struct DynamicListItemModuleDynamicMajorLiveRcmd: Codable {
+    let content: String // 直播间内容JSON
+    let reserve_type: Int
 }
