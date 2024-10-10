@@ -16,7 +16,8 @@ struct DynamicView: View {
         ScrollView {
             if loaded {
                 if isError {
-                    Text(errorStr).font(.largeTitle)
+                    Text("Error").font(.largeTitle)
+                    Text(errorStr)
                 } else {
                     LazyVStack {
                         ForEach(dynamicList, id: \.id_str) { item in
@@ -33,6 +34,7 @@ struct DynamicView: View {
                 }
             } else {
                 Text("Loading...")
+                ProgressView()
             }
         }
         .toolbar {
@@ -58,6 +60,7 @@ struct DynamicView: View {
                 } fail: { err in
                     DispatchQueue.main.async {
                         isError=true
+                        loaded=true
                         errorStr=err
                     }
                 }
