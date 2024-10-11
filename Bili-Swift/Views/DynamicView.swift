@@ -21,14 +21,16 @@ struct DynamicView: View {
                 } else {
                     LazyVStack {
                         ForEach(dynamicList, id: \.id_str) { item in
-                            switch item.type {
-                            case DynamicType().WORD:
-                                DynamicItemTextView(itemData: item)
-                            case DynamicType().DRAW:
-                                DynamicItemImageView(itemData: item)
-                            default:
-                                DynamicItemView(itemData: item)
-                            }
+//                            switch item.type {
+//                            case DynamicType().WORD:
+//                                DynamicItemTextView(itemData: item)
+//                            case DynamicType().DRAW:
+//                                DynamicItemImageView(itemData: item)
+//                            default:
+//                                DynamicItemView(itemData: item)
+//                            }
+
+                            DynamicItemImageView(itemData: item)
                         }
                     }
                 }
@@ -156,6 +158,23 @@ struct DynamicItemTextView: View {
 struct DynamicItemImageView: View {
     var itemData: DynamicListItem
     private let defaultImg="https://i0.hdslb.com/bfs/activity-plat/static/20220518/49ddaeaba3a23f61a6d2695de40d45f0/2nqyzFm9He.jpeg"
+    private let imageUrl: String?
+    @State private var hasImage=false
+    init(itemData: DynamicListItem) {
+        self.itemData=itemData
+        switch itemData.type {
+        case DynamicType().DRAW:
+            self.hasImage=true
+            self.imageUrl=itemData.modules.module_dynamic.major?.draw?.items[0].src
+        case DynamicType().VIDEO:
+            self.hasImage=true
+            self.imageUrl=itemData.modules.module_dynamic.major?.archive?.cover
+        default:
+            self.hasImage=false
+            self.imageUrl=nil
+        }
+    }
+
     var body: some View {
         VStack(alignment: .leading) {
             VStack {
@@ -182,22 +201,24 @@ struct DynamicItemImageView: View {
                 Text(itemData.getTitle())
                     .lineLimit(2)
                     .padding(.horizontal, 20) // 设置水平方向的内间距
-                AsyncImage(url: URL(string: itemData.modules.module_dynamic.major?.draw?.items[0].src.replace(of: "http://", with: "https://") ?? defaultImg)) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .scaledToFit() // 图片将等比缩放以适应框架
-                        .padding(.horizontal, 20) // 设置水平方向的内间距
-                } placeholder: {
-                    ProgressView()
+                if hasImage {
+                    AsyncImage(url: URL(string: (imageUrl ?? defaultImg).replace(of: "http://", with: "https://"))) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .scaledToFit() // 图片将等比缩放以适应框架
+                            .padding(.horizontal, 20) // 设置水平方向的内间距
+                    } placeholder: {
+                        ProgressView()
+                    }
+//                    .padding(.leading, 20) // 在左侧添加 10 点的内间距
                 }
-                .padding(.leading, 20) // 在左侧添加 10 点的内间距
                 Spacer()
             }
         }
         .background(Color.secondary) // 设置背景色以便观察效果
 //        .frame(height: 150) // 将 VStack 的固定高度设置为100
-        .frame(minHeight: 180)
+        .frame(minHeight: 100)
         .contentShape(Rectangle()) // 加这行才实现可点击
         .onTapGesture {
             // TODO: onClick

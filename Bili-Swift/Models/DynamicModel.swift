@@ -53,6 +53,8 @@ struct DynamicListItem: Codable {
             return self.modules.module_dynamic.major?.archive?.title ?? "[标题神秘消失了]"
         case DynamicType().WORD:
             return self.modules.module_dynamic.desc?.text ?? "[文字动态的文字神秘消失了]"
+        case DynamicType().DRAW:
+            return "[发了图片]"
         default:
             return "[\(self.type)]"
         }
