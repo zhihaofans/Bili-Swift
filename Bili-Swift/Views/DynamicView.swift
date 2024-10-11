@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUtils
 
 struct DynamicView: View {
     @State var isError=false
@@ -24,10 +25,8 @@ struct DynamicView: View {
 //                            switch item.type {
 //                            case DynamicType().WORD:
 //                                DynamicItemTextView(itemData: item)
-//                            case DynamicType().DRAW:
-//                                DynamicItemImageView(itemData: item)
 //                            default:
-//                                DynamicItemView(itemData: item)
+//                                DynamicItemOldView(itemData: item)
 //                            }
 
                             DynamicItemImageView(itemData: item)
@@ -71,7 +70,7 @@ struct DynamicView: View {
     }
 }
 
-struct DynamicItemView: View {
+struct DynamicItemOldView: View {
     var itemData: DynamicListItem
     private let defaultImg="https://i0.hdslb.com/bfs/activity-plat/static/20220518/49ddaeaba3a23f61a6d2695de40d45f0/2nqyzFm9He.jpeg"
     var body: some View {
@@ -93,51 +92,6 @@ struct DynamicItemView: View {
                 Spacer()
             }.frame(maxHeight: .infinity, alignment: .leading) // 设置对齐方式
             Spacer()
-        }
-        .background(Color.secondary) // 设置背景色以便观察效果
-        .frame(height: 100) // 将 VStack 的固定高度设置为100
-        .contentShape(Rectangle()) // 加这行才实现可点击
-        .onTapGesture {
-            // TODO: onClick
-            print(itemData)
-//            switch itemData.type {
-//                // case "archive":
-//
-//                default:
-//                    print(itemData.type)
-//            }
-        }
-    }
-}
-
-struct DynamicItemTextView: View {
-    var itemData: DynamicListItem
-    var body: some View {
-        VStack(alignment: .leading) {
-            VStack {
-                HStack {
-                    AsyncImage(url: URL(string: itemData.modules.module_author.face)) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .scaledToFit() // 图片将等比缩放以适应框架
-                            .frame(width: 40, height: 40) // 设置视图框架的大小
-                            .clipShape(Circle()) // 裁剪成圆形
-                            .overlay(Circle().stroke(Color.gray, lineWidth: 4)) // 可选的白色边框
-                    } placeholder: {
-                        ProgressView()
-                    }
-                    .padding(.leading, 20) // 在左侧添加 10 点的内间距
-//                    .frame(width: 40, height: 40)
-                    Text(itemData.modules.module_author.name)
-                        .font(.title2)
-                    Spacer()
-                    Text(itemData.modules.module_author.pub_time)
-                }.frame(maxHeight: .infinity) // 设置对齐方式
-                Text(itemData.getTitle())
-                    .padding(.horizontal, 20) // 设置水平方向的内间距
-                Spacer()
-            }
         }
         .background(Color.secondary) // 设置背景色以便观察效果
         .frame(height: 100) // 将 VStack 的固定高度设置为100
@@ -224,10 +178,11 @@ struct DynamicItemImageView: View {
             // TODO: onClick
             print(itemData)
 //            switch itemData.type {
-//                // case "archive":
+//            case DynamicType().VIDEO:
 //
-//                default:
-//                    print(itemData.type)
+//                AppUtil().openUrl(itemData.modules.module_dynamic.major?.archive?.jump_url ?? "")
+//            default:
+//                print(itemData.type)
 //            }
         }
     }

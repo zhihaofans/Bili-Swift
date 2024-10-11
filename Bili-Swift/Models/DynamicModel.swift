@@ -52,7 +52,7 @@ struct DynamicListItem: Codable {
         case DynamicType().VIDEO:
             return self.modules.module_dynamic.major?.archive?.title ?? "[标题神秘消失了]"
         case DynamicType().WORD:
-            return self.modules.module_dynamic.desc?.text ?? "[文字动态的文字神秘消失了]"
+            return self.modules.module_dynamic.desc?.text ?? "[文字神秘消失了]"
         case DynamicType().DRAW:
             return "[发了图片]"
         default:
