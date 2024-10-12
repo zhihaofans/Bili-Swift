@@ -77,6 +77,7 @@ struct Later2WatchItemView: View {
                     Text("@" + itemData.owner.name)
                 }
                 // .frame(width: geometry.size.width)
+                Spacer()
             }.frame(maxHeight: .infinity, alignment: .leading) // 设置对齐方式
         }
         .frame(height: 100) // 将 VStack 的固定高度设置为100
