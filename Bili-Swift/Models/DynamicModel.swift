@@ -122,7 +122,7 @@ struct DynamicListItemModuleDynamicMajor: Codable {
     let type: String // 动态主体类型
     let archive: DynamicListItemModuleDynamicMajorArchive? // type=MAJOR_TYPE_ARCHIVE  视频
     let draw: DynamicListItemModuleDynamicMajorDraw? // type=MAJOR_TYPE_DRAW
-    let live_rcmd: DynamicListItemModuleDynamicMajorLiveRcmd? // type=MAJOR_TYPE_DRAW
+    let live_rcmd: DynamicListItemModuleDynamicMajorLiveRcmd? // type=DYNAMIC_TYPE_LIVE_RCMD
     func getCover() -> String? {
         switch self.type {
         case DynamicType().VIDEO:
