@@ -114,6 +114,9 @@ struct DynamicItemImageView: View {
     private let defaultImg="https://i0.hdslb.com/bfs/activity-plat/static/20220518/49ddaeaba3a23f61a6d2695de40d45f0/2nqyzFm9He.jpeg"
     private let imageUrl: String?
     @State private var hasImage=false
+    @State private var showingAlert=false
+    @State private var alertTitle=""
+    @State private var alertText=""
     init(itemData: DynamicListItem) {
         self.itemData=itemData
         switch itemData.type {
@@ -123,6 +126,9 @@ struct DynamicItemImageView: View {
         case DynamicType().VIDEO:
             self.hasImage=true
             self.imageUrl=itemData.modules.module_dynamic.major?.archive?.cover
+        case DynamicType().ARTICLE:
+            self.hasImage=true
+            self.imageUrl=itemData.modules.module_dynamic.major?.article?.covers[0]
         default:
             self.hasImage=false
             self.imageUrl=nil
@@ -177,13 +183,58 @@ struct DynamicItemImageView: View {
         .onTapGesture {
             // TODO: onClick
             print(itemData)
-//            switch itemData.type {
-//            case DynamicType().VIDEO:
-//
-//                AppUtil().openUrl(itemData.modules.module_dynamic.major?.archive?.jump_url ?? "")
-//            default:
-//                print(itemData.type)
-//            }
+            switch itemData.type {
+            case DynamicType().VIDEO:
+                Task {
+                    DispatchQueue.main.async {
+                        var urlStr=itemData.modules.module_dynamic.major?.archive?.jump_url ?? ""
+                        if urlStr.isNotEmpty {
+                            if urlStr.starts(with: "//") {
+                                urlStr="https:" + urlStr
+                            }
+                            if urlStr.starts(with: "http://") {
+                                urlStr=urlStr.replace(of: "http://", with: "https://")
+                            }
+                            if let url=URL(string: urlStr) {
+                                DispatchQueue.main.async {
+                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                }
+                            }
+                        }
+                    }
+                }
+            case DynamicType().ARTICLE:
+                Task {
+                    DispatchQueue.main.async {
+                        var urlStr=itemData.modules.module_dynamic.major?.article?.jump_url ?? ""
+                        if urlStr.isNotEmpty {
+                            if urlStr.starts(with: "//") {
+                                urlStr="https:" + urlStr
+                            }
+                            if urlStr.starts(with: "http://") {
+                                urlStr=urlStr.replace(of: "http://", with: "https://")
+                            }
+                            if let url=URL(string: urlStr) {
+                                DispatchQueue.main.async {
+                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                }
+                            }
+                        }
+                    }
+                }
+            default:
+                print(itemData.type)
+                alertTitle="@" + itemData.modules.module_author.name
+                alertText=itemData.modules.module_dynamic.getTitle() ?? "[没有标题]"
+                showingAlert=true
+            }
+        }
+        .alert(alertTitle, isPresented: $showingAlert) {
+            Button("OK", action: {
+                showingAlert=false
+            })
+        } message: {
+            Text(alertText)
         }
     }
 }

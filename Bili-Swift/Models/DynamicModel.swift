@@ -55,6 +55,8 @@ struct DynamicListItem: Codable {
             return self.modules.module_dynamic.desc?.text ?? "[文字神秘消失了]"
         case DynamicType().DRAW:
             return "[发了图片]"
+        case DynamicType().ARTICLE:
+            return self.modules.module_dynamic.major?.article?.title ?? "[标题神秘消失了]"
         default:
             return "[\(self.type)]"
         }
@@ -123,6 +125,7 @@ struct DynamicListItemModuleDynamicMajor: Codable {
     let archive: DynamicListItemModuleDynamicMajorArchive? // type=MAJOR_TYPE_ARCHIVE  视频
     let draw: DynamicListItemModuleDynamicMajorDraw? // type=MAJOR_TYPE_DRAW
     let live_rcmd: DynamicListItemModuleDynamicMajorLiveRcmd? // type=DYNAMIC_TYPE_LIVE_RCMD
+    let article: DynamicListItemModuleDynamicMajorArticle? // type=MAJOR_TYPE_ARTICLE
     func getCover() -> String? {
         switch self.type {
         case DynamicType().VIDEO:
@@ -179,4 +182,13 @@ struct DynamicListItemModuleDynamicMajorDrawItem: Codable {
 struct DynamicListItemModuleDynamicMajorLiveRcmd: Codable {
     let content: String // 直播间内容JSON
     let reserve_type: Int
+}
+
+struct DynamicListItemModuleDynamicMajorArticle: Codable {
+    let covers: [String] // 封面图数组,最多三张
+    let desc: String
+    let id: Int
+    let jump_url: String
+    let label: String
+    let title: String
 }
