@@ -215,9 +215,7 @@ struct DynamicItemImageView: View {
                                 urlStr=urlStr.replace(of: "http://", with: "https://")
                             }
                             if let url=URL(string: urlStr) {
-                                DispatchQueue.main.async {
-                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                                }
+                                UIApplication.shared.open(url, options: [:], completionHandler: nil)
                             }
                         }
                     }

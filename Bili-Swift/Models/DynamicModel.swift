@@ -54,7 +54,7 @@ struct DynamicListItem: Codable {
         case DynamicType().WORD:
             return self.modules.module_dynamic.desc?.text ?? "[文字神秘消失了]"
         case DynamicType().DRAW:
-            return "[发了图片]"
+            return self.modules.module_dynamic.desc?.text ?? "[发了图片]"
         case DynamicType().ARTICLE:
             return self.modules.module_dynamic.major?.article?.title ?? "[标题神秘消失了]"
         default:
