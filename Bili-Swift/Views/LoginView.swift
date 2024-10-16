@@ -45,19 +45,19 @@ struct iosLoginView: View {
                     Button(action: {
                         Task {
                             // 在这里执行耗时的任务
-                            let openSu = await AppUtil().openUrl(qrcodeUrl)
+                            AppUtil().openUrl(qrcodeUrl)
                             // 完成后，在主线程更新 UI
-                            DispatchQueue.main.async {
-                                // 更新 UI
-                                print("打开app：" + openSu.string(trueStr: "Su", falseStr: "fail"))
-                            }
+//                            DispatchQueue.main.async {
+//                                // 更新 UI
+//                                print("打开app：" + openSu.string(trueStr: "Su", falseStr: "fail"))
+//                            }
                         }
                     }) {
                         Text("打开App登录").font(.title)
                     }
                     .padding()
                 } else {
-                    let qrImage = QrcodeUtil().generateQRCode(from: EncodeUtil().urlDecode( qrcodeUrl))
+                    let qrImage = QrcodeUtil().generateQRCode(from: EncodeUtil().urlDecode(qrcodeUrl))
                     if qrImage == nil {
                         Text("请安装APP")
 
@@ -71,7 +71,7 @@ struct iosLoginView: View {
                             let setSu = KeychainUtil().saveString(forKey: "bilibili.login.refresh_token", value: checkResult.refresh_token)
                             alertText = "保存登录数据" + setSu.string(trueStr: "成功", falseStr: "失败")
                             showingAlert = true
-                            if(setSu){
+                            if setSu {
                                 // TODO: 登录成功后操作
                             }
                         } else {

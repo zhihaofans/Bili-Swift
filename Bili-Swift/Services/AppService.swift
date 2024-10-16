@@ -13,10 +13,10 @@ class AppService {
         return "bilibili://browser/?url=\(url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? ""))"
     }
 
-    func openAppUrl(url: String) async -> Bool {
+    func openAppUrl(url: String) {
         let biliUrl = self.getBiliUrl(url: url)
         print(biliUrl)
-        return await AppUtil().openUrl(url)
+        AppUtil().openUrl(url)
     }
 
     func isAppIntalled() -> Bool {
