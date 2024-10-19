@@ -13,7 +13,6 @@ struct DynamicView: View {
     @State var loaded=false
     @State var errorStr=""
     @State var dynamicList: [DynamicListItem]=[]
-    private let UDUtil=UserDefaultUtil()
     var body: some View {
         ScrollView {
             if loaded {
@@ -118,6 +117,7 @@ struct DynamicItemImageView: View {
     @State private var showingAlert=false
     @State private var alertTitle=""
     @State private var alertText=""
+    private let UDUtil=UserDefaultUtil()
     init(itemData: DynamicListItem) {
         self.itemData=itemData
         if UDUtil.getBool("bili_dynamic_image_mode") ?? true {

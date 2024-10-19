@@ -101,6 +101,6 @@ struct TextItem: View {
     }
 }
 
-#Preview {
-    SettingView()
-}
+//#Preview {
+//    SettingView()
+//}
