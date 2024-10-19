@@ -9,33 +9,21 @@ import SwiftUI
 import SwiftUtils
 import UIKit
 
-private func getAppIconName() -> String? {
-    if let iconsDictionary = Bundle.main.infoDictionary?["CFBundleIcons"] as? [String: Any],
-       let primaryIconsDictionary = iconsDictionary["CFBundlePrimaryIcon"] as? [String: Any],
-       let iconFiles = primaryIconsDictionary["CFBundleIconFiles"] as? [String],
-       let lastIcon = iconFiles.last
-    {
-        return lastIcon
-    }
-    return nil
-}
-
-private func getAppIconImage() -> UIImage? {
-    if let iconName = getAppIconName() {
-        return UIImage(named: iconName)
-    }
-    return nil
-}
-
 struct SettingView: View {
+    @AppStorage("bili_dynamic_image_mode") var isDynamicShowImage: Bool = true
     var body: some View {
         VStack {
             List {
+                Section(header: Text("动态")) {
+                    Toggle(isOn: $isDynamicShowImage) {
+                        Text("动态是否显示图片")
+                    }
+                }
                 if let appIcon = getAppIconImage() {
                     AppIconAndNameView(image: appIcon)
                     // 你可以在你的UI中展示这个appIcon, 比如在UIImageView中
                 } else {
-                    Text("Failed to retrieve app icon")
+                    Text("Failed to load app icon")
                 }
                 Section(header: Text("About")) {
                     TextItem(title: "开发者", detail: "zhihaofans")
@@ -57,6 +45,24 @@ struct SettingView: View {
         #else
         .navigationTitle("设置")
         #endif
+    }
+
+    private func getAppIconName() -> String? {
+        if let iconsDictionary = Bundle.main.infoDictionary?["CFBundleIcons"] as? [String: Any],
+           let primaryIconsDictionary = iconsDictionary["CFBundlePrimaryIcon"] as? [String: Any],
+           let iconFiles = primaryIconsDictionary["CFBundleIconFiles"] as? [String],
+           let lastIcon = iconFiles.last
+        {
+            return lastIcon
+        }
+        return nil
+    }
+
+    private func getAppIconImage() -> UIImage? {
+        if let iconName = getAppIconName() {
+            return UIImage(named: iconName)
+        }
+        return nil
     }
 }
 

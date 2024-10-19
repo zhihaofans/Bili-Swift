@@ -13,6 +13,7 @@ struct DynamicView: View {
     @State var loaded=false
     @State var errorStr=""
     @State var dynamicList: [DynamicListItem]=[]
+    private let UDUtil=UserDefaultUtil()
     var body: some View {
         ScrollView {
             if loaded {
@@ -119,17 +120,22 @@ struct DynamicItemImageView: View {
     @State private var alertText=""
     init(itemData: DynamicListItem) {
         self.itemData=itemData
-        switch itemData.type {
-        case DynamicType().DRAW:
-            self.hasImage=true
-            self.imageUrl=itemData.modules.module_dynamic.major?.draw?.items[0].src
-        case DynamicType().VIDEO:
-            self.hasImage=true
-            self.imageUrl=itemData.modules.module_dynamic.major?.archive?.cover
-        case DynamicType().ARTICLE:
-            self.hasImage=true
-            self.imageUrl=itemData.modules.module_dynamic.major?.article?.covers[0]
-        default:
+        if UDUtil.getBool("bili_dynamic_image_mode") ?? true {
+            switch itemData.type {
+            case DynamicType().DRAW:
+                self.hasImage=true
+                self.imageUrl=itemData.modules.module_dynamic.major?.draw?.items[0].src
+            case DynamicType().VIDEO:
+                self.hasImage=true
+                self.imageUrl=itemData.modules.module_dynamic.major?.archive?.cover
+            case DynamicType().ARTICLE:
+                self.hasImage=true
+                self.imageUrl=itemData.modules.module_dynamic.major?.article?.covers[0]
+            default:
+                self.hasImage=false
+                self.imageUrl=nil
+            }
+        } else {
             self.hasImage=false
             self.imageUrl=nil
         }
