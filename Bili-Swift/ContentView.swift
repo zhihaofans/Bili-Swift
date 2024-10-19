@@ -32,7 +32,25 @@ struct iosMainView: View {
         case 1:
             DynamicView()
         case 2:
-            UserView()
+            NavigationView {
+                List {
+                    NavigationLink("工具", destination: ToolView())
+                }
+                .navigationTitle("更多")
+//                .toolbar {
+//                    ToolbarItem(placement: .navigationBarTrailing) {
+//                        NavigationLink(destination: UserView()) {
+//                            // TODO: 这里跳转到个人页面或登录界面
+//                            Image(systemName: "person")
+//                        }
+//                    }
+//                    ToolbarItem(placement: .navigationBarTrailing) {
+//                        NavigationLink(destination: SettingView()) {
+//                            Image(systemName: "gear")
+//                        }
+//                    }
+//                }
+            }
         default:
             NavigationView {
                 List {
@@ -40,7 +58,7 @@ struct iosMainView: View {
                     NavigationLink("稍后再看", destination: LaterToWatchView())
                     NavigationLink("历史记录", destination: HistoryView())
                     // NavigationLink("动态", destination: HistoryView())
-                    NavigationLink("工具", destination: ToolView())
+//                    NavigationLink("工具", destination: ToolView())
                 }
                 .navigationTitle(AppUtil().getAppName() /* "哔了个哩" */ )
                 .toolbar {
@@ -113,6 +131,3 @@ struct macMainView: View {
     }
 }
 
-#Preview {
-    ContentView()
-}
