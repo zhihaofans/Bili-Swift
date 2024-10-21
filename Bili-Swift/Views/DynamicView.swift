@@ -193,14 +193,8 @@ struct DynamicItemImageView: View {
             case DynamicType().VIDEO:
                 Task {
                     DispatchQueue.main.async {
-                        var urlStr=itemData.modules.module_dynamic.major?.archive?.jump_url ?? ""
+                        let urlStr=self.checkLink(itemData.modules.module_dynamic.major?.archive?.jump_url)
                         if urlStr.isNotEmpty {
-                            if urlStr.starts(with: "//") {
-                                urlStr="https:" + urlStr
-                            }
-                            if urlStr.starts(with: "http://") {
-                                urlStr=urlStr.replace(of: "http://", with: "https://")
-                            }
                             if let url=URL(string: urlStr) {
                                 DispatchQueue.main.async {
                                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -212,14 +206,8 @@ struct DynamicItemImageView: View {
             case DynamicType().ARTICLE:
                 Task {
                     DispatchQueue.main.async {
-                        var urlStr=itemData.modules.module_dynamic.major?.article?.jump_url ?? ""
+                        let urlStr=self.checkLink(itemData.modules.module_dynamic.major?.article?.jump_url)
                         if urlStr.isNotEmpty {
-                            if urlStr.starts(with: "//") {
-                                urlStr="https:" + urlStr
-                            }
-                            if urlStr.starts(with: "http://") {
-                                urlStr=urlStr.replace(of: "http://", with: "https://")
-                            }
                             if let url=URL(string: urlStr) {
                                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
                             }
@@ -240,5 +228,16 @@ struct DynamicItemImageView: View {
         } message: {
             Text(alertText)
         }
+    }
+
+    private func checkLink(_ url: String?) -> String {
+        var urlStr=url ?? ""
+        if urlStr.starts(with: "//") {
+            urlStr="https:" + urlStr
+        }
+        if urlStr.starts(with: "http://") {
+            urlStr=urlStr.replace(of: "http://", with: "https://")
+        }
+        return urlStr
     }
 }
