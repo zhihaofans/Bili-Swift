@@ -11,12 +11,18 @@ import UIKit
 
 struct SettingView: View {
     @AppStorage("bili_dynamic_image_mode") var isDynamicShowImage: Bool = true
+    @AppStorage("open_web_in_app") var openWebInApp: Bool = false
     var body: some View {
         VStack {
             List {
                 Section(header: Text("动态")) {
                     Toggle(isOn: $isDynamicShowImage) {
                         Text("动态是否显示图片")
+                    }
+                }
+                Section(header: Text("网页")) {
+                    Toggle(isOn: $openWebInApp) {
+                        Text("使用Bilibili app打开网页")
                     }
                 }
                 if let appIcon = getAppIconImage() {
@@ -101,6 +107,6 @@ struct TextItem: View {
     }
 }
 
-//#Preview {
+// #Preview {
 //    SettingView()
-//}
+// }

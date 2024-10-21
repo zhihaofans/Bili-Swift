@@ -7,16 +7,25 @@
 
 import Foundation
 import SwiftUtils
+import UIKit
 
 class AppService {
-    func getBiliUrl(url: String) -> String {
+    func getBiliUrl(_ url: String) -> String {
         return "bilibili://browser/?url=\(url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? ""))"
     }
 
-    func openAppUrl(url: String) {
-        let biliUrl = self.getBiliUrl(url: url)
+    func openAppUrl(_ urlStr: String) {
+        let biliUrl = self.getBiliUrl(urlStr)
         print(biliUrl)
-        AppUtil().openUrl(url)
+        Task {
+            DispatchQueue.main.async {
+                if biliUrl.isNotEmpty {
+                    if let url = URL(string: biliUrl) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    }
+                }
+            }
+        }
     }
 
     func isAppIntalled() -> Bool {

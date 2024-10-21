@@ -118,9 +118,11 @@ struct DynamicItemImageView: View {
     @State private var alertTitle=""
     @State private var alertText=""
     private let UDUtil=UserDefaultUtil()
+    @AppStorage("open_web_in_app") var openWebInApp: Bool=false
     init(itemData: DynamicListItem) {
         self.itemData=itemData
-        if UDUtil.getBool("bili_dynamic_image_mode") ?? true {
+        @AppStorage("bili_dynamic_image_mode") var isDynamicShowImage=true
+        if isDynamicShowImage {
             switch itemData.type {
             case DynamicType().DRAW:
                 self.hasImage=true
@@ -191,25 +193,33 @@ struct DynamicItemImageView: View {
             print(itemData)
             switch itemData.type {
             case DynamicType().VIDEO:
-                Task {
-                    DispatchQueue.main.async {
-                        let urlStr=self.checkLink(itemData.modules.module_dynamic.major?.archive?.jump_url)
-                        if urlStr.isNotEmpty {
-                            if let url=URL(string: urlStr) {
-                                DispatchQueue.main.async {
-                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                let urlStr=self.checkLink(itemData.modules.module_dynamic.major?.archive?.jump_url)
+                if openWebInApp {
+                    AppService().openAppUrl(urlStr)
+                } else {
+                    Task {
+                        DispatchQueue.main.async {
+                            if urlStr.isNotEmpty {
+                                if let url=URL(string: urlStr) {
+                                    DispatchQueue.main.async {
+                                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                    }
                                 }
                             }
                         }
                     }
                 }
             case DynamicType().ARTICLE:
-                Task {
-                    DispatchQueue.main.async {
-                        let urlStr=self.checkLink(itemData.modules.module_dynamic.major?.article?.jump_url)
-                        if urlStr.isNotEmpty {
-                            if let url=URL(string: urlStr) {
-                                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                let urlStr=self.checkLink(itemData.modules.module_dynamic.major?.article?.jump_url)
+                if openWebInApp {
+                    AppService().openAppUrl(urlStr)
+                } else {
+                    Task {
+                        DispatchQueue.main.async {
+                            if urlStr.isNotEmpty {
+                                if let url=URL(string: urlStr) {
+                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                }
                             }
                         }
                     }

@@ -112,6 +112,6 @@ struct CheckinItemView: View {
     }
 }
 
-//#Preview {
+// #Preview {
 //    CheckinView()
-//}
+// }
