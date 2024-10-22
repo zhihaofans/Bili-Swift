@@ -16,8 +16,9 @@ struct ToolView: View {
             NavigationView {
                 List {
 //                    NavigationLink("工具", destination: ToolView())
-                    CheckinItemView(title: "直播签到", isLoading: $isLoading) {
+                    CheckinItemView(title: "下载视频封面", isLoading: $isLoading) {
                         Task {}
+                        isLoading = false
                     }
                 }
                 .navigationTitle("工具")

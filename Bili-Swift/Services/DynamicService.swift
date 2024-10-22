@@ -32,7 +32,7 @@ class DynamicService {
                     let data = try JSONDecoder().decode(DynamicListResult.self, from: result.data(using: .utf8)!)
                     debugPrint(data.code)
                     if data.code == 0 {
-                        debugPrint(data.data)
+//                        debugPrint(data.data)
                         callback(data)
                     } else {
                         fail("Code \(data.code): \(data.message)")
