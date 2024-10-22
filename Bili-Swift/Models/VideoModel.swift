@@ -37,7 +37,7 @@ struct VideoInfoOwner: Codable {
 
 struct VideoInfoPagesItem: Codable {
     let cid: Int
-    let num: Int // 分P序号，从1开始
+    let page: Int // 分P序号，从1开始
     let from: String // 视频来源，    vupload：普通上传（B站）、hunan：芒果TV、qq：腾讯
     let part: String // 分P标题
     let duration: Int // 分P持续时间

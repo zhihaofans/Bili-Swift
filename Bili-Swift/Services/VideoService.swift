@@ -20,8 +20,8 @@ class VideoService {
         http.setHeader(headers)
     }
 
-    func getVideoInfo(callback: @escaping (VideoInfoResult)->Void, fail: @escaping (String)->Void) {
-        let url = "https://api.bilibili.com/x/web-interface/wbi/view"
+    func getVideoInfo(_ bvid: String, callback: @escaping (VideoInfoResult)->Void, fail: @escaping (String)->Void) {
+        let url = "https://api.bilibili.com/x/web-interface/wbi/view?bvid=\(bvid)"
         http.get(url) { result in
             if result.isEmpty {
                 fail("result.isEmpty")
