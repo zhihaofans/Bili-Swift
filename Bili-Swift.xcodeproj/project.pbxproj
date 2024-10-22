@@ -38,6 +38,8 @@
 		26C592AE2C4EBE0F006E211D /* LiveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C592AD2C4EBE0F006E211D /* LiveModel.swift */; };
 		26DF0E2C2C5B191800B4A8B3 /* LaterToWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF0E2B2C5B191800B4A8B3 /* LaterToWatchView.swift */; };
 		26DF0E512C6BC42600B4A8B3 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF0E502C6BC42600B4A8B3 /* NotificationService.swift */; };
+		26ED615A2CC6B95300A004A6 /* VideoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26ED61592CC6B95300A004A6 /* VideoService.swift */; };
+		26ED615C2CC6BDB100A004A6 /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26ED615B2CC6BDB100A004A6 /* VideoModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +75,8 @@
 		26C592AD2C4EBE0F006E211D /* LiveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveModel.swift; sourceTree = "<group>"; };
 		26DF0E2B2C5B191800B4A8B3 /* LaterToWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaterToWatchView.swift; sourceTree = "<group>"; };
 		26DF0E502C6BC42600B4A8B3 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		26ED61592CC6B95300A004A6 /* VideoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoService.swift; sourceTree = "<group>"; };
+		26ED615B2CC6BDB100A004A6 /* VideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +160,7 @@
 				260B583E2C5948E800923D29 /* VipService.swift */,
 				26DF0E502C6BC42600B4A8B3 /* NotificationService.swift */,
 				26745F4C2CB19DC900C0713B /* DynamicService.swift */,
+				26ED61592CC6B95300A004A6 /* VideoService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -170,6 +175,7 @@
 				263B0D472C48A0D10040F879 /* LaterWatchModel.swift */,
 				26C592AD2C4EBE0F006E211D /* LiveModel.swift */,
 				26745F4E2CB19E4B00C0713B /* DynamicModel.swift */,
+				26ED615B2CC6BDB100A004A6 /* VideoModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -262,6 +268,7 @@
 				260B583D2C54031500923D29 /* ToolView.swift in Sources */,
 				263A6E372C473D7100830CD5 /* LoginService.swift in Sources */,
 				26745F4A2CB19D2900C0713B /* DynamicView.swift in Sources */,
+				26ED615C2CC6BDB100A004A6 /* VideoModel.swift in Sources */,
 				263A6E182C46BAD400830CD5 /* ContentView.swift in Sources */,
 				263A6E162C46BAD400830CD5 /* Bili_SwiftApp.swift in Sources */,
 				263A6E3B2C47437200830CD5 /* AppService.swift in Sources */,
@@ -273,6 +280,7 @@
 				263A6E352C473A5800830CD5 /* LoginView.swift in Sources */,
 				26C592AC2C4EBD91006E211D /* LiveService.swift in Sources */,
 				260B583F2C5948E800923D29 /* VipService.swift in Sources */,
+				26ED615A2CC6B95300A004A6 /* VideoService.swift in Sources */,
 				263A6E422C48232700830CD5 /* CheckinService.swift in Sources */,
 				263A6E3F2C4808DC00830CD5 /* UserModel.swift in Sources */,
 				263B0D462C48A0BA0040F879 /* HistoryModel.swift in Sources */,
