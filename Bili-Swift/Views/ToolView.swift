@@ -6,6 +6,7 @@
 //
 
 import PhotosUI
+import QuickLook
 import SwiftUI
 import SwiftUtils
 import UIKit
@@ -13,26 +14,26 @@ import UIKit
 struct ToolView: View {
     var body: some View {
         VStack {
-            NavigationView {
-                List {
+            List {
 //                    NavigationLink("工具", destination: ToolView())
-                    DownloadVideoCoverView()
-                }
-                .navigationTitle("工具")
-                //                .toolbar {
-                //                    ToolbarItem(placement: .navigationBarTrailing) {
-                //                        NavigationLink(destination: UserView()) {
-                //                            // TODO: 这里跳转到个人页面或登录界面
-                //                            Image(systemName: "person")
-                //                        }
-                //                    }
-                //                    ToolbarItem(placement: .navigationBarTrailing) {
-                //                        NavigationLink(destination: SettingView()) {
-                //                            Image(systemName: "gear")
-                //                        }
-                //                    }
-                //                }
+                NavigationLink("下载视频封面", destination: DownloadVideoCoverView())
+//                    DownloadVideoCoverView()
             }
+            //                .toolbar {
+            //                    ToolbarItem(placement: .navigationBarTrailing) {
+            //                        NavigationLink(destination: UserView()) {
+            //                            // TODO: 这里跳转到个人页面或登录界面
+            //                            Image(systemName: "person")
+            //                        }
+            //                    }
+            //                    ToolbarItem(placement: .navigationBarTrailing) {
+            //                        NavigationLink(destination: SettingView()) {
+            //                            Image(systemName: "gear")
+            //                        }
+            //                    }
+            //                }
+
+            .navigationBarTitle("工具", displayMode: .inline)
         }
     }
 }
@@ -40,45 +41,65 @@ struct ToolView: View {
 struct DownloadVideoCoverView: View {
     @State private var isLoading = false
     @State private var isShowAlert = false
-    @State private var inputBvid = ""
+    @State private var alertTitle = ""
+    @State private var alertText = ""
+    @State private var inputBvid = "BV117411r7R1"
+    @State private var videoCover = ""
     var body: some View {
-        CheckinItemView(title: "下载视频封面", isLoading: $isLoading) {
-            isShowAlert = true
-//            isLoading = false
-        }
-        .alert("请输入bvid", isPresented: $isShowAlert) {
+        List {
             TextField("", text: $inputBvid)
-            Button("YES", action: {
-                if inputBvid.isNotEmpty {
+            CheckinItemView(title: "开始下载视频封面", isLoading: $isLoading) {
+                if inputBvid.isEmpty {
+                    isLoading = false
+                    alertTitle = "发生错误"
+                    alertText = "请输入BVID"
+                    isShowAlert = true
+                } else if !inputBvid.uppercased().starts(with: "BV") {
+                    isLoading = false
+                    alertTitle = "发生错误"
+                    alertText = "请输入BV开头的ID"
+                    isShowAlert = true
+                } else {
                     Task {
                         VideoService().getVideoInfo(inputBvid) { infoResult in
                             print(infoResult)
+                            if infoResult.code == 0 && infoResult.data?.pic != nil {
+                                videoCover = infoResult.data?.pic.replace(of: "http://", with: "https://") ?? ""
+                            } else {}
                             isLoading = false
                         } fail: { err in
                             print(err)
                             isLoading = false
+                            alertTitle = "发生错误"
+                            alertText = err
+                            isShowAlert = true
                         }
                     }
-//                    if hasTag {
-//                        // TODO: 重复添加提示
-//                        alertTitle = "添加标签失败"
-//                        alertMessage = "标签\(newTag)已存在，标签不区分大小写"
-//                        isShowInfoAlert = true
-//                        newTag = ""
-//                    } else {
-//                        self.addTag(tag: newTag)
-//                        newTag = ""
-//                    }
-
-                } else {
-                    isLoading = false
                 }
-            })
-            Button("NO", action: {
-                isShowAlert = false
-                isLoading = false
-            })
+            }
+            .alert(alertTitle, isPresented: $isShowAlert) {
+                Button("OK", action: {
+                    alertTitle = ""
+                    alertText = ""
+                    isLoading = false
+                })
+            } message: {
+                Text(alertText)
+            }
+            if videoCover.isNotEmpty {
+                AsyncImage(url: URL(string: videoCover)) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .scaledToFit() // 图片将等比缩放以适应框架
+                        .padding(.horizontal, 20) // 设置水平方向的内间距
+                } placeholder: {
+                    ProgressView()
+                }
+                TextField("", text: $videoCover)
+            }
         }
+        .navigationBarTitle("下载视频封面", displayMode: .inline)
     }
 }
 

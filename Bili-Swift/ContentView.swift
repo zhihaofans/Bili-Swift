@@ -130,4 +130,3 @@ struct macMainView: View {
         .frame(minWidth: 800, minHeight: 600) // 设置窗口的最小尺寸
     }
 }
-
