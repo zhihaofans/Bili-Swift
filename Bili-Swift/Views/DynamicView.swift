@@ -5,6 +5,8 @@
 //  Created by zzh on 2024/10/6.
 //
 
+import Alamofire
+import Foundation
 import SwiftUI
 import SwiftUtils
 
@@ -112,27 +114,49 @@ struct DynamicItemOldView: View {
 struct DynamicItemImageView: View {
     var itemData: DynamicListItem
     private let defaultImg="https://i0.hdslb.com/bfs/activity-plat/static/20220518/49ddaeaba3a23f61a6d2695de40d45f0/2nqyzFm9He.jpeg"
-    private let imageUrl: String?
+    private var imageUrl: String?
+    private var dynamicText: String
     @State private var hasImage=false
     @State private var showingAlert=false
     @State private var alertTitle=""
     @State private var alertText=""
     private let UDUtil=UserDefaultUtil()
     @AppStorage("open_web_in_app") var openWebInApp: Bool=false
+    private let dynamicType=DynamicType()
+    private let dynamicService=DynamicService()
+
     init(itemData: DynamicListItem) {
         self.itemData=itemData
+        self.dynamicText=itemData.getTitle()
         @AppStorage("bili_dynamic_image_mode") var isDynamicShowImage=true
+        debugPrint(itemData.modules.module_dynamic.major?.type)
+        // debugPrint(contentJson)
         if isDynamicShowImage {
             switch itemData.type {
-            case DynamicType().DRAW:
+            case dynamicType.DRAW:
                 self.hasImage=true
                 self.imageUrl=itemData.modules.module_dynamic.major?.draw?.items[0].src
-            case DynamicType().VIDEO:
+            case dynamicType.VIDEO:
                 self.hasImage=true
                 self.imageUrl=itemData.modules.module_dynamic.major?.archive?.cover
-            case DynamicType().ARTICLE:
+            case dynamicType.ARTICLE:
                 self.hasImage=true
                 self.imageUrl=itemData.modules.module_dynamic.major?.article?.covers[0]
+            case dynamicType.LIVE_RCMD:
+                let contentJson=itemData.modules.module_dynamic.major?.live_rcmd?.content
+                if contentJson != nil {
+                    let data=try? JSONDecoder().decode(DynamicListItemModuleDynamicMajorLiveRcmdContent.self, from: contentJson!.data(using: .utf8)!)
+                    debugPrint(data)
+                    if data != nil {
+                        self.dynamicText=data!.getTitle() ?? dynamicText
+                        self.imageUrl=data!.getCover()
+                        self.hasImage=true
+                    } else {
+                        self.hasImage=false
+                    }
+                    debugPrint(imageUrl)
+                    debugPrint(hasImage)
+                }
             default:
                 self.hasImage=false
                 self.imageUrl=nil
@@ -166,10 +190,10 @@ struct DynamicItemImageView: View {
                     Text(itemData.modules.module_author.pub_time + " " + itemData.modules.module_author.pub_action)
                         .padding(.trailing, 10) // 在右侧添加 10 点的内间距
                 }.frame(maxHeight: .infinity) // 设置对齐方式
-                Text(itemData.getTitle())
+                Text(dynamicText)
                     .lineLimit(2)
                     .padding(.horizontal, 20) // 设置水平方向的内间距
-                if hasImage {
+                if imageUrl != nil && imageUrl!.isNotEmpty {
                     AsyncImage(url: URL(string: (imageUrl ?? defaultImg).replace(of: "http://", with: "https://"))) { image in
                         image
                             .resizable()
@@ -224,6 +248,11 @@ struct DynamicItemImageView: View {
                         }
                     }
                 }
+            case DynamicType().LIVE_RCMD:
+                print(itemData.modules.module_dynamic.major?.live_rcmd)
+                alertTitle="@" + itemData.modules.module_author.name + " 开播了"
+                alertText=itemData.modules.module_dynamic.major?.live_rcmd?.content ?? "[??]"
+                showingAlert=true
             default:
                 print(itemData.type)
                 alertTitle="@" + itemData.modules.module_author.name
@@ -232,6 +261,7 @@ struct DynamicItemImageView: View {
             }
         }
         .alert(alertTitle, isPresented: $showingAlert) {
+            TextField("Placeholder", text: $alertText)
             Button("OK", action: {
                 showingAlert=false
             })

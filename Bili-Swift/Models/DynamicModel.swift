@@ -184,6 +184,26 @@ struct DynamicListItemModuleDynamicMajorLiveRcmd: Codable {
     let reserve_type: Int
 }
 
+struct DynamicListItemModuleDynamicMajorLiveRcmdContent: Codable {
+    let type: Int
+    let live_play_info: DynamicListItemModuleDynamicMajorLiveRcmdContentInfo
+    func getCover() -> String? {
+        return self.live_play_info.cover.replace(of: "http://", with: "https://")
+    }
+
+    func getTitle() -> String? {
+        return self.live_play_info.title
+    }
+}
+
+struct DynamicListItemModuleDynamicMajorLiveRcmdContentInfo: Codable {
+    let title: String
+    let cover: String
+    let live_id: String
+    let live_start_time: Int
+    let live_status: Int
+}
+
 struct DynamicListItemModuleDynamicMajorArticle: Codable {
     let covers: [String] // 封面图数组,最多三张
     let desc: String

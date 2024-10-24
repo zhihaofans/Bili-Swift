@@ -49,4 +49,16 @@ class DynamicService {
             fail("getDynamicList:\(error)")
         }
     }
+
+    func getLiveDynamicContent(_ contentJson: String, callback: @escaping (DynamicListItemModuleDynamicMajorLiveRcmdContent)->Void, fail: @escaping (String)->Void) {
+        do {
+            let data = try JSONDecoder().decode(DynamicListItemModuleDynamicMajorLiveRcmdContent.self, from: contentJson.data(using: .utf8)!)
+            debugPrint(data)
+            callback(data)
+        } catch {
+            print(error)
+            print("DynamicListItemModuleDynamicMajorLiveRcmdContent")
+            fail(error.localizedDescription)
+        }
+    }
 }

@@ -111,15 +111,15 @@
 		263A6E142C46BAD400830CD5 /* Bili-Swift */ = {
 			isa = PBXGroup;
 			children = (
-				263A6E2E2C46C12600830CD5 /* Services */,
+				263A6E1B2C46BAD600830CD5 /* Bili_Swift.entitlements */,
 				263A6E402C480E8500830CD5 /* Info.plist */,
-				263A6E2F2C46C13000830CD5 /* Models */,
-				263A6E2D2C46C12000830CD5 /* Views */,
 				263A6E152C46BAD400830CD5 /* Bili_SwiftApp.swift */,
 				263A6E172C46BAD400830CD5 /* ContentView.swift */,
 				263A6E192C46BAD600830CD5 /* Assets.xcassets */,
-				263A6E1B2C46BAD600830CD5 /* Bili_Swift.entitlements */,
+				263A6E2F2C46C13000830CD5 /* Models */,
 				263A6E1C2C46BAD600830CD5 /* Preview Content */,
+				263A6E2E2C46C12600830CD5 /* Services */,
+				263A6E2D2C46C12000830CD5 /* Views */,
 			);
 			path = "Bili-Swift";
 			sourceTree = "<group>";
@@ -168,13 +168,13 @@
 		263A6E2F2C46C13000830CD5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				263A6E382C473DA200830CD5 /* LoginModel.swift */,
-				263A6E3E2C4808DC00830CD5 /* UserModel.swift */,
 				263A6E432C48235000830CD5 /* CheckinModel.swift */,
+				26745F4E2CB19E4B00C0713B /* DynamicModel.swift */,
 				263B0D452C48A0BA0040F879 /* HistoryModel.swift */,
 				263B0D472C48A0D10040F879 /* LaterWatchModel.swift */,
 				26C592AD2C4EBE0F006E211D /* LiveModel.swift */,
-				26745F4E2CB19E4B00C0713B /* DynamicModel.swift */,
+				263A6E382C473DA200830CD5 /* LoginModel.swift */,
+				263A6E3E2C4808DC00830CD5 /* UserModel.swift */,
 				26ED615B2CC6BDB100A004A6 /* VideoModel.swift */,
 			);
 			path = Models;
