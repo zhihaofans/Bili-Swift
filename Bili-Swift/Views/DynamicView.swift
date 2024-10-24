@@ -16,55 +16,54 @@ struct DynamicView: View {
     @State var errorStr=""
     @State var dynamicList: [DynamicListItem]=[]
     var body: some View {
-        ScrollView {
-            if loaded {
-                if isError {
-                    Text("Error").font(.largeTitle)
-                    Text(errorStr)
-                } else {
-                    LazyVStack {
-                        ForEach(dynamicList, id: \.id_str) { item in
-//                            switch item.type {
-//                            case DynamicType().WORD:
-//                                DynamicItemTextView(itemData: item)
-//                            default:
-//                                DynamicItemOldView(itemData: item)
-//                            }
+        NavigationView {
+            ScrollView {
+                if loaded {
+                    if isError {
+                        Text("Error").font(.largeTitle)
+                        Text(errorStr)
+                    } else {
+                        LazyVStack {
+                            Section(header: Text("共\(dynamicList.count)个动态").foregroundColor(.blue), footer: Text("下面的内容还不能给你看").foregroundColor(.red)) {
+                                ForEach(dynamicList, id: \.id_str) { item in
+                                    //                            switch item.type {
+                                    //                            case DynamicType().WORD:
+                                    //                                DynamicItemTextView(itemData: item)
+                                    //                            default:
+                                    //                                DynamicItemOldView(itemData: item)
+                                    //                            }
 
-                            DynamicItemImageView(itemData: item)
+                                    DynamicItemImageView(itemData: item)
+                                }
+                            }
                         }
                     }
+                } else {
+                    Text("Loading...")
+                    ProgressView()
                 }
-            } else {
-                Text("Loading...")
-                ProgressView()
             }
-        }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Image(systemName: "trash")
-            }
-        }
-        .navigationTitle("动态")
-        .onAppear {
-            // TODO: 加载历史数据
-            Task {
-                DynamicService().getDynamicList { result in
-                    DispatchQueue.main.async {
-                        if result.data == nil || result.data!.items.isEmpty {
-                            isError=true
-                            errorStr="空白结果列表"
-                        } else {
-                            dynamicList=result.data!.items
-                            isError=false
+            .navigationBarTitle("动态", displayMode: .inline)
+            .onAppear {
+                // TODO: 加载历史数据
+                Task {
+                    DynamicService().getDynamicList { result in
+                        DispatchQueue.main.async {
+                            if result.data == nil || result.data!.items.isEmpty {
+                                isError=true
+                                errorStr="空白结果列表"
+                            } else {
+                                dynamicList=result.data!.items
+                                isError=false
+                            }
+                            loaded=true
                         }
-                        loaded=true
-                    }
-                } fail: { err in
-                    DispatchQueue.main.async {
-                        isError=true
-                        loaded=true
-                        errorStr=err
+                    } fail: { err in
+                        DispatchQueue.main.async {
+                            isError=true
+                            loaded=true
+                            errorStr=err
+                        }
                     }
                 }
             }
@@ -208,7 +207,7 @@ struct DynamicItemImageView: View {
                 Spacer()
             }
         }
-        .background(Color.secondary) // 设置背景色以便观察效果
+        .background(Color(.secondarySystemBackground)) // 设置背景色以便观察效果
 //        .frame(height: 150) // 将 VStack 的固定高度设置为100
         .frame(minHeight: 100)
         .contentShape(Rectangle()) // 加这行才实现可点击
@@ -249,7 +248,7 @@ struct DynamicItemImageView: View {
                     }
                 }
             case DynamicType().LIVE_RCMD:
-                print(itemData.modules.module_dynamic.major?.live_rcmd)
+//                print(itemData.modules.module_dynamic.major?.live_rcmd)
                 alertTitle="@" + itemData.modules.module_author.name + " 开播了"
                 alertText=itemData.modules.module_dynamic.major?.live_rcmd?.content ?? "[??]"
                 showingAlert=true
