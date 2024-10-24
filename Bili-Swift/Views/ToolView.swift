@@ -87,16 +87,17 @@ struct DownloadVideoCoverView: View {
                 Text(alertText)
             }
             if videoCover.isNotEmpty {
-                AsyncImage(url: URL(string: videoCover)) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .scaledToFit() // 图片将等比缩放以适应框架
-                        .padding(.horizontal, 20) // 设置水平方向的内间距
-                } placeholder: {
-                    ProgressView()
-                }
+//                AsyncImage(url: URL(string: videoCover)) { image in
+//                    image
+//                        .resizable()
+//                        .aspectRatio(contentMode: .fill)
+//                        .scaledToFit() // 图片将等比缩放以适应框架
+//                        .padding(.horizontal, 20) // 设置水平方向的内间距
+//                } placeholder: {
+//                    ProgressView()
+//                }
                 TextField("", text: $videoCover)
+                NavigationLink("查看视频封面", destination: PreviewView(type: "image", dataList: [videoCover]))
             }
         }
         .navigationBarTitle("下载视频封面", displayMode: .inline)
