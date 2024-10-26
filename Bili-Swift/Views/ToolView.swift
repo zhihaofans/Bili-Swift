@@ -12,6 +12,7 @@ import SwiftUtils
 import UIKit
 
 struct ToolView: View {
+    @State var isLoading = false
     var body: some View {
         VStack {
             List {
@@ -32,7 +33,6 @@ struct ToolView: View {
             //                        }
             //                    }
             //                }
-
             .navigationBarTitle("工具", displayMode: .inline)
         }
     }
@@ -48,7 +48,7 @@ struct DownloadVideoCoverView: View {
     var body: some View {
         List {
             TextField("", text: $inputBvid)
-            CheckinItemView(title: "开始下载视频封面", isLoading: $isLoading) {
+            ListItemLoadingView(title: "开始下载视频封面", isLoading: $isLoading, loadingColor: Color.blue) {
                 if inputBvid.isEmpty {
                     isLoading = false
                     alertTitle = "发生错误"

@@ -60,6 +60,7 @@ struct LaterToWatchView: View {
 }
 
 struct Later2WatchItemView: View {
+    @AppStorage("open_web_in_app") private var openWebInApp: Bool=false
     var itemData: Later2WatchItem
     var body: some View {
         VStack(alignment: .leading) {
@@ -84,7 +85,34 @@ struct Later2WatchItemView: View {
         .contentShape(Rectangle()) // 加这行才实现可点击
         .onTapGesture {
             // TODO: onClick
-
+            print(itemData)
+            if openWebInApp {
+                let urlStr=itemData.uri
+                Task {
+                    DispatchQueue.main.async {
+                        if urlStr.isNotEmpty {
+                            if let url=URL(string: urlStr) {
+                                DispatchQueue.main.async {
+                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                let urlStr="https://www.bilibili.com/video/\(itemData.bvid)/"
+                Task {
+                    DispatchQueue.main.async {
+                        if urlStr.isNotEmpty {
+                            if let url=URL(string: urlStr) {
+                                DispatchQueue.main.async {
+                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 //            switch itemData.history.getType() {
 //                // case "archive":
 //

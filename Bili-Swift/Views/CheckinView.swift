@@ -19,7 +19,7 @@ struct CheckinView: View {
         VStack {
             List {
                 Section(header: Text("通用")) {
-                    CheckinItemView(title: "漫画签到", isLoading: $mangaLoading) {
+                    ListItemLoadingView(title: "漫画签到", isLoading: $mangaLoading, loadingColor: Color.red) {
                         Task {
                             CheckinService().mangaCheckin { result in
                                 DispatchQueue.main.async {
@@ -36,7 +36,7 @@ struct CheckinView: View {
                             }
                         }
                     }
-                    CheckinItemView(title: "直播签到", isLoading: $liveLoading) {
+                    ListItemLoadingView(title: "直播签到", isLoading: $liveLoading, loadingColor: Color.green) {
                         Task {
                             LiveService().checkIn { result in
                                 DispatchQueue.main.async {
@@ -55,7 +55,7 @@ struct CheckinView: View {
                     }
                 }
                 Section(header: Text("大会员")) {
-                    CheckinItemView(title: "大积分签到", isLoading: $vipPointLoading) {
+                    ListItemLoadingView(title: "大积分签到", isLoading: $vipPointLoading, loadingColor: Color.blue) {
                         Task {
                             VipService().bipPointCheckin { result in
                                 DispatchQueue.main.async {
@@ -87,28 +87,6 @@ struct CheckinView: View {
         #else
             .navigationTitle("签到")
         #endif
-    }
-}
-
-struct CheckinItemView: View {
-    var title: String
-    @Binding var isLoading: Bool
-    var onClick: () -> Void
-    var body: some View {
-        Button(action: {
-            if !isLoading {
-                isLoading = true
-                onClick()
-            }
-        }) {
-            HStack {
-                Text(title)
-                // Spacer() // 占据剩余空间，将 ProgressView 推到右侧
-                if isLoading {
-                    ProgressView()
-                }
-            }
-        }
     }
 }
 

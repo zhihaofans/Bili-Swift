@@ -60,6 +60,7 @@ struct HistoryView: View {
 }
 
 struct HistoryItemView: View {
+    @AppStorage("open_web_in_app") private var openWebInApp: Bool=false
     var itemData: HistoryItem
     var body: some View {
         VStack(alignment: .leading) {
@@ -84,7 +85,23 @@ struct HistoryItemView: View {
         .contentShape(Rectangle()) // 加这行才实现可点击
         .onTapGesture {
             // TODO: onClick
-
+            print(itemData)
+            let urlStr="https://www.bilibili.com/video/\(itemData.history.bvid)/"
+            if openWebInApp {
+                AppService().openAppUrl(urlStr)
+            } else {
+                Task {
+                    DispatchQueue.main.async {
+                        if urlStr.isNotEmpty {
+                            if let url=URL(string: urlStr) {
+                                DispatchQueue.main.async {
+                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             switch itemData.history.getType() {
                 // case "archive":
 
@@ -95,6 +112,6 @@ struct HistoryItemView: View {
     }
 }
 
-//#Preview {
+// #Preview {
 //    HistoryView()
-//}
+// }

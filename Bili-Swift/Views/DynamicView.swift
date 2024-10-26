@@ -120,7 +120,7 @@ struct DynamicItemImageView: View {
     @State private var alertTitle=""
     @State private var alertText=""
     private let UDUtil=UserDefaultUtil()
-    @AppStorage("open_web_in_app") var openWebInApp: Bool=false
+    @AppStorage("open_web_in_app") private var openWebInApp: Bool=false
     private let dynamicType=DynamicType()
     private let dynamicService=DynamicService()
 
