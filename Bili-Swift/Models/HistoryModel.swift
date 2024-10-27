@@ -27,6 +27,7 @@ struct HistoryItem: Codable {
     let cover: String?
     let covers: [String]?
     let history: HistoryItemInfo
+    let uri: String
     func getCover() -> String {
         let cover = self.covers?[0] ?? self.cover ?? "https://http.cat/images/404.jpg"
         return cover.replacingOccurrences(of: "http://", with: "https://")
@@ -34,7 +35,7 @@ struct HistoryItem: Codable {
 }
 
 struct HistoryItemInfo: Codable {
-    private let business: String
+    let business: String
     private let dt: Int
     let oid: Int? // 稿件视频&剧集avid、直播、文章、文集
     let epid: Int?

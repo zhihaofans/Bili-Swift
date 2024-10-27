@@ -86,16 +86,28 @@ struct HistoryItemView: View {
         .onTapGesture {
             // TODO: onClick
             print(itemData)
-            let urlStr="https://www.bilibili.com/video/\(itemData.history.bvid)/"
-            if openWebInApp {
-                AppService().openAppUrl(urlStr)
-            } else {
-                Task {
-                    DispatchQueue.main.async {
-                        if urlStr.isNotEmpty {
-                            if let url=URL(string: urlStr) {
-                                DispatchQueue.main.async {
-                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            var urlStr=""
+            switch itemData.history.business {
+            case "live":
+                urlStr=itemData.uri
+            case "pgc":
+                urlStr=itemData.uri
+            case "archive":
+                urlStr="https://www.bilibili.com/video/\(String(describing: itemData.history.bvid))"
+            default:
+                urlStr=""
+            }
+            if urlStr.isNotEmpty {
+                if openWebInApp {
+                    AppService().openAppUrl(urlStr)
+                } else {
+                    Task {
+                        DispatchQueue.main.async {
+                            if urlStr.isNotEmpty {
+                                if let url=URL(string: urlStr) {
+                                    DispatchQueue.main.async {
+                                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                    }
                                 }
                             }
                         }
@@ -105,8 +117,8 @@ struct HistoryItemView: View {
             switch itemData.history.getType() {
                 // case "archive":
 
-                default:
-                    print(itemData.getCover())
+            default:
+                print(itemData.getCover())
             }
         }
     }
