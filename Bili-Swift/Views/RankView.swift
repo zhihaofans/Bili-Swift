@@ -15,12 +15,12 @@ struct RankView: View {
     @State var rankList: [RankInfoData]=[]
     var body: some View {
         ScrollView {
-            if loaded {
-                if isError {
-                    Text(errorStr).font(.largeTitle)
+            if self.loaded {
+                if self.isError {
+                    Text(self.errorStr).font(.largeTitle)
                 } else {
                     LazyVStack {
-                        ForEach(rankList, id: \.bvid) { item in
+                        ForEach(self.rankList, id: \.bvid) { item in
                             RankItemView(itemData: item)
                         }
                     }
@@ -43,25 +43,25 @@ struct RankView: View {
                 RankService().getRankList { result in
                     DispatchQueue.main.async {
                         if result.code != 0 {
-                            errorStr="code(\(result.code)):\(result.message)"
-                            isError=true
+                            self.errorStr="code(\(result.code)):\(result.message)"
+                            self.isError=true
                         } else if result.data == nil {
-                            errorStr="result.data = nil"
-                            isError=true
+                            self.errorStr="result.data = nil"
+                            self.isError=true
                         } else if result.data!.list.isEmpty {
-                            errorStr="空白热门榜"
-                            isError=true
+                            self.errorStr="空白热门榜"
+                            self.isError=true
                         } else {
-                            rankList=result.data!.list
-                            isError=false
+                            self.rankList=result.data!.list
+                            self.isError=false
                         }
-                        loaded=true
+                        self.loaded=true
                     }
                 } fail: { err in
                     DispatchQueue.main.async {
-                        errorStr=err
-                        isError=true
-                        loaded=true
+                        self.errorStr=err
+                        self.isError=true
+                        self.loaded=true
                     }
                 }
             }
@@ -85,7 +85,7 @@ struct RankItemView: View {
         VStack(alignment: .leading) {
             VStack {
                 HStack {
-                    AsyncImage(url: URL(string: self.checkLink(itemData.owner.face))) { image in
+                    AsyncImage(url: URL(string: self.checkLink(self.itemData.owner.face))) { image in
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fill)
@@ -98,17 +98,17 @@ struct RankItemView: View {
                     }
                     .padding(.leading, 20) // 在左侧添加 10 点的内间距
 //                    .frame(width: 40, height: 40)
-                    Text(itemData.owner.name)
+                    Text(self.itemData.owner.name)
                         .font(.title2)
                     Spacer()
-                    Text(DateUtil().timestampToTimeStr(itemData.pubdate))
+                    Text(DateUtil().timestampToTimeStr(self.itemData.pubdate, format: "MM-dd HH:mm"))
                         .padding(.trailing, 10) // 在右侧添加 10 点的内间距
                 }.frame(maxHeight: .infinity) // 设置对齐方式
-                Text("[\(itemData.tname)]")
+                Text("[\(self.itemData.tname)]")
                     .lineLimit(1)
-                Text(itemData.title)
+                Text(self.itemData.title)
                     .lineLimit(3)
-                AsyncImage(url: URL(string: self.checkLink(itemData.pic))) { image in
+                AsyncImage(url: URL(string: self.checkLink(self.itemData.pic))) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -126,14 +126,14 @@ struct RankItemView: View {
         .contentShape(Rectangle()) // 加这行才实现可点击
         .onTapGesture {
             // TODO: onClick
-            print(itemData)
-            if openWebInApp {
+            print(self.itemData)
+            if self.openWebInApp {
                 let urlStr="https://www.bilibili.com/video/\(itemData.bvid)"
                 AppService().openAppUrl(urlStr)
             } else {
                 Task {
                     DispatchQueue.main.async {
-                        if itemData.short_link_v2.isNotEmpty {
+                        if self.itemData.short_link_v2.isNotEmpty {
                             if let url=URL(string: itemData.short_link_v2) {
                                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
                             }
@@ -143,12 +143,12 @@ struct RankItemView: View {
             }
         }
         .alert(alertTitle, isPresented: $showingAlert) {
-            TextField("Placeholder", text: $alertText)
+            TextField("Placeholder", text: self.$alertText)
             Button("OK", action: {
-                showingAlert=false
+                self.showingAlert=false
             })
         } message: {
-            Text(alertText)
+            Text(self.alertText)
         }
     }
 
