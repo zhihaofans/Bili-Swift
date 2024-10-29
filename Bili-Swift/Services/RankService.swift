@@ -12,7 +12,7 @@ import SwiftUtils
 class RankService {
     private let http = HttpUtil()
     private let headers: HTTPHeaders = [
-        //        "Cookie": LoginService().getCookiesString(),
+        "Cookie": LoginService().getCookiesString(),
         "Content-Type": "application/x-www-form-urlencoded",
         "Referer": "https://www.bilibili.com/",
     ]

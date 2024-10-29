@@ -11,7 +11,7 @@ import Foundation
 struct RankResult: Codable {
     let code: Int
     let message: String
-    let data: RankData
+    let data: RankData?
 }
 
 struct RankData: Codable {
@@ -33,6 +33,8 @@ struct RankInfoData: Codable {
     let duration: Int // 稿件总时长(所有分P)
     let owner: RankInfoOwner
     let dynamic: String // 视频同步发布的的动态的文字内容
+    let short_link_v2: String
+    let tname: String // 分区类型
 }
 
 struct RankInfoOwner: Codable {
