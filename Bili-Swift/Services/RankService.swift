@@ -26,9 +26,10 @@ class RankService {
             if result.isEmpty {
                 fail("result.isEmpty")
             } else {
-                print(result)
+//                print(result)
                 do {
                     let data = try JSONDecoder().decode(RankResult.self, from: result.data(using: .utf8)!)
+                    print("getRankList")
                     debugPrint(data.code)
                     if data.code == 0 {
                         callback(data)

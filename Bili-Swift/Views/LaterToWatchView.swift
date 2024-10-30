@@ -63,6 +63,12 @@ struct Later2WatchItemView: View {
     @AppStorage("open_web_in_app") private var openWebInApp: Bool=false
     var itemData: Later2WatchItem
     var body: some View {
+//        NavigationLink {
+//            VideoInfoView(id: workFolder.id)
+//        } label: {
+//            Label("Work Folder", systemImage: "folder")
+//        }
+
         VStack(alignment: .leading) {
             HStack {
                 AsyncImage(url: URL(string: itemData.pic.replace(of: "http://", with: "https://"))) { image in

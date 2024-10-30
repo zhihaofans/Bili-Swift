@@ -16,7 +16,7 @@ struct RankResult: Codable {
 
 struct RankData: Codable {
     let note: String
-    let list: [RankInfoData]
+    let list: [VideoInfoData]
 }
 
 struct RankInfoData: Codable {

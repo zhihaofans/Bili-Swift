@@ -45,6 +45,7 @@
 		26DF0E512C6BC42600B4A8B3 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF0E502C6BC42600B4A8B3 /* NotificationService.swift */; };
 		26ED615A2CC6B95300A004A6 /* VideoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26ED61592CC6B95300A004A6 /* VideoService.swift */; };
 		26ED615C2CC6BDB100A004A6 /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26ED615B2CC6BDB100A004A6 /* VideoModel.swift */; };
+		26F1433B2CD13F0400D3D095 /* VideoInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1433A2CD13F0400D3D095 /* VideoInfoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +88,7 @@
 		26DF0E502C6BC42600B4A8B3 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		26ED61592CC6B95300A004A6 /* VideoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoService.swift; sourceTree = "<group>"; };
 		26ED615B2CC6BDB100A004A6 /* VideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
+		26F1433A2CD13F0400D3D095 /* VideoInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoInfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 				26745F492CB19D2900C0713B /* DynamicView.swift */,
 				26AA91AB2CCAA0D200EEDD77 /* PreviewView.swift */,
 				260EC29D2CCFE76A0093ABB5 /* RankView.swift */,
+				26F1433A2CD13F0400D3D095 /* VideoInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 				263A6E352C473A5800830CD5 /* LoginView.swift in Sources */,
 				26C592AC2C4EBD91006E211D /* LiveService.swift in Sources */,
 				260B583F2C5948E800923D29 /* VipService.swift in Sources */,
+				26F1433B2CD13F0400D3D095 /* VideoInfoView.swift in Sources */,
 				26ED615A2CC6B95300A004A6 /* VideoService.swift in Sources */,
 				263A6E422C48232700830CD5 /* CheckinService.swift in Sources */,
 				263A6E3F2C4808DC00830CD5 /* UserModel.swift in Sources */,
