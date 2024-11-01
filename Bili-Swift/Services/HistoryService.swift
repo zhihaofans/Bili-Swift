@@ -15,42 +15,39 @@ class HistoryService {
         "Cookie": LoginService().getCookiesString(),
         "Content-Type": "application/x-www-form-urlencoded",
         "Referer": "https://www.bilibili.com/",
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0
     ]
     init() {
         http.setHeader(headers)
     }
 
     func getHistory(callback: @escaping (HistoryResult)->Void, fail: @escaping (String)->Void) {
-        let headers: HTTPHeaders = [
-            "Cookie": "SESSDATA=" + LoginService().getSESSDATA(),
-            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
-            // "Accept": "application/json;charset=UTF-8",
-        ]
-        AF.request("https://api.bilibili.com/x/web-interface/history/cursor", headers: headers).responseString { response in
-            do {
-                switch response.result {
-                case let .success(value):
-                    debugPrint(value)
-                    if value.contains("Method Not Allowed") {
-                        fail("err:" + value)
-                    } else {
-                        let result = try JSONDecoder().decode(HistoryResult.self, from: value.data(using: .utf8)!)
+        let url = "https://api.bilibili.com/x/web-interface/history/cursor"
+        http.get(url) { result in
+            if result.isEmpty {
+                fail("result.isEmpty")
+            } else if value.contains("Method Not Allowed") {
+                    fail("err:" + value)
+            } else {
+                print(result)
+                do {
+                    let result = try JSONDecoder().decode(HistoryResult.self, from: value.data(using: .utf8)!)
                         debugPrint(result)
                         if result.code == 0 {
                             callback(result)
                         } else {
                             fail(result.message)
                         }
-                    }
-                case let .failure(error):
+                } catch {
                     print(error)
-                    fail(error.localizedDescription)
+                    print("getHistory.catch.error")
+                    fail("getHistory:\(error)")
                 }
-            } catch {
-                print("http.error")
-                debugPrint(error)
-                fail("网络请求错误:\(error.localizedDescription)")
             }
+        } fail: { error in
+            print(error)
+            print("getHistory.http.error")
+            fail("getHistory:\(error)")
         }
     }
 

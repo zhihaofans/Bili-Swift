@@ -10,17 +10,22 @@ import Foundation
 import SwiftUtils
 
 class CheckinService {
-    func mangaCheckin(callback: @escaping (MangaCheckinResult)->Void, fail: @escaping (String)->Void) {
-        // TODO: http.post
-        let headers: HTTPHeaders = [
-            "Cookie": LoginService().getCookiesString(),
-            "Accept": "application/json;charset=UTF-8",
+    private let http = HttpUtil()
+    private let headers: HTTPHeaders = [
+        "Cookie": LoginService().getCookiesString(),
+        "Accept": "application/json;charset=UTF-8",
         ]
-        AF.request("https://manga.bilibili.com/twirp/activity.v1.Activity/ClockIn?platform=android", method: .post, headers: headers).responseString { response in
-            do {
-                switch response.result {
-                case let .success(value):
-                    print(value)
+    init() {
+        http.setHeader(headers)
+    }
+    func mangaCheckin(callback: @escaping (MangaCheckinResult)->Void, fail: @escaping (String)->Void) {
+        let url = "https://manga.bilibili.com/twirp/activity.v1.Activity/ClockIn?platform=android"
+        http.post(url) { result in
+            if result.isEmpty {
+                fail("result.isEmpty")
+            } else {
+                print(result)
+                do {
                     let result = try JSONDecoder().decode(MangaCheckinResult.self, from: value.data(using: .utf8)!)
                     debugPrint(result.code)
                     if result.code == 0 {
@@ -28,15 +33,16 @@ class CheckinService {
                     } else {
                         fail("Code \(result.code): \(result.msg)")
                     }
-                case let .failure(error):
+                } catch {
                     print(error)
-                    fail(error.localizedDescription)
+                    print("bipPointCheckin.catch.error")
+                    fail("bipPointCheckin:\(error)")
                 }
-            } catch {
-                print(error)
+            }
+        } fail: { error in
+            print(error)
                 print("mangaCheckin.http.error")
                 fail("网络请求错误:\(error.localizedDescription)")
-            }
         }
     }
 }
