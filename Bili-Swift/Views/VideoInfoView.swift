@@ -8,28 +8,23 @@
 import SwiftUI
 
 struct VideoInfoView: View {
-    @State private var videoInfo: VideoInfoData?
+    @State private var videoInfo: VideoInfoData?=nil
     @State private var isError=false
     @State private var loaded=false
     @State private var errorStr=""
-    @State private var bvid: String=""
-    init(videoInfo: VideoInfoData?=nil, bvid: String?=nil) {
-//        print(videoInfo)
-        if videoInfo == nil {
-            if bvid != nil && bvid!.isNotEmpty {
-                self.getVideoInfo()
-            } else {
-                self.errorStr="请从正确入口进来"
-                self.bvid="空白视频信息(videoInfo=nil)"
-                self.isError=true
-                self.loaded=true
-            }
-        } else {
-            self.videoInfo=videoInfo
-            self.bvid=videoInfo!.bvid
-            self.loaded=true
-        }
-    }
+    @State var bvid: String=""
+//    init(_ bvid: String?=nil) {
+    ////        print(videoInfo)
+//        if bvid != nil && bvid!.isNotEmpty {
+//            self.bvid=bvid!
+//            self.getVideoInfo()
+//        } else {
+//            self.errorStr="空白bvid"
+//            self.bvid="bvid:nil"
+//            self.isError=true
+//            self.loaded=true
+//        }
+//    }
 
     var body: some View {
         ScrollView {
@@ -50,10 +45,18 @@ struct VideoInfoView: View {
 //                Image(systemName: "trash")
 //            }
 //        }
-        .navigationTitle(self.$bvid)
+        .navigationBarTitle(bvid, displayMode: .inline)
         .onAppear {
-            // TODO: 加载热门榜
-            Task {}
+            // TODO: 加载热视频信息
+            Task {
+                if self.bvid.isNotEmpty {
+                    self.getVideoInfo()
+                } else {
+                    self.errorStr="空白bvid"
+                    self.isError=true
+                    self.loaded=true
+                }
+            }
         }
     }
 
@@ -84,18 +87,38 @@ struct VideoInfoItemView: View {
 
     var body: some View {
         VStack {
-            AsyncImage(url: URL(string: self.checkLink(self.videoInfo.pic))) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .scaledToFit() // 图片将等比缩放以适应框架
-                    .frame(width: 40, height: 40) // 设置视图框架的大小
-                    .clipShape(Circle()) // 裁剪成圆形
-                    .overlay(Circle().stroke(Color.gray, lineWidth: 4)) // 可选的白色边框
-            } placeholder: {
-                ProgressView()
+            NavigationLink {
+                PreviewView(type: "image", dataList: [videoInfo.pic])
+            } label: {
+                AsyncImage(url: URL(string: self.checkLink(videoInfo.pic))) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .scaledToFit() // 图片将等比缩放以适应框架
+                        .padding(.horizontal, 5) // 设置水平方向的内间距
+                } placeholder: {
+                    ProgressView()
+                }
             }
-            .padding(.leading, 20)
+            HStack {
+                AsyncImage(url: URL(string: self.checkLink(videoInfo.owner.face))) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .scaledToFit() // 图片将等比缩放以适应框架
+                        .frame(width: 40, height: 40) // 设置视图框架的大小
+                        .clipShape(Circle()) // 裁剪成圆形
+                        .overlay(Circle().stroke(Color.gray, lineWidth: 4)) // 可选的白色边框
+                } placeholder: {
+                    ProgressView()
+                }
+                .padding(.leading, 20) // 在左侧添加 10 点的内间距
+//                    .frame(width: 40, height: 40)
+                Text(videoInfo.owner.name)
+                    .font(.title2)
+                Spacer()
+
+            }.frame(maxHeight: .infinity) // 设置对齐方式
         }
     }
 

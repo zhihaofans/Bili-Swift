@@ -85,7 +85,7 @@ struct RankItemView: View {
     var body: some View {
         VStack(alignment: .leading) {
             NavigationLink {
-                VideoInfoView(videoInfo: itemData)
+                VideoInfoView(bvid: itemData.bvid)
             } label: {
                 VStack {
                     HStack {
