@@ -20,7 +20,11 @@ struct LaterToWatchView: View {
                 } else {
                     LazyVStack {
                         ForEach(later2watchList, id: \.bvid) { item in
-                            Later2WatchItemView(itemData: item)
+                            NavigationLink {
+                                VideoInfoView(bvid: item.bvid)
+                            } label: {
+                                Later2WatchItemView(itemData: item)
+                            }
                         }
                     }
                 }
@@ -88,44 +92,44 @@ struct Later2WatchItemView: View {
             }.frame(maxHeight: .infinity, alignment: .leading) // 设置对齐方式
         }
         .frame(height: 100) // 将 VStack 的固定高度设置为100
-        .contentShape(Rectangle()) // 加这行才实现可点击
-        .onTapGesture {
-            // TODO: onClick
-            print(itemData)
-            if openWebInApp {
-                let urlStr=itemData.uri
-                Task {
-                    DispatchQueue.main.async {
-                        if urlStr.isNotEmpty {
-                            if let url=URL(string: urlStr) {
-                                DispatchQueue.main.async {
-                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                                }
-                            }
-                        }
-                    }
-                }
-            } else {
-                let urlStr="https://www.bilibili.com/video/\(itemData.bvid)/"
-                Task {
-                    DispatchQueue.main.async {
-                        if urlStr.isNotEmpty {
-                            if let url=URL(string: urlStr) {
-                                DispatchQueue.main.async {
-                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-//            switch itemData.history.getType() {
-//                // case "archive":
-//
-//                default:
-//                    print(itemData.getCover())
+//        .contentShape(Rectangle()) // 加这行才实现可点击
+//        .onTapGesture {
+//            // TODO: onClick
+//            print(itemData)
+//            if openWebInApp {
+//                let urlStr=itemData.uri
+//                Task {
+//                    DispatchQueue.main.async {
+//                        if urlStr.isNotEmpty {
+//                            if let url=URL(string: urlStr) {
+//                                DispatchQueue.main.async {
+//                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            } else {
+//                let urlStr="https://www.bilibili.com/video/\(itemData.bvid)/"
+//                Task {
+//                    DispatchQueue.main.async {
+//                        if urlStr.isNotEmpty {
+//                            if let url=URL(string: urlStr) {
+//                                DispatchQueue.main.async {
+//                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
 //            }
-        }
+////            switch itemData.history.getType() {
+////                // case "archive":
+////
+////                default:
+////                    print(itemData.getCover())
+////            }
+//        }
     }
 }
 

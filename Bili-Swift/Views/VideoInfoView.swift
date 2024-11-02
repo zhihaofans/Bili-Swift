@@ -80,6 +80,7 @@ struct VideoInfoView: View {
 
 struct VideoInfoItemView: View {
     @State var videoInfo: VideoInfoData
+    @AppStorage("open_web_in_app") private var openWebInApp: Bool=false
     init(videoInfo: VideoInfoData) {
         self.videoInfo=videoInfo
         print(videoInfo)
@@ -119,6 +120,27 @@ struct VideoInfoItemView: View {
                 Spacer()
 
             }.frame(maxHeight: .infinity) // 设置对齐方式
+            Button(action: {
+                let urlStr="https://www.bilibili.com/video/\(videoInfo.bvid)/"
+                if openWebInApp {
+                    AppService().openAppUrl(urlStr)
+                } else {
+                    Task {
+                        DispatchQueue.main.async {
+                            if urlStr.isNotEmpty {
+                                if let url=URL(string: urlStr) {
+                                    DispatchQueue.main.async {
+                                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }) {
+                Text("看").font(.title)
+            }
+            .padding()
         }
     }
 
