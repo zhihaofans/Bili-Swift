@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -46,7 +46,34 @@
 		26ED615A2CC6B95300A004A6 /* VideoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26ED61592CC6B95300A004A6 /* VideoService.swift */; };
 		26ED615C2CC6BDB100A004A6 /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26ED615B2CC6BDB100A004A6 /* VideoModel.swift */; };
 		26F1433B2CD13F0400D3D095 /* VideoInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1433A2CD13F0400D3D095 /* VideoInfoView.swift */; };
+		26F143432CD6830500D3D095 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F143422CD6830500D3D095 /* WidgetKit.framework */; };
+		26F143452CD6830500D3D095 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F143442CD6830500D3D095 /* SwiftUI.framework */; };
+		26F143512CD6830700D3D095 /* BiliWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 26F143402CD6830500D3D095 /* BiliWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		26F1434F2CD6830700D3D095 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 263A6E0A2C46BAD400830CD5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 26F1433F2CD6830500D3D095;
+			remoteInfo = BiliWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		26F143562CD6830700D3D095 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				26F143512CD6830700D3D095 /* BiliWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		260B583A2C5402FB00923D29 /* ToolService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolService.swift; sourceTree = "<group>"; };
@@ -89,7 +116,24 @@
 		26ED61592CC6B95300A004A6 /* VideoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoService.swift; sourceTree = "<group>"; };
 		26ED615B2CC6BDB100A004A6 /* VideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
 		26F1433A2CD13F0400D3D095 /* VideoInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoInfoView.swift; sourceTree = "<group>"; };
+		26F143402CD6830500D3D095 /* BiliWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BiliWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		26F143422CD6830500D3D095 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = /System/Library/Frameworks/WidgetKit.framework; sourceTree = "<absolute>"; };
+		26F143442CD6830500D3D095 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = /System/Library/Frameworks/SwiftUI.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		26F143522CD6830700D3D095 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 26F1433F2CD6830500D3D095 /* BiliWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		26F143462CD6830500D3D095 /* BiliWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (26F143522CD6830700D3D095 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BiliWidget; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		263A6E0F2C46BAD400830CD5 /* Frameworks */ = {
@@ -101,6 +145,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		26F1433D2CD6830500D3D095 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				26F143452CD6830500D3D095 /* SwiftUI.framework in Frameworks */,
+				26F143432CD6830500D3D095 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -108,6 +161,8 @@
 			isa = PBXGroup;
 			children = (
 				263A6E142C46BAD400830CD5 /* Bili-Swift */,
+				26F143462CD6830500D3D095 /* BiliWidget */,
+				26F143412CD6830500D3D095 /* Frameworks */,
 				263A6E132C46BAD400830CD5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -116,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				263A6E122C46BAD400830CD5 /* Bili-Swift.app */,
+				26F143402CD6830500D3D095 /* BiliWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -206,6 +262,15 @@
 			path = Componets;
 			sourceTree = "<group>";
 		};
+		26F143412CD6830500D3D095 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				26F143422CD6830500D3D095 /* WidgetKit.framework */,
+				26F143442CD6830500D3D095 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -216,10 +281,12 @@
 				263A6E0E2C46BAD400830CD5 /* Sources */,
 				263A6E0F2C46BAD400830CD5 /* Frameworks */,
 				263A6E102C46BAD400830CD5 /* Resources */,
+				26F143562CD6830700D3D095 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				26F143502CD6830700D3D095 /* PBXTargetDependency */,
 			);
 			name = "Bili-Swift";
 			packageProductDependencies = (
@@ -230,6 +297,28 @@
 			productReference = 263A6E122C46BAD400830CD5 /* Bili-Swift.app */;
 			productType = "com.apple.product-type.application";
 		};
+		26F1433F2CD6830500D3D095 /* BiliWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 26F143532CD6830700D3D095 /* Build configuration list for PBXNativeTarget "BiliWidgetExtension" */;
+			buildPhases = (
+				26F1433C2CD6830500D3D095 /* Sources */,
+				26F1433D2CD6830500D3D095 /* Frameworks */,
+				26F1433E2CD6830500D3D095 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				26F143462CD6830500D3D095 /* BiliWidget */,
+			);
+			name = BiliWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = BiliWidgetExtension;
+			productReference = 26F143402CD6830500D3D095 /* BiliWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -237,11 +326,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1540;
+				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
 					263A6E112C46BAD400830CD5 = {
 						CreatedOnToolsVersion = 15.4;
+					};
+					26F1433F2CD6830500D3D095 = {
+						CreatedOnToolsVersion = 16.0;
 					};
 				};
 			};
@@ -263,6 +355,7 @@
 			projectRoot = "";
 			targets = (
 				263A6E112C46BAD400830CD5 /* Bili-Swift */,
+				26F1433F2CD6830500D3D095 /* BiliWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -274,6 +367,13 @@
 			files = (
 				263A6E1E2C46BAD600830CD5 /* Preview Assets.xcassets in Resources */,
 				263A6E1A2C46BAD600830CD5 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		26F1433E2CD6830500D3D095 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,7 +422,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		26F1433C2CD6830500D3D095 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		26F143502CD6830700D3D095 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 26F1433F2CD6830500D3D095 /* BiliWidgetExtension */;
+			targetProxy = 26F1434F2CD6830700D3D095 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		263A6E1F2C46BAD600830CD5 /* Debug */ = {
@@ -457,6 +572,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Bili-Swift/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "哔了个哩";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -467,10 +583,10 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "me.zzhhoo.Bili-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -499,6 +615,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Bili-Swift/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "哔了个哩";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -509,10 +626,10 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "me.zzhhoo.Bili-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -521,6 +638,86 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		26F143542CD6830700D3D095 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = BiliWidget/BiliWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7PDM8RVDK9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BiliWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BiliWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
+				MARKETING_VERSION = 0.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "me.zzhhoo.Bili-Swift.BiliWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				XROS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		26F143552CD6830700D3D095 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = BiliWidget/BiliWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7PDM8RVDK9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BiliWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BiliWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
+				MARKETING_VERSION = 0.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "me.zzhhoo.Bili-Swift.BiliWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				XROS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
@@ -541,6 +738,15 @@
 			buildConfigurations = (
 				263A6E222C46BAD600830CD5 /* Debug */,
 				263A6E232C46BAD600830CD5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		26F143532CD6830700D3D095 /* Build configuration list for PBXNativeTarget "BiliWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				26F143542CD6830700D3D095 /* Debug */,
+				26F143552CD6830700D3D095 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

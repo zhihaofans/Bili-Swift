@@ -5,16 +5,15 @@
 //  Created by zzh on 2024/11/2.
 //
 
-import WidgetKit
 import SwiftUI
+import WidgetKit
 
 struct Provider: TimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), emoji: "😀")
+    func placeholder(in context: Context) -> SimpleEntry { SimpleEntry(date: Date(), liver_name: "鸽子王", room_title: "今天也摸了", room_id: "-1", is_live: false)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), emoji: "😀")
+        let entry = SimpleEntry(date: Date(), liver_name: "鸽子王", room_title: "今天也摸了", room_id: "-1", is_live: false)
         completion(entry)
     }
 
@@ -24,8 +23,8 @@ struct Provider: TimelineProvider {
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, emoji: "😀")
+//            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
+            let entry = SimpleEntry(date: Date(), liver_name: "鸽子王", room_title: "今天也摸了", room_id: "-1", is_live: false)
             entries.append(entry)
         }
 
@@ -40,21 +39,27 @@ struct Provider: TimelineProvider {
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
-    let emoji: String
+    let liver_name: String
+    let room_title: String
+    let room_id: String
+    let is_live: Bool
 }
 
-struct BiliWidgetEntryView : View {
+struct BiliWidgetEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
         VStack {
-            HStack {
-                Text("Time:")
-                Text(entry.date, style: .time)
+//            HStack {
+//                Text("Time:")
+//                Text(entry.date, style: .time)
+//            }
+            Text(entry.liver_name).font(.largeTitle)
+            Text("房间:\(entry.room_id)")
+            Text(entry.is_live ? "开播了" : "摸了")
+            if entry.is_live {
+                Text("「\(entry.room_title)」")
             }
-
-            Text("Emoji:")
-            Text(entry.emoji)
         }
     }
 }
@@ -73,14 +78,14 @@ struct BiliWidget: Widget {
                     .background()
             }
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("鸽子王播了吗")
+        .description("输入直播间编号")
     }
 }
 
 #Preview(as: .systemSmall) {
     BiliWidget()
 } timeline: {
-    SimpleEntry(date: .now, emoji: "😀")
-    SimpleEntry(date: .now, emoji: "🤩")
+    SimpleEntry(date: Date(), liver_name: "鸽子王", room_title: "今天也摸了", room_id: "-1", is_live: false)
+    SimpleEntry(date: Date(), liver_name: "小鸽子", room_title: "咕咕咕", room_id: "-1", is_live: false)
 }
