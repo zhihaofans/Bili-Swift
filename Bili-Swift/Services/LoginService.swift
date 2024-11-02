@@ -11,13 +11,12 @@ import SwiftUtils
 
 class LoginService {
     private let keychainHeader = "bilibili.login"
-    private let http = HttpUtil()
-    private let headers: HTTPHeaders = [
-        "Cookie": LoginService().getCookiesString(),
+    let headers: HTTPHeaders = [
         "Content-Type": "application/x-www-form-urlencoded",
         "Referer": "https://www.bilibili.com/",
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
     ]
+    private let http = HttpUtil()
     init() {
         http.setHeader(headers)
     }

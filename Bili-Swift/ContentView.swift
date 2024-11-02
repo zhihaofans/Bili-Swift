@@ -30,6 +30,7 @@ struct iosMainView: View {
     var body: some View {
         switch selectedTab {
         case 1:
+//            Text("test")
             DynamicView()
         case 2:
             NavigationView {
