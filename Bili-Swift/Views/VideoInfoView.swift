@@ -78,9 +78,10 @@ struct VideoInfoView: View {
 struct VideoInfoItemView: View {
     @State var videoInfo: VideoInfoData
     init(videoInfo: VideoInfoData) {
-        self.videoInfo = videoInfo
+        self.videoInfo=videoInfo
         print(videoInfo)
     }
+
     var body: some View {
         VStack {
             AsyncImage(url: URL(string: self.checkLink(self.videoInfo.pic))) { image in

@@ -11,30 +11,49 @@ import SwiftUtils
 
 class LoginService {
     private let keychainHeader = "bilibili.login"
+    private let http = HttpUtil()
+    private let headers: HTTPHeaders = [
+        "Cookie": LoginService().getCookiesString(),
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Referer": "https://www.bilibili.com/",
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    ]
+    init() {
+        http.setHeader(headers)
+    }
+
     func getWebLoginQrcode(callback: @escaping (LoginQrcodeData)->Void, fail: @escaping (String)->Void) {
-        AF.request("https://passport.bilibili.com/x/passport-login/web/qrcode/generate").responseString { response in
-            do {
-                switch response.result {
-                case let .success(value):
-                    let loginResult = try JSONDecoder().decode(LoginQrcodeResult.self, from: value.data(using: .utf8)!)
-                    debugPrint(loginResult.code)
-                    if loginResult.code == 0 {
-                        callback(loginResult.data)
+        let url = "https://passport.bilibili.com/x/passport-login/web/qrcode/generate"
+        http.get(url) { result in
+            if result.isEmpty {
+                fail("result.isEmpty")
+            } else if result.contains("Method Not Allowed") {
+                fail("err:" + result)
+            } else {
+                print(result)
+                do {
+                    let result = try JSONDecoder().decode(LoginQrcodeResult.self, from: result.data(using: .utf8)!)
+                    debugPrint(result)
+                    if result.code == 0 {
+                        callback(result.data)
                     } else {
-                        fail(loginResult.message)
+                        fail(result.message)
                     }
-                case let .failure(error):
+                } catch {
                     print(error)
-                    fail(error.localizedDescription)
+                    print("getWebLoginQrcode.catch.error")
+                    fail("getWebLoginQrcode:\(error)")
                 }
-            } catch {
-                print("getWebLoginQrcode.http.error")
-                fail("网络请求错误")
             }
+        } fail: { error in
+            print(error)
+            print("getWebLoginQrcode.http.error")
+            fail("getWebLoginQrcode:\(error)")
         }
     }
 
     func checkWebLoginQrcode(qrcodeKey: String, callback: @escaping (LoginQrcodeCheckData)->Void, fail: @escaping (String)->Void) {
+        // TODO: 这里需要用到response，不能直接改HttpUtil
         AF.request("https://passport.bilibili.com/x/passport-login/web/qrcode/poll?qrcode_key=" + qrcodeKey).responseString { response in
             do {
                 switch response.result {

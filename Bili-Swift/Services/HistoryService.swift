@@ -15,7 +15,7 @@ class HistoryService {
         "Cookie": LoginService().getCookiesString(),
         "Content-Type": "application/x-www-form-urlencoded",
         "Referer": "https://www.bilibili.com/",
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
     ]
     init() {
         http.setHeader(headers)
@@ -26,18 +26,18 @@ class HistoryService {
         http.get(url) { result in
             if result.isEmpty {
                 fail("result.isEmpty")
-            } else if value.contains("Method Not Allowed") {
-                    fail("err:" + value)
+            } else if result.contains("Method Not Allowed") {
+                fail("err:" + result)
             } else {
                 print(result)
                 do {
-                    let result = try JSONDecoder().decode(HistoryResult.self, from: value.data(using: .utf8)!)
-                        debugPrint(result)
-                        if result.code == 0 {
-                            callback(result)
-                        } else {
-                            fail(result.message)
-                        }
+                    let result = try JSONDecoder().decode(HistoryResult.self, from: result.data(using: .utf8)!)
+                    debugPrint(result)
+                    if result.code == 0 {
+                        callback(result)
+                    } else {
+                        fail(result.message)
+                    }
                 } catch {
                     print(error)
                     print("getHistory.catch.error")

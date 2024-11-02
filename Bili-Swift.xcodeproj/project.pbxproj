@@ -166,18 +166,18 @@
 		263A6E2E2C46C12600830CD5 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				263A6E3C2C48060B00830CD5 /* UserService.swift */,
-				263A6E362C473D7100830CD5 /* LoginService.swift */,
 				263A6E3A2C47437200830CD5 /* AppService.swift */,
 				263A6E412C48232700830CD5 /* CheckinService.swift */,
+				26745F4C2CB19DC900C0713B /* DynamicService.swift */,
 				263B0D492C48A1040040F879 /* HistoryService.swift */,
 				26C592AB2C4EBD91006E211D /* LiveService.swift */,
-				260B583A2C5402FB00923D29 /* ToolService.swift */,
-				260B583E2C5948E800923D29 /* VipService.swift */,
+				263A6E362C473D7100830CD5 /* LoginService.swift */,
 				26DF0E502C6BC42600B4A8B3 /* NotificationService.swift */,
-				26745F4C2CB19DC900C0713B /* DynamicService.swift */,
-				26ED61592CC6B95300A004A6 /* VideoService.swift */,
 				260EC2A12CCFE9290093ABB5 /* RankService.swift */,
+				260B583A2C5402FB00923D29 /* ToolService.swift */,
+				263A6E3C2C48060B00830CD5 /* UserService.swift */,
+				26ED61592CC6B95300A004A6 /* VideoService.swift */,
+				260B583E2C5948E800923D29 /* VipService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
