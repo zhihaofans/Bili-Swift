@@ -71,45 +71,6 @@ struct DynamicView: View {
     }
 }
 
-struct DynamicItemOldView: View {
-    var itemData: DynamicListItem
-    private let defaultImg="https://i0.hdslb.com/bfs/activity-plat/static/20220518/49ddaeaba3a23f61a6d2695de40d45f0/2nqyzFm9He.jpeg"
-    var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                AsyncImage(url: URL(string: itemData.getCover() ?? defaultImg)) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                } placeholder: {
-                    ProgressView()
-                }
-                .frame(width: 100, height: 50)
-                VStack {
-                    Text(itemData.getTitle()) // .font()
-                    Text("@" + itemData.modules.module_author.name)
-                }
-                // .frame(width: geometry.size.width)
-                Spacer()
-            }.frame(maxHeight: .infinity, alignment: .leading) // 设置对齐方式
-            Spacer()
-        }
-        .background(Color.secondary) // 设置背景色以便观察效果
-        .frame(height: 100) // 将 VStack 的固定高度设置为100
-        .contentShape(Rectangle()) // 加这行才实现可点击
-        .onTapGesture {
-            // TODO: onClick
-            print(itemData)
-//            switch itemData.type {
-//                // case "archive":
-//
-//                default:
-//                    print(itemData.type)
-//            }
-        }
-    }
-}
-
 struct DynamicItemImageView: View {
     var itemData: DynamicListItem
     private let defaultImg="https://i0.hdslb.com/bfs/activity-plat/static/20220518/49ddaeaba3a23f61a6d2695de40d45f0/2nqyzFm9He.jpeg"
@@ -128,7 +89,7 @@ struct DynamicItemImageView: View {
         self.itemData=itemData
         self.dynamicText=itemData.getTitle()
         @AppStorage("bili_dynamic_image_mode") var isDynamicShowImage=true
-        debugPrint(itemData.modules.module_dynamic.major?.type)
+//        debugPrint(itemData.modules.module_dynamic.major?.type)
         // debugPrint(contentJson)
         if isDynamicShowImage {
             switch itemData.type {
@@ -145,7 +106,7 @@ struct DynamicItemImageView: View {
                 let contentJson=itemData.modules.module_dynamic.major?.live_rcmd?.content
                 if contentJson != nil {
                     let data=try? JSONDecoder().decode(DynamicListItemModuleDynamicMajorLiveRcmdContent.self, from: contentJson!.data(using: .utf8)!)
-                    debugPrint(data)
+//                    debugPrint(data)
                     if data != nil {
                         self.dynamicText=data!.getTitle() ?? dynamicText
                         self.imageUrl=data!.getCover()
@@ -210,7 +171,7 @@ struct DynamicItemImageView: View {
         .background(Color(.secondarySystemBackground)) // 设置背景色以便观察效果
 //        .frame(height: 150) // 将 VStack 的固定高度设置为100
         .frame(minHeight: 100)
-        .contentShape(Rectangle()) // 加这行才实现可点击
+        .contentShape(Rectangle()) // 加这行才实现可点击Q
         .onTapGesture {
             // TODO: onClick
             print(itemData)

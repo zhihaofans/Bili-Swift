@@ -39,6 +39,7 @@ struct DynamicListItem: Codable {
     let type: String
     let basic: DynamicListItemBasic
     let modules: DynamicListItemModules
+    let orig: DynamicListForwardItem?
     func getCover() -> String? {
         var coverUrl: String? = nil
         if self.modules.module_dynamic.major != nil {
@@ -47,19 +48,39 @@ struct DynamicListItem: Codable {
         return coverUrl ?? self.modules.module_author.face
     }
 
+//    func getTitle() -> String {
+//        switch self.type {
+//        case DynamicType().VIDEO:
+//            return self.modules.module_dynamic.major?.archive?.title ?? "[标题神秘消失了]"
+//        case DynamicType().WORD:
+//            return self.modules.module_dynamic.desc?.text ?? "[文字神秘消失了]"
+//        case DynamicType().DRAW:
+//            return self.modules.module_dynamic.desc?.text ?? "[发了图片]"
+//        case DynamicType().ARTICLE:
+//            return self.modules.module_dynamic.major?.article?.title ?? "[标题神秘消失了]"
+//        case DynamicType().FORWARD:
+//            return "[转发]\(self.modules.module_dynamic.getTitle() ?? "[文字神秘消失了]")"
+//        default:
+//            return "[\(self.type)]"
+//        }
+//    }
     func getTitle() -> String {
-        switch self.type {
-        case DynamicType().VIDEO:
-            return self.modules.module_dynamic.major?.archive?.title ?? "[标题神秘消失了]"
-        case DynamicType().WORD:
-            return self.modules.module_dynamic.desc?.text ?? "[文字神秘消失了]"
-        case DynamicType().DRAW:
-            return self.modules.module_dynamic.desc?.text ?? "[发了图片]"
-        case DynamicType().ARTICLE:
-            return self.modules.module_dynamic.major?.article?.title ?? "[标题神秘消失了]"
-        default:
-            return "[\(self.type)]"
-        }
+        return self.modules.module_dynamic.major?.archive?.title ?? self.modules.module_dynamic.major?.article?.title ?? self.modules.module_dynamic.desc?.text ?? self.modules.module_dynamic.getTitle() ?? "[文字神秘消失了]"
+    }
+}
+
+struct DynamicListForwardItem: Codable {
+    let visible: Bool
+    let id_str: String
+    let type: String
+    let basic: DynamicListItemBasic
+    let modules: DynamicListItemModules
+    func getCover() -> String? {
+        return self.modules.module_dynamic.major?.getCover()
+    }
+
+    func getTitle() -> String {
+        return self.modules.module_dynamic.major?.archive?.title ?? self.modules.module_dynamic.major?.article?.title ?? self.modules.module_dynamic.desc?.text ?? self.modules.module_dynamic.getTitle() ?? "[文字神秘消失了]"
     }
 }
 
