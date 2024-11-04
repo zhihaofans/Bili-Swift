@@ -120,27 +120,40 @@ struct VideoInfoItemView: View {
                 Spacer()
 
             }.frame(maxHeight: .infinity) // 设置对齐方式
+            Text(videoInfo.title)
+                .lineLimit(2)
+                .font(.title3)
             Button(action: {
                 let urlStr="https://www.bilibili.com/video/\(videoInfo.bvid)/"
-                if openWebInApp {
-                    AppService().openAppUrl(urlStr)
-                } else {
-                    Task {
-                        DispatchQueue.main.async {
-                            if urlStr.isNotEmpty {
-                                if let url=URL(string: urlStr) {
-                                    DispatchQueue.main.async {
-                                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+//                if openWebInApp {
+                AppService().openAppUrl(urlStr)
+//                } else {
+//                    Task {
+//                        DispatchQueue.main.async {
+//                            if urlStr.isNotEmpty {
+//                                if let url=URL(string: urlStr) {
+//                                    DispatchQueue.main.async {
+//                                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
             }) {
-                Text("看").font(.title)
+                Text("打开APP")
             }
             .padding()
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(8)
+            Button(action: {}) {
+                Text("添加到稍后再看")
+            }
+            .padding()
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(8)
         }
     }
 

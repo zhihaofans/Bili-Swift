@@ -108,7 +108,7 @@ struct RankItemView: View {
                         Text(DateUtil().timestampToTimeStr(self.itemData.pubdate, format: "MM-dd HH:mm"))
                             .padding(.trailing, 10) // 在右侧添加 10 点的内间距
                     }.frame(maxHeight: .infinity) // 设置对齐方式
-                    Text("[\(String(describing: self.itemData.tname))]")
+                    Text("[\(String(self.itemData.tname!))]")
                         .lineLimit(1)
                     Text(self.itemData.title)
                         .lineLimit(3)
