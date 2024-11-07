@@ -11,10 +11,11 @@ import SwiftUI
 import SwiftUtils
 
 struct DynamicView: View {
-    @State var isError=false
-    @State var loaded=false
-    @State var errorStr=""
-    @State var dynamicList: [DynamicListItem]=[]
+    @State private var isError=false
+    @State private var loaded=false
+    @State private var errorStr=""
+    @State private var dynamicList: [DynamicListItem]=[]
+    private let dynamicType=DynamicType()
     var body: some View {
         NavigationView {
             ScrollView {
@@ -32,8 +33,17 @@ struct DynamicView: View {
                                     //                            default:
                                     //                                DynamicItemOldView(itemData: item)
                                     //                            }
-
-                                    DynamicItemImageView(itemData: item)
+                                    switch item.type {
+                                    case dynamicType.VIDEO:
+                                        NavigationLink {
+                                            VideoInfoView(bvid: item.modules.module_dynamic.major?.archive?.bvid ?? "")
+                                        } label: {
+                                            DynamicItemImageView(itemData: item)
+                                                .contentShape(Rectangle()) // 加这行才实现可点击
+                                        }
+                                    default:
+                                        DynamicItemImageView(itemData: item)
+                                    }
                                 }
                             }
                         }
@@ -154,16 +164,16 @@ struct DynamicItemImageView: View {
                     .lineLimit(2)
                     .padding(.horizontal, 20) // 设置水平方向的内间距
                 if imageUrl != nil && imageUrl!.isNotEmpty {
-                    AsyncImage(url: URL(string: (imageUrl ?? defaultImg).replace(of: "http://", with: "https://"))) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .scaledToFit() // 图片将等比缩放以适应框架
-                            .padding(.horizontal, 20) // 设置水平方向的内间距
-                    } placeholder: {
-                        ProgressView()
+                    let drawList: [DynamicListItemModuleDynamicMajorDrawItem]=itemData.modules.module_dynamic.major?.draw?.items ?? []
+                    if itemData.type == dynamicType.DRAW && drawList.isNotEmpty {
+                        NavigationLink {
+                            PreviewView(type: "image", dataList: drawList.map { $0.src })
+                        } label: {
+                            DynamicImageItemView(imageUrl: imageUrl!)
+                        }
+                    } else {
+                        DynamicImageItemView(imageUrl: imageUrl!)
                     }
-//                    .padding(.leading, 20) // 在左侧添加 10 点的内间距
                 }
                 Spacer()
             }
@@ -171,55 +181,56 @@ struct DynamicItemImageView: View {
         .background(Color(.secondarySystemBackground)) // 设置背景色以便观察效果
 //        .frame(height: 150) // 将 VStack 的固定高度设置为100
         .frame(minHeight: 100)
-        .contentShape(Rectangle()) // 加这行才实现可点击Q
-        .onTapGesture {
-            // TODO: onClick
-            print(itemData)
-            switch itemData.type {
-            case DynamicType().VIDEO:
-                let urlStr=self.checkLink(itemData.modules.module_dynamic.major?.archive?.jump_url)
-                if openWebInApp {
-                    AppService().openAppUrl(urlStr)
-                } else {
-                    Task {
-                        DispatchQueue.main.async {
-                            if urlStr.isNotEmpty {
-                                if let url=URL(string: urlStr) {
-                                    DispatchQueue.main.async {
-                                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            case DynamicType().ARTICLE:
-                let urlStr=self.checkLink(itemData.modules.module_dynamic.major?.article?.jump_url)
-                if openWebInApp {
-                    AppService().openAppUrl(urlStr)
-                } else {
-                    Task {
-                        DispatchQueue.main.async {
-                            if urlStr.isNotEmpty {
-                                if let url=URL(string: urlStr) {
-                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                                }
-                            }
-                        }
-                    }
-                }
-            case DynamicType().LIVE_RCMD:
-//                print(itemData.modules.module_dynamic.major?.live_rcmd)
-                alertTitle="@" + itemData.modules.module_author.name + " 开播了"
-                alertText=itemData.modules.module_dynamic.major?.live_rcmd?.content ?? "[??]"
-                showingAlert=true
-            default:
-                print(itemData.type)
-                alertTitle="@" + itemData.modules.module_author.name
-                alertText=itemData.modules.module_dynamic.getTitle() ?? "[没有标题]"
-                showingAlert=true
-            }
-        }
+        // TODO: 重写动态点击事件
+//        .contentShape(Rectangle()) // 加这行才实现可点击
+//        .onTapGesture {
+//            // TODO: onClick
+//            print(itemData)
+//            switch itemData.type {
+//            case DynamicType().VIDEO:
+//                let urlStr=self.checkLink(itemData.modules.module_dynamic.major?.archive?.jump_url)
+//                if openWebInApp {
+//                    AppService().openAppUrl(urlStr)
+//                } else {
+//                    Task {
+//                        DispatchQueue.main.async {
+//                            if urlStr.isNotEmpty {
+//                                if let url=URL(string: urlStr) {
+//                                    DispatchQueue.main.async {
+//                                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            case DynamicType().ARTICLE:
+//                let urlStr=self.checkLink(itemData.modules.module_dynamic.major?.article?.jump_url)
+//                if openWebInApp {
+//                    AppService().openAppUrl(urlStr)
+//                } else {
+//                    Task {
+//                        DispatchQueue.main.async {
+//                            if urlStr.isNotEmpty {
+//                                if let url=URL(string: urlStr) {
+//                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            case DynamicType().LIVE_RCMD:
+        ////                print(itemData.modules.module_dynamic.major?.live_rcmd)
+//                alertTitle="@" + itemData.modules.module_author.name + " 开播了"
+//                alertText=itemData.modules.module_dynamic.major?.live_rcmd?.content ?? "[??]"
+//                showingAlert=true
+//            default:
+//                print(itemData.type)
+//                alertTitle="@" + itemData.modules.module_author.name
+//                alertText=itemData.modules.module_dynamic.getTitle() ?? "[没有标题]"
+//                showingAlert=true
+//            }
+//        }
         .alert(alertTitle, isPresented: $showingAlert) {
             TextField("Placeholder", text: $alertText)
             Button("OK", action: {
@@ -239,5 +250,22 @@ struct DynamicItemImageView: View {
             urlStr=urlStr.replace(of: "http://", with: "https://")
         }
         return urlStr
+    }
+}
+
+struct DynamicImageItemView: View {
+    private let defaultImg="https://i0.hdslb.com/bfs/activity-plat/static/20220518/49ddaeaba3a23f61a6d2695de40d45f0/2nqyzFm9He.jpeg"
+    var imageUrl: String
+    var body: some View {
+        AsyncImage(url: URL(string: imageUrl.replace(of: "http://", with: "https://"))) { image in
+            image
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .scaledToFit() // 图片将等比缩放以适应框架
+                .padding(.horizontal, 20) // 设置水平方向的内间距
+        } placeholder: {
+            ProgressView()
+        }
+        //                    .padding(.leading, 20) // 在左侧添加 10 点的内间距
     }
 }
