@@ -91,3 +91,9 @@ struct HistoryItemOwner: Codable {
     let name: String
     let face: String
 }
+
+// Add Later to watch
+struct AddLater2WatchResult: Codable {
+    let code: Int
+    let message: String
+}

@@ -78,4 +78,37 @@ class HistoryService {
             fail("getLaterToWatch:\(error)")
         }
     }
+
+    func addLaterToWatch(bvid: String, callback: @escaping (AddLater2WatchResult)->Void, fail: @escaping (String)->Void) {
+        if bvid.isEmpty {
+            fail("bvid is empty")
+        } else {
+            let parameters = ["bvid": bvid, "csrf": LoginService().getSESSDATA()]
+            let url = "https://api.bilibili.com/x/v2/history/toview/add"
+            http.post(url, body: parameters) { result in
+                if result.isEmpty {
+                    fail("result.isEmpty")
+                } else {
+                    print(result)
+                    do {
+                        let data = try JSONDecoder().decode(AddLater2WatchResult.self, from: result.data(using: .utf8)!)
+                        debugPrint(data.code)
+                        if data.code == 0 {
+                            callback(data)
+                        } else {
+                            fail("Code \(data.code): \(data.message)")
+                        }
+                    } catch {
+                        print(error)
+                        print("addLaterToWatch.catch.error")
+                        fail("addLaterToWatch:\(error)")
+                    }
+                }
+            } fail: { error in
+                print(error)
+                print("addLaterToWatch.http.error")
+                fail("addLaterToWatch:\(error)")
+            }
+        }
+    }
 }
