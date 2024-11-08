@@ -83,7 +83,7 @@ class HistoryService {
         if bvid.isEmpty {
             fail("bvid is empty")
         } else {
-            let parameters = ["bvid": bvid, "csrf": LoginService().getSESSDATA()]
+            let parameters = ["bvid": bvid, "csrf": LoginService().getbili_jct()]
             let url = "https://api.bilibili.com/x/v2/history/toview/add"
             http.post(url, body: parameters) { result in
                 if result.isEmpty {
