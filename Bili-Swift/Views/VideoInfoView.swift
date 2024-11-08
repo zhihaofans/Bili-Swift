@@ -81,6 +81,9 @@ struct VideoInfoView: View {
 struct VideoInfoItemView: View {
     @State var videoInfo: VideoInfoData
     @AppStorage("open_web_in_app") private var openWebInApp: Bool=false
+    @State private var showingAlert=false
+    @State private var alertTitle: String="Error"
+    @State private var alertText: String="未知错误"
     init(videoInfo: VideoInfoData) {
         self.videoInfo=videoInfo
         print(videoInfo)
@@ -147,13 +150,34 @@ struct VideoInfoItemView: View {
             .background(Color.blue)
             .foregroundColor(.white)
             .cornerRadius(8)
-            Button(action: {}) {
+            Button(action: {
+                HistoryService().addLaterToWatch(bvid: videoInfo.bvid) { result in
+                    print(result)
+                    alertTitle="添加到稍后再看" + (result.code == 0).string(trueStr: "成功", falseStr: "失败")
+                    alertText=result.message
+                    showingAlert=true
+                } fail: { err in
+                    print(err)
+                    alertTitle="添加到稍后再看错误"
+                    alertText=err
+                    showingAlert=true
+                }
+            }) {
                 Text("添加到稍后再看")
             }
             .padding()
             .background(Color.blue)
             .foregroundColor(.white)
             .cornerRadius(8)
+            .alert(alertTitle, isPresented: $showingAlert) {
+                Button("OK", action: {
+                    alertTitle="Error"
+                    alertText="未知错误"
+                    showingAlert=false
+                })
+            } message: {
+                Text(alertText)
+            }
         }
     }
 
