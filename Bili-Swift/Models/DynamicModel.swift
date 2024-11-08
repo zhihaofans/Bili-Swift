@@ -223,6 +223,11 @@ struct DynamicListItemModuleDynamicMajorLiveRcmdContentInfo: Codable {
     let live_id: String
     let live_start_time: Int
     let live_status: Int
+    let area_name: String
+    let parent_area_name: String
+    let link: String
+    let room_paid_type: Int
+    let uid: Int
 }
 
 struct DynamicListItemModuleDynamicMajorArticle: Codable {

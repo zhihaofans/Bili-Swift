@@ -269,3 +269,15 @@ struct DynamicImageItemView: View {
         //                    .padding(.leading, 20) // 在左侧添加 10 点的内间距
     }
 }
+
+struct DynamicDetailView: View {
+    private var dynamicData: DynamicListItem
+    init(_ itemData: DynamicListItem) {
+        self.dynamicData=itemData
+    }
+
+    var body: some View {
+        Text("正在打开动态")
+        ProgressView()
+    }
+}
