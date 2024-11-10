@@ -34,13 +34,13 @@ struct DynamicView: View {
                                     //                                DynamicItemOldView(itemData: item)
                                     //                            }
                                     switch item.type {
-                                    case dynamicType.VIDEO:
-                                        NavigationLink {
-                                            VideoInfoView(bvid: item.modules.module_dynamic.major?.archive?.bvid ?? "")
-                                        } label: {
-                                            DynamicItemImageView(itemData: item)
-                                                .contentShape(Rectangle()) // 加这行才实现可点击
-                                        }
+//                                    case dynamicType.VIDEO:
+//                                        NavigationLink {
+//                                            VideoInfoView(bvid: item.modules.module_dynamic.major?.archive?.bvid ?? "")
+//                                        } label: {
+//                                            DynamicItemImageView(itemData: item)
+//                                                .contentShape(Rectangle()) // 加这行才实现可点击
+//                                        }
                                     default:
                                         DynamicItemImageView(itemData: item)
                                     }
@@ -55,7 +55,7 @@ struct DynamicView: View {
             }
             .navigationBarTitle("动态", displayMode: .inline)
             .onAppear {
-                // TODO: 加载历史数据
+                // TODO: 加载动态数据
                 Task {
                     DynamicService().getDynamicList { result in
                         DispatchQueue.main.async {
@@ -153,13 +153,20 @@ struct DynamicItemImageView: View {
                         ProgressView()
                     }
                     .padding(.leading, 20) // 在左侧添加 10 点的内间距
-//                    .frame(width: 40, height: 40)
                     Text(itemData.modules.module_author.name)
                         .font(.title2)
                     Spacer()
                     Text(itemData.modules.module_author.pub_time + " " + itemData.modules.module_author.pub_action)
                         .padding(.trailing, 10) // 在右侧添加 10 点的内间距
-                }.frame(maxHeight: .infinity) // 设置对齐方式
+                }
+                .frame(maxHeight: .infinity) // 设置对齐方式
+                .onClick {
+                    AppService().openAppUrl(self.checkLink(itemData.modules.module_author.jump_url))
+                }
+//                .contentShape(Rectangle()) // 加这行才实现可点击
+//                .onTapGesture {
+//                    AppService().openAppUrl(self.checkLink(itemData.modules.module_author.jump_url))
+//                }
                 Text(dynamicText)
                     .lineLimit(2)
                     .padding(.horizontal, 20) // 设置水平方向的内间距
@@ -168,6 +175,12 @@ struct DynamicItemImageView: View {
                     if itemData.type == dynamicType.DRAW && drawList.isNotEmpty {
                         NavigationLink {
                             PreviewView(type: "image", dataList: drawList.map { $0.src })
+                        } label: {
+                            DynamicImageItemView(imageUrl: imageUrl!)
+                        }
+                    } else if itemData.type == dynamicType.VIDEO {
+                        NavigationLink {
+                            VideoInfoView(bvid: itemData.modules.module_dynamic.major?.archive?.bvid ?? "")
                         } label: {
                             DynamicImageItemView(imageUrl: imageUrl!)
                         }
