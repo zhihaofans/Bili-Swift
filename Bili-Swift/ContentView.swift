@@ -38,19 +38,19 @@ struct iosMainView: View {
                     NavigationLink("工具", destination: ToolView())
                 }
                 .navigationTitle("更多")
-//                .toolbar {
-//                    ToolbarItem(placement: .navigationBarTrailing) {
-//                        NavigationLink(destination: UserView()) {
-//                            // TODO: 这里跳转到个人页面或登录界面
-//                            Image(systemName: "person")
-//                        }
-//                    }
-//                    ToolbarItem(placement: .navigationBarTrailing) {
-//                        NavigationLink(destination: SettingView()) {
-//                            Image(systemName: "gear")
-//                        }
-//                    }
-//                }
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        NavigationLink(destination: UserView()) {
+                            // TODO: 这里跳转到个人页面或登录界面
+                            Image(systemName: "person")
+                        }
+                    }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        NavigationLink(destination: SettingView()) {
+                            Image(systemName: "gear")
+                        }
+                    }
+                }
             }
         default:
             NavigationView {
