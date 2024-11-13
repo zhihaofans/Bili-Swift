@@ -84,34 +84,39 @@ struct RankItemView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            NavigationLink {
-                VideoInfoView(bvid: itemData.bvid)
-            } label: {
-                VStack {
-                    HStack {
-                        AsyncImage(url: URL(string: self.checkLink(self.itemData.owner.face))) { image in
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .scaledToFit() // 图片将等比缩放以适应框架
-                                .frame(width: 40, height: 40) // 设置视图框架的大小
-                                .clipShape(Circle()) // 裁剪成圆形
-                                .overlay(Circle().stroke(Color.gray, lineWidth: 4)) // 可选的白色边框
-                        } placeholder: {
-                            ProgressView()
-                        }
-                        .padding(.leading, 20) // 在左侧添加 10 点的内间距
-                        //                    .frame(width: 40, height: 40)
-                        Text(self.itemData.owner.name)
-                            .font(.title2)
-                        Spacer()
-                        Text(DateUtil().timestampToTimeStr(self.itemData.pubdate, format: "MM-dd HH:mm"))
-                            .padding(.trailing, 10) // 在右侧添加 10 点的内间距
-                    }.frame(maxHeight: .infinity) // 设置对齐方式
-                    Text("[\(String(self.itemData.tname!))]")
-                        .lineLimit(1)
-                    Text(self.itemData.title)
-                        .lineLimit(3)
+            VStack {
+                HStack {
+                    AsyncImage(url: URL(string: self.checkLink(self.itemData.owner.face))) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .scaledToFit() // 图片将等比缩放以适应框架
+                            .frame(width: 40, height: 40) // 设置视图框架的大小
+                            .clipShape(Circle()) // 裁剪成圆形
+                            .overlay(Circle().stroke(Color.gray, lineWidth: 4)) // 可选的白色边框
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    .padding(.leading, 20) // 在左侧添加 10 点的内间距
+                    //                    .frame(width: 40, height: 40)
+                    Text(self.itemData.owner.name)
+                        .font(.title2)
+                    Spacer()
+                    Text(DateUtil().timestampToTimeStr(self.itemData.pubdate, format: "MM-dd HH:mm"))
+                        .padding(.trailing, 10) // 在右侧添加 10 点的内间距
+                }
+                .frame(maxHeight: .infinity) // 设置对齐方式
+                .onClick {
+                    AppService().openAppUrl(self.checkLink("https://space.bilibili.com/\(itemData.owner.mid)/"))
+                }
+                Text("[\(String(self.itemData.tname!))]")
+                    .lineLimit(1)
+                Text(self.itemData.title)
+                    .lineLimit(3)
+
+                NavigationLink {
+                    VideoInfoView(bvid: itemData.bvid)
+                } label: {
                     AsyncImage(url: URL(string: self.checkLink(self.itemData.pic))) { image in
                         image
                             .resizable()
@@ -121,8 +126,8 @@ struct RankItemView: View {
                     } placeholder: {
                         ProgressView()
                     }
-                    Spacer()
                 }
+                Spacer()
             }
         }
         .background(Color(.secondarySystemBackground)) // 设置背景色以便观察效果
