@@ -8,30 +8,51 @@
 import SwiftUI
 import SwiftUtils
 
+class SearchType {
+    let VIDEO = "video"
+}
+
 struct SearchView: View {
-    @State var playNotificationSounds=false
-    @State var sendReadReceipts=false
-    @State var searchKey=""
+    private let searchTypeList = SearchType()
+    @State private var searchType = "video"
+    @State var playNotificationSounds = false
+    @State var sendReadReceipts = false
+    @State var searchKey = ""
     var body: some View {
         VStack {
             Form {
-                TextField("Placeholder", text: $searchKey)
-                Section(header: Text("Notifications")) {
-                    Toggle("Play notification sounds", isOn: $playNotificationSounds)
-                    TextField("Placeholder", text: $searchKey)
-                    Toggle("Send read receipts", isOn: $sendReadReceipts)
-                    Button("Button") {
-                        
+                Section(header: Text("搜索")) {
+                    TextField("搜索", text: $searchKey)
+                    Menu {
+                        Button(action: {
+                            searchType = searchTypeList.VIDEO
+                        }) {
+                            Label("视频", systemImage: "play.rectangle.fill")
+                        }
+                    } label: {
+                        SimpleTextItemView(title: "搜索类型", detail: searchType)
                     }
                 }
-                Button("Button") {
-                    
-                }
+                Button("Button") {}
             }
         }.setNavigationTitle("搜索")
     }
 }
 
-#Preview {
-    SearchView()
+struct SimpleTextItemView: View {
+    var title: String
+    var detail: String
+
+    var body: some View {
+        HStack {
+            Text(title)
+            Spacer()
+            Text(detail).foregroundColor(.gray)
+        }
+    }
 }
+
+//
+// #Preview {
+//    SearchView()
+// }
