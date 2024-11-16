@@ -13,6 +13,7 @@
 		260EC29E2CCFE76A0093ABB5 /* RankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260EC29D2CCFE76A0093ABB5 /* RankView.swift */; };
 		260EC2A02CCFE8970093ABB5 /* RankModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260EC29F2CCFE8970093ABB5 /* RankModel.swift */; };
 		260EC2A22CCFE9290093ABB5 /* RankService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260EC2A12CCFE9290093ABB5 /* RankService.swift */; };
+		261D11862CE797E300C79198 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261D11852CE797E300C79198 /* SearchView.swift */; };
 		263A6E162C46BAD400830CD5 /* Bili_SwiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263A6E152C46BAD400830CD5 /* Bili_SwiftApp.swift */; };
 		263A6E182C46BAD400830CD5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263A6E172C46BAD400830CD5 /* ContentView.swift */; };
 		263A6E1A2C46BAD600830CD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 263A6E192C46BAD600830CD5 /* Assets.xcassets */; };
@@ -82,6 +83,7 @@
 		260EC29D2CCFE76A0093ABB5 /* RankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankView.swift; sourceTree = "<group>"; };
 		260EC29F2CCFE8970093ABB5 /* RankModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankModel.swift; sourceTree = "<group>"; };
 		260EC2A12CCFE9290093ABB5 /* RankService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankService.swift; sourceTree = "<group>"; };
+		261D11852CE797E300C79198 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		263A6E122C46BAD400830CD5 /* Bili-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bili-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		263A6E152C46BAD400830CD5 /* Bili_SwiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bili_SwiftApp.swift; sourceTree = "<group>"; };
 		263A6E172C46BAD400830CD5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -203,17 +205,18 @@
 		263A6E2D2C46C12000830CD5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				26AA91AD2CCD4C5500EEDD77 /* Componets */,
-				263A6E302C46C14100830CD5 /* SettingView.swift */,
-				263A6E322C46C49E00830CD5 /* UserView.swift */,
-				263A6E342C473A5800830CD5 /* LoginView.swift */,
 				263A6E452C48238B00830CD5 /* CheckinView.swift */,
+				26AA91AD2CCD4C5500EEDD77 /* Componets */,
+				26745F492CB19D2900C0713B /* DynamicView.swift */,
 				263B0D432C48A0A80040F879 /* HistoryView.swift */,
 				26DF0E2B2C5B191800B4A8B3 /* LaterToWatchView.swift */,
-				260B583C2C54031500923D29 /* ToolView.swift */,
-				26745F492CB19D2900C0713B /* DynamicView.swift */,
+				263A6E342C473A5800830CD5 /* LoginView.swift */,
 				26AA91AB2CCAA0D200EEDD77 /* PreviewView.swift */,
 				260EC29D2CCFE76A0093ABB5 /* RankView.swift */,
+				261D11852CE797E300C79198 /* SearchView.swift */,
+				263A6E302C46C14100830CD5 /* SettingView.swift */,
+				260B583C2C54031500923D29 /* ToolView.swift */,
+				263A6E322C46C49E00830CD5 /* UserView.swift */,
 				26F1433A2CD13F0400D3D095 /* VideoInfoView.swift */,
 			);
 			path = Views;
@@ -412,6 +415,7 @@
 				26C592AC2C4EBD91006E211D /* LiveService.swift in Sources */,
 				260B583F2C5948E800923D29 /* VipService.swift in Sources */,
 				26F1433B2CD13F0400D3D095 /* VideoInfoView.swift in Sources */,
+				261D11862CE797E300C79198 /* SearchView.swift in Sources */,
 				26ED615A2CC6B95300A004A6 /* VideoService.swift in Sources */,
 				263A6E422C48232700830CD5 /* CheckinService.swift in Sources */,
 				263A6E3F2C4808DC00830CD5 /* UserModel.swift in Sources */,
