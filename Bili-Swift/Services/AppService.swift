@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import SwiftUI
 import SwiftUtils
 import UIKit
 
 class AppService {
+    @AppStorage("open_web_in_app") private var openWebInApp = false
     func getBiliUrl(_ url: String) -> String {
         return "bilibili://browser/?url=\(url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? ""))"
     }
@@ -34,5 +36,9 @@ class AppService {
         #else
         return true
         #endif
+    }
+
+    func openUrl(appUrl: String, webUrl: String) {
+        
     }
 }
