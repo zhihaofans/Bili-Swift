@@ -15,6 +15,7 @@ struct CheckinView: View {
     @State var mangaLoading = false
     @State var liveLoading = false
     @State var vipPointLoading = false
+    @State var vipExperienceLoading = false
     var body: some View {
         VStack {
             List {
@@ -66,6 +67,23 @@ struct CheckinView: View {
                             } fail: { error in
                                 DispatchQueue.main.async {
                                     vipPointLoading = false
+                                    showingAlert = true
+                                    alertText = error
+                                }
+                            }
+                        }
+                    }
+                    ListItemLoadingView(title: "每日经验签到(需要完成看一次会员视频)", isLoading: $vipExperienceLoading, loadingColor: Color.blue) {
+                        Task {
+                            VipService().experienceCheckin { result in
+                                DispatchQueue.main.async {
+                                    vipExperienceLoading = false
+                                    alertText = result.message
+                                    showingAlert = true
+                                }
+                            } fail: { error in
+                                DispatchQueue.main.async {
+                                    vipExperienceLoading = false
                                     showingAlert = true
                                     alertText = error
                                 }

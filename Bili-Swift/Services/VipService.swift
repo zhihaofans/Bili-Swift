@@ -47,4 +47,33 @@ class VipService {
             fail("bipPointCheckin:\(error)")
         }
     }
+
+    func experienceCheckin(callback: @escaping (VipExperienceCheckinResult)->Void, fail: @escaping (String)->Void) {
+        let url = "https://api.bilibili.com/x/vip/experience/add"
+        let parameters = ["csrf": LoginService().getbili_jct()]
+        http.post(url, body: parameters) { result in
+            if result.isEmpty {
+                fail("result.isEmpty")
+            } else {
+                print(result)
+                do {
+                    let data = try JSONDecoder().decode(VipExperienceCheckinResult.self, from: result.data(using: .utf8)!)
+                    debugPrint(data.code)
+                    if data.code == 0 {
+                        callback(data)
+                    } else {
+                        fail("Code \(data.code): \(data.message)")
+                    }
+                } catch {
+                    print(error)
+                    print("bipPointCheckin.catch.error")
+                    fail("bipPointCheckin:\(error)")
+                }
+            }
+        } fail: { error in
+            print(error)
+            print("bipPointCheckin.http.error")
+            fail("bipPointCheckin:\(error)")
+        }
+    }
 }
