@@ -39,6 +39,33 @@ class AppService {
     }
 
     func openUrl(appUrl: String, webUrl: String) {
-        
+        if appUrl.isNotEmpty {
+            if self.openWebInApp, self.isAppIntalled() {
+                self.openAppUrl(appUrl)
+            } else {
+                Task {
+                    DispatchQueue.main.async {
+                        if webUrl.isNotEmpty {
+                            if let url = URL(string: webUrl) {
+                                DispatchQueue.main.async {
+                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    func checkLink(_ url: String?) -> String {
+        var urlStr = url ?? ""
+        if urlStr.starts(with: "//") {
+            urlStr = "https:" + urlStr
+        }
+        if urlStr.starts(with: "http://") {
+            urlStr = urlStr.replace(of: "http://", with: "https://")
+        }
+        return urlStr
     }
 }
