@@ -94,7 +94,7 @@ struct DynamicItemImageView: View {
     @AppStorage("open_web_in_app") private var openWebInApp: Bool=false
     private let dynamicType=DynamicType()
     private let dynamicService=DynamicService()
-
+    private let appService=AppService()
     init(itemData: DynamicListItem) {
         self.itemData=itemData
         self.dynamicText=itemData.getTitle()
@@ -124,8 +124,8 @@ struct DynamicItemImageView: View {
                     } else {
                         self.hasImage=false
                     }
-                    debugPrint(imageUrl)
-                    debugPrint(hasImage)
+//                    debugPrint(imageUrl)
+//                    debugPrint(hasImage)
                 }
             default:
                 self.hasImage=false
@@ -161,7 +161,8 @@ struct DynamicItemImageView: View {
                 }
                 .frame(maxHeight: .infinity) // 设置对齐方式
                 .onClick {
-                    AppService().openAppUrl(self.checkLink(itemData.modules.module_author.jump_url))
+                    let webUrl=appService.checkLink(itemData.modules.module_author.jump_url)
+                    appService.openUrl(appUrl: webUrl, webUrl: webUrl)
                 }
 //                .contentShape(Rectangle()) // 加这行才实现可点击
 //                .onTapGesture {

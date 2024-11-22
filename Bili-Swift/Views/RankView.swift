@@ -77,7 +77,7 @@ struct RankItemView: View {
     @State private var alertText=""
     @AppStorage("open_web_in_app") private var openWebInApp=false
     @AppStorage("bili_dynamic_image_mode") var isDynamicShowImage=true
-
+    private let appService=AppService()
     init(itemData: VideoInfoData) {
         self.itemData=itemData
     }
@@ -86,7 +86,7 @@ struct RankItemView: View {
         VStack(alignment: .leading) {
             VStack {
                 HStack {
-                    AsyncImage(url: URL(string: self.checkLink(self.itemData.owner.face))) { image in
+                    AsyncImage(url: URL(string: appService.checkLink(self.itemData.owner.face))) { image in
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fill)
@@ -107,7 +107,8 @@ struct RankItemView: View {
                 }
                 .frame(maxHeight: .infinity) // 设置对齐方式
                 .onClick {
-                    AppService().openAppUrl(self.checkLink("https://space.bilibili.com/\(itemData.owner.mid)/"))
+                    let webUrl=appService.checkLink("https://space.bilibili.com/\(itemData.owner.mid)/")
+                    appService.openUrl(appUrl: webUrl, webUrl: webUrl)
                 }
                 Text("[\(String(self.itemData.tname!))]")
                     .lineLimit(1)
@@ -117,7 +118,7 @@ struct RankItemView: View {
                 NavigationLink {
                     VideoInfoView(bvid: itemData.bvid)
                 } label: {
-                    AsyncImage(url: URL(string: self.checkLink(self.itemData.pic))) { image in
+                    AsyncImage(url: URL(string: appService.checkLink(self.itemData.pic))) { image in
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fill)
@@ -150,17 +151,6 @@ struct RankItemView: View {
         } message: {
             Text(self.alertText)
         }
-    }
-
-    private func checkLink(_ url: String?) -> String {
-        var urlStr=url ?? ""
-        if urlStr.starts(with: "//") {
-            urlStr="https:" + urlStr
-        }
-        if urlStr.starts(with: "http://") {
-            urlStr=urlStr.replace(of: "http://", with: "https://")
-        }
-        return urlStr
     }
 }
 

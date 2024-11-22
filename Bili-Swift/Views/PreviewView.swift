@@ -28,7 +28,7 @@ struct PreviewView: View {
                             //                            default:
                             //                                DynamicItemOldView(itemData: item)
                             //                            }
-                            AsyncImage(url: URL(string: self.checkLink(url))) { image in
+                            AsyncImage(url: URL(string: AppService().checkLink(url))) { image in
                                 image
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
@@ -45,14 +45,5 @@ struct PreviewView: View {
         .navigationBarTitle("预览图片", displayMode: .inline)
     }
 
-    private func checkLink(_ url: String?) -> String {
-        var urlStr=url ?? ""
-        if urlStr.starts(with: "//") {
-            urlStr="https:" + urlStr
-        }
-        if urlStr.starts(with: "http://") {
-            urlStr=urlStr.replace(of: "http://", with: "https://")
-        }
-        return urlStr
-    }
+
 }

@@ -84,6 +84,8 @@ struct VideoInfoItemView: View {
     @State private var showingAlert=false
     @State private var alertTitle: String="Error"
     @State private var alertText: String="未知错误"
+
+    private let appService=AppService()
     init(videoInfo: VideoInfoData) {
         self.videoInfo=videoInfo
         print(videoInfo)
@@ -94,7 +96,7 @@ struct VideoInfoItemView: View {
             NavigationLink {
                 PreviewView(type: "image", dataList: [videoInfo.pic])
             } label: {
-                AsyncImage(url: URL(string: self.checkLink(videoInfo.pic))) { image in
+                AsyncImage(url: URL(string: appService.checkLink(videoInfo.pic))) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -105,7 +107,7 @@ struct VideoInfoItemView: View {
                 }
             }
             HStack {
-                AsyncImage(url: URL(string: self.checkLink(videoInfo.owner.face))) { image in
+                AsyncImage(url: URL(string: appService.checkLink(videoInfo.owner.face))) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -129,7 +131,7 @@ struct VideoInfoItemView: View {
             Button(action: {
                 let urlStr="https://www.bilibili.com/video/\(videoInfo.bvid)/"
 //                if openWebInApp {
-                AppService().openAppUrl(urlStr)
+                appService.openAppUrl(urlStr)
 //                } else {
 //                    Task {
 //                        DispatchQueue.main.async {
@@ -179,17 +181,6 @@ struct VideoInfoItemView: View {
                 Text(alertText)
             }
         }
-    }
-
-    private func checkLink(_ url: String?) -> String {
-        var urlStr=url ?? ""
-        if urlStr.starts(with: "//") {
-            urlStr="https:" + urlStr
-        }
-        if urlStr.starts(with: "http://") {
-            urlStr=urlStr.replace(of: "http://", with: "https://")
-        }
-        return urlStr
     }
 }
 
