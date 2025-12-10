@@ -131,7 +131,7 @@ struct RankItemView: View {
                 Spacer()
             }
         }
-        .background(Color(.secondarySystemBackground)) // 设置背景色以便观察效果
+        .background(Color.secondary.opacity(0.1)) // 设置背景色以便观察效果
 //        .frame(height: 150) // 将 VStack 的固定高度设置为100
         .frame(minHeight: 100)
 //        .contentShape(Rectangle()) // 加这行才实现可点击

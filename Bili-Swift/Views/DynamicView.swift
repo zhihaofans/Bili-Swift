@@ -53,7 +53,7 @@ struct DynamicView: View {
                     ProgressView()
                 }
             }
-            .navigationBarTitle("动态", displayMode: .inline)
+            .setNavigationTitle("动态")
             .onAppear {
                 // TODO: 加载动态数据
                 Task {
@@ -192,7 +192,7 @@ struct DynamicItemImageView: View {
                 Spacer()
             }
         }
-        .background(Color(.secondarySystemBackground)) // 设置背景色以便观察效果
+        .background(Color.secondary.opacity(0.1)) // 设置背景色以便观察效果
 //        .frame(height: 150) // 将 VStack 的固定高度设置为100
         .frame(minHeight: 100)
         // TODO: 重写动态点击事件

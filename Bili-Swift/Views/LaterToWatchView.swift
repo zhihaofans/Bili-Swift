@@ -33,9 +33,15 @@ struct LaterToWatchView: View {
             }
         }
         .toolbar {
+#if os(iOS)
             ToolbarItem(placement: .navigationBarTrailing) {
                 Image(systemName: "trash")
             }
+#elseif os(macOS)
+            ToolbarItem {
+                Image(systemName: "trash")
+            }
+#endif
         }
         .navigationTitle("稍后再看")
         .onAppear {
@@ -123,12 +129,12 @@ struct Later2WatchItemView: View {
 //                    }
 //                }
 //            }
-////            switch itemData.history.getType() {
-////                // case "archive":
-////
-////                default:
-////                    print(itemData.getCover())
-////            }
+        ////            switch itemData.history.getType() {
+        ////                // case "archive":
+        ////
+        ////                default:
+        ////                    print(itemData.getCover())
+        ////            }
 //        }
     }
 }

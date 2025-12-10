@@ -37,9 +37,15 @@ struct HistoryView: View {
             }
         }
         .toolbar {
+#if os(iOS)
             ToolbarItem(placement: .navigationBarTrailing) {
                 Image(systemName: "trash")
             }
+#elseif os(macOS)
+            ToolbarItem {
+                Image(systemName: "trash")
+            }
+#endif
         }
         .navigationTitle("历史记录")
         .onAppear {

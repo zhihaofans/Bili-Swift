@@ -45,7 +45,7 @@ struct VideoInfoView: View {
 //                Image(systemName: "trash")
 //            }
 //        }
-        .navigationBarTitle(bvid, displayMode: .inline)
+        .setNavigationTitle(bvid)
         .onAppear {
             // TODO: 加载热视频信息
             Task {

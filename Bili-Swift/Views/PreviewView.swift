@@ -10,7 +10,7 @@ import SwiftUI
 struct PreviewView: View {
     @State private var imageList: [String]
     init(type: String, dataList: [String]) {
-        self.imageList=dataList
+        self.imageList = dataList
     }
 
     var body: some View {
@@ -42,8 +42,6 @@ struct PreviewView: View {
                 }
             }
         }
-        .navigationBarTitle("预览图片", displayMode: .inline)
+        .setNavigationTitle("预览图片")
     }
-
-
 }

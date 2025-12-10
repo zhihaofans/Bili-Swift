@@ -60,9 +60,12 @@ struct iosLoginView: View {
                     let qrImage = QrcodeUtil().generateQRCode(from: EncodeUtil().urlDecode(qrcodeUrl))
                     if qrImage == nil {
                         Text("请安装APP")
-
                     } else {
+                        #if os(iOS)
                         Image(uiImage: qrImage!).resizable().frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 100)
+                        #elseif os(macOS)
+                        Image(nsImage: qrImage!).resizable().frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 100)
+                        #endif
                     }
                 }
                 Button(action: {
@@ -110,7 +113,6 @@ struct iosLoginView: View {
                         showingAlert = true
                     }
                 } fail: { errorMsg in
-
                     showingAlert = true
                     alertText = errorMsg
                 }

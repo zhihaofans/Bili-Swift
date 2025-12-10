@@ -7,8 +7,9 @@
 
 import SwiftUI
 import SwiftUtils
+#if canImport(UIKit)
 import UIKit
-
+#endif
 struct SettingView: View {
     @AppStorage("bili_dynamic_image_mode") var isDynamicShowImage: Bool = true
     @AppStorage("open_web_in_app") var openWebInApp: Bool = false
@@ -64,25 +65,48 @@ struct SettingView: View {
         return nil
     }
 
+    #if os(iOS)
     private func getAppIconImage() -> UIImage? {
         if let iconName = getAppIconName() {
             return UIImage(named: iconName)
         }
         return nil
     }
+
+    #elseif os(macOS)
+    private func getAppIconImage() -> NSImage? {
+        if let iconName = getAppIconName() {
+            return NSImage(named: iconName)
+        }
+        return nil
+    }
+    #endif
 }
 
 struct AppIconAndNameView: View {
+    #if os(iOS)
     let image: UIImage
+    #elseif os(macOS)
+    let image: NSImage
+    #endif
     var body: some View {
         VStack(alignment: .center) {
             // Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+            #if os(iOS)
             Image(uiImage: image)
                 .resizable() // 允许图片可调整大小
                 .scaledToFit() // 图片将等比缩放以适应框架
                 .frame(width: 120, height: 120) // 设置视图框架的大小
                 .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous)) // 设置圆角矩形形状
                 .shadow(radius: 5) // 添加阴影以增强效果
+            #elseif os(macOS)
+            Image(nsImage: image)
+                .resizable() // 允许图片可调整大小
+                .scaledToFit() // 图片将等比缩放以适应框架
+                .frame(width: 120, height: 120) // 设置视图框架的大小
+                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous)) // 设置圆角矩形形状
+                .shadow(radius: 5) // 添加阴影以增强效果
+            #endif
             // .overlay(Circle().stroke(Color.gray, lineWidth: 4)) // 可选的白色边框
 //                .aspectRatio(contentMode: .fit)
 //                .frame(width: 100, height: 100)

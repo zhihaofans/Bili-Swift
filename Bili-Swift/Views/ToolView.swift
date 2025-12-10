@@ -9,7 +9,9 @@ import PhotosUI
 import QuickLook
 import SwiftUI
 import SwiftUtils
+#if canImport(UIKit)
 import UIKit
+#endif
 
 struct ToolView: View {
     @State var isLoading = false
@@ -33,7 +35,7 @@ struct ToolView: View {
             //                        }
             //                    }
             //                }
-            .navigationBarTitle("工具", displayMode: .inline)
+            .setNavigationTitle("工具")
         }
     }
 }
@@ -100,7 +102,7 @@ struct DownloadVideoCoverView: View {
                 NavigationLink("查看视频封面", destination: PreviewView(type: "image", dataList: [videoCover]))
             }
         }
-        .navigationBarTitle("下载视频封面", displayMode: .inline)
+        .setNavigationTitle("下载视频封面")
     }
 }
 

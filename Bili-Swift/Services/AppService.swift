@@ -8,7 +8,9 @@
 import Foundation
 import SwiftUI
 import SwiftUtils
+#if canImport(UIKit)
 import UIKit
+#endif
 
 class AppService {
     @AppStorage("open_web_in_app") private var openWebInApp = false
@@ -23,7 +25,9 @@ class AppService {
             DispatchQueue.main.async {
                 if biliUrl.isNotEmpty {
                     if let url = URL(string: biliUrl) {
+                        #if os(iOS)
                         UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                        #endif
                     }
                 }
             }
@@ -48,7 +52,9 @@ class AppService {
                         if webUrl.isNotEmpty {
                             if let url = URL(string: webUrl) {
                                 DispatchQueue.main.async {
+                                    #if os(iOS)
                                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                    #endif
                                 }
                             }
                         }
